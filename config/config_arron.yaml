@@ -1,0 +1,73 @@
+# Interested companies
+companies:
+  - Google
+  - Amazon
+  - Meta
+  - Microsoft
+  - Apple
+  - TD
+  - RBC
+  - Scotiabank
+  - BMO
+  - Manulife
+  - Wealthsimple
+  - Shopify
+  - Intel
+  - NVIDIA
+  - Uber
+  - IBM
+  - Snowflake
+  - Palantir
+  - Vector Institute
+  - Vanguard
+  - Yelp
+  - eBay
+  - Lyft
+  - Rogers
+  - Loblaw
+  - Instacart
+  - Capital One
+  - Ontario
+  - AMD
+  - EA
+  - American Express
+  - Interac
+  - DoorDash
+  - Citi
+  - Oracle
+  - Rakuten
+  - Bloomberg
+  - Deloitte
+  - KPMG
+  - TransUnion
+  - Equifax
+  - S&P
+  - Cisco
+  - Thomson Reuters
+  - Telus
+  - Bell
+  - Desjardins
+  - Sun Life
+  - CIBC
+  - National Bank of Canada
+  - PwC
+  - Accenture
+  - Morgan Stanley
+  - Candadian Tire
+  - Air Canada
+  - Workday
+  - Intuit
+
+# User Identification
+user_name: "Arron"
+
+# Search Parameters
+search:
+  keyword: "Machine Learning"
+  city: "Toronto, Ontario, Canada"
+  distance: 10
+  period: "Past 24 hours"
+
+# Browser Settings
+options:
+  headless: false  # Debug - False; Production - True
