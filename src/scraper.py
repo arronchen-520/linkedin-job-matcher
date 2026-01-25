@@ -314,6 +314,8 @@ class LinkedInScraper:
         Keeps jobs that match either of these criteria:
         - Company is in the provided company_list
         - Job posting includes salary information
+
+        - And whether or not the job is reposted based on the user config.
         
         Args:
             filepath (str): Full path where filtered results will be saved (e.g., /app/data/filtered_jobs.csv)
@@ -330,7 +332,7 @@ class LinkedInScraper:
         if company_list == []:
             self.logger.info(f"No company list provided. No filter was applied to the output. ")
         else:
-            df = df.loc[(df['Company'].isin(company_list)) | (df['Salary'] != '')]
+            df = df.loc[((df['Company'].isin(company_list)) | (df['Salary'] != '')) & (df['Reposted'] == params['repost'])]
         current_date = datetime.now().strftime("%Y%m%d")
         search = params['search']
         filepath = Path(filepath / f"{current_date}_{user}_{search['keyword']}_{search['city']}_{search['period']}_filtered.csv")

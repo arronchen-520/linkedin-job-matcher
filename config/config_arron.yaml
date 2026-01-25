@@ -57,16 +57,15 @@ company_list:
   - Workday
   - Intuit
 
-# User Identification
 user_name: "Arron"
 
-# Search Parameters
 search:
   keyword: "Machine Learning"
   city: "Toronto, Ontario, Canada"
   distance: 10
   period: "Past 24 hours"
 
-# Browser Settings
 options:
   headless: false  # Debug - False; Production - True
+
+repost: False

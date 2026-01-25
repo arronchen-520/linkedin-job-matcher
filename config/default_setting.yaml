@@ -1,12 +1,19 @@
+# List of companies that you are interested in
 company_list:
 
+# User Identification
 user_name: 'User'
 
+# Search Parameters (Required)
 search:
   keyword: "Machine Learning"
   city: "Toronto, Ontario, Canada"
   distance: 10
   period: "Past 24 hours"
 
+# Browser Settings
 options:
   headless: false  # Debug - False; Production - True
+
+# Whether or not to include reposted jobs (boolean)
+repost: False
