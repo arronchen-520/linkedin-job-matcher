@@ -117,8 +117,8 @@ class LinkedInScraper:
         valid_periods = ['Past 24 hours', 'Past week', 'Past month']
         
         if period not in valid_periods:
-            self.logger.warning(f"Invalid period '{period}'. Skipping filter. Valid options: {valid_periods}")
-            return
+            self.logger.warning(f"Invalid period '{period}'. Defaulting to 'Past 24 hours'. Valid options: {valid_periods}")
+            period = 'Past 24 hours'
 
         try:
             self.page.get_by_label('Date posted').locator('..').click()
@@ -155,7 +155,6 @@ class LinkedInScraper:
                 else:
                     self.logger.info('Navigating to next page...')
                     next_button.first.click()
-                    
             except Exception as e:
                 self.logger.error(f"Unexpected error during pagination loop: {e}")
                 exit_loop = True
@@ -167,19 +166,29 @@ class LinkedInScraper:
         job_element.scroll_into_view_if_needed()
         
         try:
-            job_text_raw = job_element.inner_text()
+            job_text = job_element.inner_text()
         except Exception as e:
             self.logger.warning(f"Failed to read text for job #{count}: {e}")
             return
 
         # Basic Parsing
         try:
-            parts = job_text_raw.split('\n\n') # Might consider updating to locator
+            parts = job_text.split('\n\n') # Might consider updating to locator
             job_title = parts[0].split('\n')[-1]
             company = parts[1]
             location = parts[2]
-            posted_time = ', '.join([t for t in parts if 'ago' in t or 'just posted' in t.lower()])
-
+            # Clean posted time
+            posted_test = '\n'.join([t for t in parts if 'ago' in t or 'just posted' in t.lower()])
+            posted_text = posted_text.split('\n')
+            for time_text in posted_text:
+                if 'Posted on' in time_text:
+                    time_text = time_text.replace('Posted on ', '')
+                    posted_time = pd.to_datetime(time_text)
+                elif 'ago' in time_text or 'now' in time_text:
+                    posted_ago = time_text
+                else:
+                    posted_time = None
+                    posted_ago = None
             # Text cleaning
             job_title = job_title.replace('\u00a0', ' ')
             company = company.replace('\u00a0', ' ')
@@ -195,7 +204,14 @@ class LinkedInScraper:
         
         try:
             job_element.click()
-            
+
+            # Check whether or not this is a reposted job
+            reposted = self.page.get_by_text('Reposted').count()
+            if reposted == 0:
+                reposted = False
+            else:
+                reposted = True
+
             # Extract description/salary
             try:
                 try:
@@ -239,6 +255,8 @@ class LinkedInScraper:
             'Company': company,
             'Location': location,
             'Posted Time': posted_time,
+            'Posted Ago': posted_ago,
+            'Reposted': reposted,
             'Salary': salary,
             'URL': url,
             'Job Description': job_description
