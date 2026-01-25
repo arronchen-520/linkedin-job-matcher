@@ -20,12 +20,15 @@ load_dotenv()
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
+current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
+log_filename = f"scraper_run_{current_time}.log"
+
 # Configure Logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(LOG_DIR / "scraper_run.log"),
+        logging.FileHandler(LOG_DIR / log_filename),
         logging.StreamHandler()
     ]
 )
@@ -118,10 +121,9 @@ def run_scraping_task(params: dict, credentials: dict):
         bot.start(headless=params['headless'])
         bot.sign_in(credentials['email'], credentials['password'])
         
-        bot.search_jobs(search['keyword'])
-        bot.set_location_and_distance(search['city'], search['distance'])
+        bot.search_jobs(search['keyword'], search['city'])
         bot.filter_period(search['period'])
-        
+        bot.set_distance(search['distance'])
         bot.scrape_available_jobs()
         bot.save_to_csv(str(full_path))
         

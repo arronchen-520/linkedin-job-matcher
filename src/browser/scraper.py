@@ -3,7 +3,7 @@ import time
 import logging
 import pandas as pd
 from typing import List, Dict, Optional
-from playwright.sync_api import sync_playwright, Page, BrowserContext, Locator
+from playwright.sync_api import sync_playwright, Page, BrowserContext, Locator, expect
 
 class LinkedInScraper:
     """
@@ -68,43 +68,42 @@ class LinkedInScraper:
             self.logger.error(f"Authentication failed: {e}")
             raise
 
-    def search_jobs(self, keywords: str):
+        if self.page.get_by_text('bot check').is_visible():
+            self.logger.warning("Bot check detected. Pausing to wait for user input...")
+            input("Press Enter after completing the bot check on the page...")
+            self.logger.info("Resuming after bot check.")
+
+
+    def search_jobs(self, keywords: str, city: str):
         """
         Executes a search query with the provided keywords.
         """
-        self.logger.info(f"Executing search for keywords: '{keywords}'")
+        self.logger.info(f"Executing search for keywords: '{keywords}' in '{city}'")
         try:
             search_box = self.page.get_by_placeholder('Describe the job you want')
-            search_box.fill(keywords)
+            search_box.fill(keywords + ' in ' + city)
             search_box.press('Enter')
         except Exception as e:
             self.logger.error(f"Search execution failed: {e}")
 
-    def set_location_and_distance(self, city: str, distance: int):
+    def set_distance(self, distance: int):
         """
-        Applies location and radius filters to the search results.
+        Applies radius filters to the search results.
         
         Args:
-            city (str): The target city string.
             distance (int): The search radius in kilometers (the value should be a multiple of 5).
         """
-        self.logger.info(f"Setting location filter: {city} (Radius: {distance}km)")
+        distance = int(round(distance / 5) * 5) # Make sure the distance is a multiple of 5.
+        self.logger.info(f"Setting location filter: {distance}km")
         try:
-            # Set City
-            self.page.locator("svg#location-marker-small").click()
-            self.page.locator("div[role='textbox']").fill(city)
-
-            # Set Distance via slider manipulation
+            location_bpx = self.page.locator('svg#location-marker-small')
+            location_bpx.wait_for()
+            location_bpx.click()
+            # Set Distance
             self.page.locator("svg#edit-small").click()
-            distance_box = self.page.locator("input[aria-label*='Slider']")
-            distance_box.focus()
-            
-            # Calculate key presses needed
-            steps = int(round((80 - distance) / 5, 0))
-            for _ in range(steps): 
-                distance_box.press("ArrowLeft")
-                time.sleep(0.1)
-                
+            slider = self.page.locator('input[type="range"][aria-label^="Slider"]')
+            slider.fill(str(distance))
+            time.sleep(0.5)
             self.page.get_by_role('button', name='Show results').click()
             self.logger.info("Location filters applied successfully.")
         except Exception as e:
@@ -180,6 +179,11 @@ class LinkedInScraper:
             company = parts[1]
             location = parts[2]
             posted_time = ', '.join([t for t in parts if 'ago' in t or 'just posted' in t.lower()])
+
+            # Text cleaning
+            job_title = job_title.replace('\u00a0', ' ')
+            company = company.replace('\u00a0', ' ')
+            location = location.replace('\u00a0', ' ')
         except IndexError:
             self.logger.warning(f"Job #{count} has an unexpected text structure. Skipping.")
             return
@@ -194,16 +198,28 @@ class LinkedInScraper:
             
             # Extract description/salary
             try:
-                self.page.locator('div[componentkey*="JobDetails"]').wait_for()
-                details = self.page.locator('div[componentkey*="JobDetails"]').nth(1)
-                desc_text = details.inner_text()
-                job_description = '\n'.join([line for line in desc_text.split('\n') if line.strip()])
-                
-                # Salary extraction logic
-                salary_lines = [line.strip() for line in job_description.split('\n') if '$' in line]
-                salary = ', '.join(salary_lines)
-                if '. ' in salary_lines:
-                    salary = ', '.join([i.strip() for i in salary_lines.split('. ') if '$' in i])
+                try:
+                    details = self.page.get_by_text('About the job').locator('..').locator('..')
+                    details.wait_for()
+                    desc_text = details.inner_text()
+                except:
+                    desc_text = ''
+                    self.logger.warning(f"Could not extract description details for job #{count}.")
+                if desc_text != '':
+                    job_description = '\n'.join([line for line in desc_text.split('\n') if line.strip()])
+                    # Salary extraction logic
+                    salary = []
+                    salary_lines = job_description.split('\n')
+                    for line in salary_lines:
+                        if ('$' not in line) & ('CAD' not in line):
+                            continue
+                        sentences = line.split('. ')
+                        for sentence in sentences:
+                            if ('$' in sentence or 'CAD' in sentence) & (' raise' not in sentence):
+                                sentence = sentence.strip()
+                                if len(sentence) < 100:
+                                    salary.append(sentence)
+                    salary = ' | '.join(salary)
             except Exception:
                 self.logger.debug(f"Could not extract description details for job #{count}.")
 
@@ -242,7 +258,7 @@ class LinkedInScraper:
         self.logger.info(f"Saving {len(self.job_list)} jobs to {filepath}...")
         
         try:
-            pd.DataFrame(self.job_list).to_csv(filepath, index=False)
+            pd.DataFrame(self.job_list).to_csv(filepath, index=False, encoding='utf-8-sig')
             self.logger.info("File saved successfully.")
         except Exception as e:
             self.logger.error(f"Failed to save CSV to {filepath}: {e}")
