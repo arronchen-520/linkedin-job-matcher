@@ -3,9 +3,12 @@ import time
 import logging
 import pandas as pd
 from dotenv import load_dotenv
+from datetime import datetime
+from pathlib import Path
 from typing import List, Dict, Optional
-from utils.config_loader import *
-from utils.file_path import *
+from utils.config_loader import get_run_parameters
+from utils.logger import setup_logging
+from utils.file_path import USER_DATA_DIR, CONFIG_DIR, COMPLETE_FILE_PATH, FILTERED_FILE_PATH
 from playwright_stealth import stealth_sync
 from playwright.sync_api import sync_playwright, Page, BrowserContext, Locator, expect
 
@@ -76,7 +79,6 @@ class LinkedInScraper:
                 except:
                     self.logger.critical("Error loading email and password from .env.")
                     raise
-
                 self.page.get_by_label('Email or phone').fill(email)
                 self.page.get_by_label('Password').first.fill(password)
                 self.page.get_by_role('button', name='Sign in').click()
@@ -305,7 +307,7 @@ class LinkedInScraper:
         except Exception as e:
             self.logger.error(f"Failed to save CSV to {filepath}: {e}")
 
-    def filter_eligible_jobs(self, filepath: Path, params: str):
+    def filter_eligible_jobs(self, filepath: Path, params: dict):
         """
         Filters collected jobs based on company eligibility and salary information.
         
@@ -319,9 +321,7 @@ class LinkedInScraper:
         
         Returns:
             pd.DataFrame: Filtered job data as a pandas DataFrame
-        
-        Example:
-            filtered_df = scraper.filter_eligible_jobs('filtered_jobs.csv', ['Google', 'Microsoft'])
+
         """
         df = pd.DataFrame(self.job_list)
         company_list = params['company_list']
@@ -348,7 +348,7 @@ class LinkedInScraper:
             self.set_distance(search['distance'])
             self.scrape_available_jobs()
             self.save_to_csv(COMPLETE_FILE_PATH, search)
-            self.filter_eligible_jobs(FILTERED_FILE_PATH, params['user_name'], params['company_list'])
+            self.filter_eligible_jobs(FILTERED_FILE_PATH, params)
             self.logger.info("Task completed successfully.")
         except KeyboardInterrupt:
             self.logger.warning("Process interrupted by user.")
@@ -366,7 +366,8 @@ class LinkedInScraper:
             self.playwright.stop()
 
 if __name__ == '__main__':
-    logger = logging.getLogger("ScraperController")
+    setup_logging()
+    logger = logging.getLogger(__name__)
     params = get_run_parameters(CONFIG_DIR / 'config_arron.yaml')
     scraper = LinkedInScraper()
     scraper.run(params)
