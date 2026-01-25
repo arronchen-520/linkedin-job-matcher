@@ -1,5 +1,5 @@
-﻿Job Title,Company,Location,Posted Time,Posted Ago,Reposted,Salary,URL,Job Description
-Senior ML Platform Engineer ,Kobo,"Toronto, ON (On-site)",2026-01-25 03:04:00,15 hours ago,False,"CAD $127,008.00 - 177,008.00 annually",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Frakuten%2Ewd1%2Emyworkdayjobs%2Ecom%2FKobo%2Fjob%2FToronto-Canada%2FSenior-Machine-Learning-Engineer_1030578%3Fsource%3DLinkedIn&urlhash=p764&isSdui=true,"About the job
+,Job Title,Company,Location,Posted Time,Posted Ago,Reposted,Salary,URL,Job Description,min_salary,max_salary,currency
+0,Senior ML Platform Engineer ,Kobo,"Toronto, ON (On-site)",2026-01-25 03:04:00,15 hours ago,False,"CAD $127,008.00 - 177,008.00 annually",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Frakuten%2Ewd1%2Emyworkdayjobs%2Ecom%2FKobo%2Fjob%2FToronto-Canada%2FSenior-Machine-Learning-Engineer_1030578%3Fsource%3DLinkedIn&urlhash=p764&isSdui=true,"About the job
 Job Description
 Here at Rakuten Kobo Inc. we offer a casual working start-up environment and a group of friendly and talented individuals. Our employees rank us highly in terms of commitment to work/life balance. We realize that for our people to be innovative, creative and passionate they need to feel valued and supported. We believe in rewarding all our employees with competitive salaries, performance based annual bonuses, stock options
 If you’re looking for a company that inspires passion, personal, and professional growth– join Kobo and come help us make reading lives better.
@@ -83,8 +83,8 @@ At the time of posting, Rakuten expects the Compensation (base salary + discreti
 CAD $127,008.00 - 177,008.00 annually
 … more
 Benefits found in job post
-Paid paternity leave, Dental insurance"
-"Software Engineer, Gen AI & Web Apps ",BenchSci,"Toronto, ON (Hybrid)",2026-01-25 17:15:00,54 minutes ago,False,"Pay range: $100,000 - $125,000",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjobs%2Elever%2Eco%2Fbenchsci%2F96b161a1-9657-4654-b2a4-b6768f41943b%2Fapply%3Fsource%3DLinkedIn&urlhash=COoQ&isSdui=true,"About the job
+Paid paternity leave, Dental insurance",127008,177008,CAD
+1,"Software Engineer, Gen AI & Web Apps ",BenchSci,"Toronto, ON (Hybrid)",2026-01-25 17:15:00,54 minutes ago,False,"Pay range: $100,000 - $125,000",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjobs%2Elever%2Eco%2Fbenchsci%2F96b161a1-9657-4654-b2a4-b6768f41943b%2Fapply%3Fsource%3DLinkedIn&urlhash=COoQ&isSdui=true,"About the job
 We are currently looking for a Software Engineer, Gen AI & Web Apps to join our team.
 Reporting to the Engineering Manager, you'll work on complex projects, actively contribute
 to back-end and front-end initiatives, and grow along with other engineers as you develop
@@ -131,8 +131,8 @@ You will work with high-impact, highly skilled, and intelligent experts motivate
 Diversity, Equity and Inclusion: We're committed to creating an inclusive environment where people from all backgrounds can thrive. We believe that improving diversity, equity and inclusion is our collective responsibility, and this belief guides our DEI journey. Learn more about our DEI initiatives .
 Accessibility Accommodations: Should you require any accommodation, we will work with you to meet your needs. Please reach out to [email protected] .
 We may use artificial intelligence (AI) tools to support parts of the hiring process, such as reviewing applications, analyzing resumes, or assessing responses. These tools assist our recruitment team but do not replace human judgment. Final hiring decisions are ultimately made by humans. If you would like more information about how your data is processed, please contact us.
-… more"
-Senior AI Consultant Engineer,UST,"Toronto, ON",2026-01-25 15:15:00,2 hours ago,False,"Compensation Range: $ 115,000-$144,000",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fusource%2Eripplehire%2Ecom%2Fcandidate%2F%3Ftoken%3D8YxWjpwDhdL62DFYUIcQ%26lang%3Den%26source%3DUSTLINKEDIN%26ref%3DUSTLINKEDIN%23detail%2Fjob%2F50574&urlhash=B_wS&isSdui=true,"About the job
+… more",100000,125000,CAD
+2,Senior AI Consultant Engineer,UST,"Toronto, ON",2026-01-25 15:15:00,2 hours ago,False,"Compensation Range: $ 115,000-$144,000",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fusource%2Eripplehire%2Ecom%2Fcandidate%2F%3Ftoken%3D8YxWjpwDhdL62DFYUIcQ%26lang%3Den%26source%3DUSTLINKEDIN%26ref%3DUSTLINKEDIN%23detail%2Fjob%2F50574&urlhash=B_wS&isSdui=true,"About the job
 Role Description
 Senior AI Consultant Engineer
 Specialist I - Data Science
@@ -189,8 +189,8 @@ UST reserves the right to periodically redefine your roles and responsibilities 
 #UST
 Skills
 responsible ai,copilot studio,data modeling,azure ai foundry,
-… more"
-"Manager, Advanced Analytics and Artificial Intelligence (AI) ",RSM Canada,"Toronto, ON",2026-01-25 07:26:00,10 hours ago,False,"Compensation Range: $98,000 - $167,000",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjobs%2Ersmus%2Ecom%2Fposting%2Fmanager-advanced-analytics-and-artificial-intelligence-ai%2FJR116243%3Fsource%3DLinkedIn%2B-%2BJob%2BFeed&urlhash=n9QH&isSdui=true,"About the job
+… more",115000,144000,CAD
+3,"Manager, Advanced Analytics and Artificial Intelligence (AI) ",RSM Canada,"Toronto, ON",2026-01-25 07:26:00,10 hours ago,False,"Compensation Range: $98,000 - $167,000",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjobs%2Ersmus%2Ecom%2Fposting%2Fmanager-advanced-analytics-and-artificial-intelligence-ai%2FJR116243%3Fsource%3DLinkedIn%2B-%2BJob%2BFeed&urlhash=n9QH&isSdui=true,"About the job
 We are the leading provider of professional services to the middle market globally, our purpose is to instill confidence in a world of change, empowering our clients and people to realize their full potential. Our exceptional people are the key to our unrivaled, inclusive culture and talent experience and our ability to be compelling to our clients. You’ll find an environment that inspires and empowers you to thrive both personally and professionally. There’s no one like you and that’s why there’s nowhere like RSM.
 Position Description
 As a Manager in RSM’s Advanced Analytics and AI Consulting practice, you will lead client engagements that help organizations unlock business value from data, machine learning, and AI. You’ll work closely with cross-functional consulting teams to design and deliver scalable AI and analytics solutions that enhance decision-making, automate processes, and drive measurable business impact.
@@ -227,8 +227,8 @@ Accommodation for applicants with disabilities is available upon request in conn
 At RSM, an employee’s pay at any point in their career is intended to reflect their experiences, performance, and skills for their current role. The salary range (or starting rate for interns and associates) for this role represents numerous factors considered in the hiring decisions including, but not limited to, education, skills, work experience, certifications, location, etc. As such, pay for the successful candidate(s) could fall anywhere within the stated range.
 Compensation Range: $98,000 - $167,000
 Individuals selected for this role will be eligible for a discretionary bonus based on firm and individual performance.
-… more"
-"Applied Science Manager III, RBKS AI ",Amazon,"Toronto, ON",2026-01-25 06:17:00,11 hours ago,False,,https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fwww%2Eamazon%2Ejobs%2Fjobs%2F3130707%2Fapplied-science-manager-iii-rbks-ai%3Fcmpid%3DSPLICX0248M%26utm_source%3Dlinkedin%2Ecom%26utm_campaign%3Dcxro%26utm_medium%3Dsocial_media%26utm_content%3Djob_posting%26ss%3Dpaid&urlhash=7cbo&isSdui=true,"About the job
+… more",98000,167000,CAD
+4,"Applied Science Manager III, RBKS AI ",Amazon,"Toronto, ON",2026-01-25 06:17:00,11 hours ago,False,,https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fwww%2Eamazon%2Ejobs%2Fjobs%2F3130707%2Fapplied-science-manager-iii-rbks-ai%3Fcmpid%3DSPLICX0248M%26utm_source%3Dlinkedin%2Ecom%26utm_campaign%3Dcxro%26utm_medium%3Dsocial_media%26utm_content%3Djob_posting%26ss%3Dpaid&urlhash=7cbo&isSdui=true,"About the job
 Description
 The RBKS AI team is responsible for innovating AI features for Ring and Blink cameras, with a mission to make our neighborhoods safer. We are working at the intersection of computer vision, generative AI (GenAI), and ambient intelligence. The team is seeking Applied Science Manager to lead initiatives that combine advanced computer vision and multimodal GenAI capabilities. This role offers a unique opportunity to lead a world-class team while shaping next-generation home security technology and advancing the field of AI algorithms and systems.
 The team is focused on productizing research in computer vision and GenAI into products that benefit millions of customers worldwide, such as real-time object detection, video understanding, and multimodal LLMs. We are at the forefront of developing AI solutions that seamlessly blend into our products while respecting privacy, delivering unprecedented levels of intelligent security experience.
@@ -252,8 +252,8 @@ Amazon is an equal opportunity employer and does not discriminate on the basis o
 Our inclusive culture empowers Amazonians to deliver the best results for our customers. If you have a disability and need a workplace accommodation or adjustment during the application and hiring process, including support for the interview or onboarding process, please visit https://amazon.jobs/content/en/how-we-hire/accommodations for more information. If the country/region you’re applying in isn’t listed, please contact your Recruiting Partner.
 Company - Amazon Development Centre Canada ULC
 Job ID: A3130707
-… more"
-Senior Software Engineer - AI/Computer Vision (Camera Systems) ,Motorola Solutions,"Toronto, ON (Hybrid)",2026-01-25 07:31:00,10 hours ago,False,"Target Base Salary Range: $62,600 CAD – $128,300 CAD",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fmotorolasolutions%2Ewd5%2Emyworkdayjobs%2Ecom%2Fen-US%2FCareers%2Fjob%2FToronto-Canada-ONT40%2FSenior-Software-Engineer---AI-Computer-Vision--Camera-Systems-_R59622%2Fapply%2FautofillWithResume%3Fsource%3DLinkedin&urlhash=gYfZ&isSdui=true,"About the job
+… more",0,0,N/A
+5,Senior Software Engineer - AI/Computer Vision (Camera Systems) ,Motorola Solutions,"Toronto, ON (Hybrid)",2026-01-25 07:31:00,10 hours ago,False,"Target Base Salary Range: $62,600 CAD – $128,300 CAD",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fmotorolasolutions%2Ewd5%2Emyworkdayjobs%2Ecom%2Fen-US%2FCareers%2Fjob%2FToronto-Canada-ONT40%2FSenior-Software-Engineer---AI-Computer-Vision--Camera-Systems-_R59622%2Fapply%2FautofillWithResume%3Fsource%3DLinkedin&urlhash=gYfZ&isSdui=true,"About the job
 Company Overview
 At Motorola Solutions, we believe that everything starts with our people. We’re a global close-knit community, united by the relentless pursuit to help keep people safer everywhere. Our critical communications, video security and command center technologies support public safety agencies and enterprises alike, enabling the coordination that’s critical for safer communities, safer schools, safer hospitals and safer businesses. Connect with a career that matters, and help us build a safer future.
 Aperçu de l’entreprise
@@ -311,8 +311,8 @@ Motorola Solutions adopte, favorise et promeut les principes de diversité, d’
 Nous sommes fiers de notre culture axée sur les personnes et les communautés, encourageant ainsi chaque Motorolan d’être la version la plus authentique de lui-même dans ses responsabilités afin de tenir la promesse d’un monde plus sécuritaire.
 Si vous souhaitez vous joindre à notre communauté mais croyez que vous ne possédez pas toutes les exigences requises pour le poste convoité, nous aimerions tout de même connaître les raisons pour lesquelles vous pensez être un excellent candidat pour notre équipe.
 Nous offrons également des mesures d’adaptation pendant toutes les étapes du processus d’embauche afin de favoriser l’inclusion des personnes vivant avec un handicap physique et/ou mental. Pour demander un aménagement, veuillez remplir ce formulaire d'aménagement raisonnable afin que nous puissions vous aider.
-… more"
-Technical Project Manager – Agentic AI Technologies ,Techedin,"Toronto, ON (Hybrid)",2026-01-25 13:46:00,4 hours ago,False,Rate: $72 to $77 CAD PH,https://www.linkedin.com/jobs/view/4321472567/apply/?openSDUIApplyFlow=true&refId=ILsDJM%2B3%2FzC8exjYgD37%2Fw%3D%3D&trackingId=A3ujYDs8Su%2F%2BnNtET6MMsw%3D%3D&eBP=CwEAAAGb92vTDWUBOfvmL_BoVIlaKEt-sWOAaEYgyzGsIzX1m5oaevLqk1TVEhEcWomFoW9Cy4RvV4KxbNLcDciScFkNHTX846rCgvUl4Rq6fjPKwENpXOFMaFSlUzKtmNEmujPVHJvOOG1hfkC92BeOr229aDawsXi0C0Gq6Is8ZHFQ5vuLncMQRcQJtbYL6RI5AoKfkViAy4ZmQzff94f1C8ma2t8XGEGY9yf_Kcs9l-goeW2gOmz7DwWPunKt43P55V1h7AIhefV9JJQmy4Q-0jG04P-8wZ_Mel1mvMKlFjPxFTZem8GjS_p2k0vXujDeM6Iz-InM1CdrGueSONQBUzCb9Z2lVkIsLNGHftck-dKWWmCprn3xdszPFZmWuqL3KQ0-CE006gKWQxeS2zIgj5K98zioIsjhhLWDuvZk9WV6AHHpVViQHvYiXAzF0NX2s8jOXXRyS9iX6rVMN85vPSn-_HHaUmB6LfBCTIE1pF1LOFZCAiOm5VadHlD1Pc8vv185FCWAZ1bVfLdD1xDoPdBMjFXYS9b8gFF48P-2GJIIFnSig-N0gH-HUbXasMNAaYIkHDmc,"About the job
+… more",62600,128300,CAD
+6,Technical Project Manager – Agentic AI Technologies ,Techedin,"Toronto, ON (Hybrid)",2026-01-25 13:46:00,4 hours ago,False,Rate: $72 to $77 CAD PH,https://www.linkedin.com/jobs/view/4321472567/apply/?openSDUIApplyFlow=true&refId=ILsDJM%2B3%2FzC8exjYgD37%2Fw%3D%3D&trackingId=A3ujYDs8Su%2F%2BnNtET6MMsw%3D%3D&eBP=CwEAAAGb92vTDWUBOfvmL_BoVIlaKEt-sWOAaEYgyzGsIzX1m5oaevLqk1TVEhEcWomFoW9Cy4RvV4KxbNLcDciScFkNHTX846rCgvUl4Rq6fjPKwENpXOFMaFSlUzKtmNEmujPVHJvOOG1hfkC92BeOr229aDawsXi0C0Gq6Is8ZHFQ5vuLncMQRcQJtbYL6RI5AoKfkViAy4ZmQzff94f1C8ma2t8XGEGY9yf_Kcs9l-goeW2gOmz7DwWPunKt43P55V1h7AIhefV9JJQmy4Q-0jG04P-8wZ_Mel1mvMKlFjPxFTZem8GjS_p2k0vXujDeM6Iz-InM1CdrGueSONQBUzCb9Z2lVkIsLNGHftck-dKWWmCprn3xdszPFZmWuqL3KQ0-CE006gKWQxeS2zIgj5K98zioIsjhhLWDuvZk9WV6AHHpVViQHvYiXAzF0NX2s8jOXXRyS9iX6rVMN85vPSn-_HHaUmB6LfBCTIE1pF1LOFZCAiOm5VadHlD1Pc8vv185FCWAZ1bVfLdD1xDoPdBMjFXYS9b8gFF48P-2GJIIFnSig-N0gH-HUbXasMNAaYIkHDmc,"About the job
 Job Title: Technical Project Manager – Agentic AI Technologies
 Job Location: Hybrid (3 days remote), Toronto, Canada
 Experience Required: 5+ Years
@@ -347,8 +347,8 @@ About Techedin
 Techedin is a global IT staffing and technology services firm helping enterprises build high-performance tech teams. We support innovation at scale by connecting skilled professionals to leading companies and impactful projects. We prioritize transparency, responsiveness, and the right fit.
 Equal Opportunity Statement
 At Techedin, we welcome applicants of all backgrounds, communities, and experiences. Our commitment to diversity, equity, and inclusion drives us to create hiring experiences that are open, fair, and human-first.
-… more"
-Director of AI Technical Marketing ,Equinix,"Toronto, ON (Hybrid)",2026-01-25 05:09:00,13 hours ago,False,"Canada - Toronto Office TRO : 166,000 - 248,000 CAD / Annual",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fcareers%2Eequinix%2Ecom%2Fjobs%2Fdirector-of-ai-technical-marketing-dallas-texas-united-states-ashburn-virginia-chicago-illinois-denver-colorado-new-york-seattle-washington-tampa-florida-toronto-ontario-canada-district-of-co%3Fsource%3Dlinkedin%26utm_source%3Dlinkedin&urlhash=7s1B&isSdui=true,"About the job
+… more",144000,154000,CAD
+7,Director of AI Technical Marketing ,Equinix,"Toronto, ON (Hybrid)",2026-01-25 05:09:00,13 hours ago,False,"Canada - Toronto Office TRO : 166,000 - 248,000 CAD / Annual",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fcareers%2Eequinix%2Ecom%2Fjobs%2Fdirector-of-ai-technical-marketing-dallas-texas-united-states-ashburn-virginia-chicago-illinois-denver-colorado-new-york-seattle-washington-tampa-florida-toronto-ontario-canada-district-of-co%3Fsource%3Dlinkedin%26utm_source%3Dlinkedin&urlhash=7s1B&isSdui=true,"About the job
 Who are we?
 Equinix is the world’s digital infrastructure company®, shortening the path to connectivity to enable the innovations that enrich our work, life and planet.
 A place where bold ideas are welcomed, human connection is valued, and everyone has the opportunity to shape their future.
@@ -407,8 +407,8 @@ Equinix is an Equal Employment Opportunity and, in the U.S., an Affirmative Acti
 We use artificial intelligence in our hiring process. Learn more here.
 … more
 Benefits found in job post
-Pension plan"
-Software Developer II,Blue J,"Toronto, ON (Remote)",2026-01-25 05:42:00,12 hours ago,False,"The base pay range for this role is CA$120,000 – CA$150,000 per year.",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjobs%2Egem%2Ecom%2Fblue-j%2Fam9icG9zdDoz6PCfArmHwaIhwYNubjOb%3Fsource%3DLinkedIn&urlhash=lDQv&isSdui=true,"About the job
+Pension plan",166000,248000,CAD
+8,Software Developer II,Blue J,"Toronto, ON (Remote)",2026-01-25 05:42:00,12 hours ago,False,"The base pay range for this role is CA$120,000 – CA$150,000 per year.",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjobs%2Egem%2Ecom%2Fblue-j%2Fam9icG9zdDoz6PCfArmHwaIhwYNubjOb%3Fsource%3DLinkedIn&urlhash=lDQv&isSdui=true,"About the job
 About Blue J
 Blue J’s ambition is to be the world leader in generative AI for tax experts. Our AI tax research software is widely regarded as the best in the market. We are racing ahead with an exciting product development roadmap to continue to delight our customers and to ensure that our users can generate the very best possible tax research answers in the service of their clients in record time.
 Our company is at the forefront of applying artificial intelligence to tax research. We recently announced our $122M USD Series D raise, to accelerate innovation and deliver even greater value to tax professionals. Since launching our flagship generative AI product, we have blown past our revenue targets quarter over quarter.
@@ -470,8 +470,8 @@ We use these tools to support efficiency and consistency, not to replace human j
 Compensation
 The base pay range for this role is CA$120,000 – CA$150,000 per year.
 Final compensation will be set fairly and thoughtfully based on experience, expertise, and alignment with the role’s responsibilities. While all candidates are expected to bring directly relevant experience, the top of the range is typically reserved for individuals who demonstrate exceptional depth in the role’s core competencies, a strong track record of impact in similar environments, and the ability to operate with a high degree of autonomy from day one.
-… more"
-Senior Software Developer,Blue J,"Toronto, ON (Remote)",2026-01-25 05:42:00,12 hours ago,False,"The base pay range for this role is CA$140,000 – CA$180,000 per year.",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjobs%2Egem%2Ecom%2Fblue-j%2Fam9icG9zdDrvw__H8ftHznPxfxZoaMK3&urlhash=hVJZ&isSdui=true,"About the job
+… more",120000,150000,CAD
+9,Senior Software Developer,Blue J,"Toronto, ON (Remote)",2026-01-25 05:42:00,12 hours ago,False,"The base pay range for this role is CA$140,000 – CA$180,000 per year.",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjobs%2Egem%2Ecom%2Fblue-j%2Fam9icG9zdDrvw__H8ftHznPxfxZoaMK3&urlhash=hVJZ&isSdui=true,"About the job
 About Blue J
 Blue J’s ambition is to be the world leader in generative AI for tax experts. Our AI tax research software is widely regarded as the best in the market. We are racing ahead with an exciting product development roadmap to continue to delight our customers and to ensure that our users can generate the very best possible tax research answers in the service of their clients in record time.
 Our company is at the forefront of applying artificial intelligence to tax research. We recently announced our $122M USD Series D raise, to accelerate innovation and deliver even greater value to tax professionals. Since launching our flagship generative AI product, we have blown past our revenue targets quarter over quarter.
@@ -534,8 +534,8 @@ We use these tools to support efficiency and consistency, not to replace human j
 Compensation
 The base pay range for this role is CA$140,000 – CA$180,000 per year.
 Final compensation will be set fairly and thoughtfully based on experience, expertise, and alignment with the role’s responsibilities. While all candidates are expected to bring directly relevant experience, the top of the range is typically reserved for individuals who demonstrate exceptional depth in the role’s core competencies, a strong track record of impact in similar environments, and the ability to operate with a high degree of autonomy from day one.
-… more"
-Analytics Engineer,Kobo,"Toronto, ON",2026-01-25 04:26:00,13 hours ago,False,"CAD $107,957.00 - 157,957.00 annually",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Frakuten%2Ewd1%2Emyworkdayjobs%2Ecom%2FKobo%2Fjob%2FToronto-Canada%2FAnalytics-Engineer_1031173%3Fsource%3DLinkedIn&urlhash=59gS&isSdui=true,"About the job
+… more",140000,180000,CAD
+10,Analytics Engineer,Kobo,"Toronto, ON",2026-01-25 04:26:00,13 hours ago,False,"CAD $107,957.00 - 157,957.00 annually",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Frakuten%2Ewd1%2Emyworkdayjobs%2Ecom%2FKobo%2Fjob%2FToronto-Canada%2FAnalytics-Engineer_1031173%3Fsource%3DLinkedIn&urlhash=59gS&isSdui=true,"About the job
 Job Description
 Here at Rakuten Kobo Inc. we offer a casual working start-up environment and a group of friendly and talented individuals. Our employees rank us highly in terms of commitment to work/life balance. We realize that for our people to be innovative, creative and passionate they need to feel valued and supported. We believe in rewarding all our employees with competitive salaries, performance based annual bonuses, stock options and training opportunities.
 If you’re looking for a company that inspires passion, personal, and professional growth – join Kobo and come help us on our mission of making reading lives better.
@@ -592,8 +592,8 @@ At the time of posting, Rakuten expects the Compensation (base salary + discreti
 CAD $107,957.00 - 157,957.00 annually
 … more
 Benefits found in job post
-Paid paternity leave, Dental insurance"
-Principal Backend Developer ,Autodesk,"Toronto, ON (Hybrid)",2026-01-25 05:14:00,12 hours ago,False,"For Canada-BC based roles, we expect a starting base salary between $131,500 and $180,840",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fautodesk%2Ewd1%2Emyworkdayjobs%2Ecom%2FExt%2Fjob%2FToronto-ON-CAN%2FPrincipal-Software-Engineer_25WD88307%3Fsrc%3DJB-10065%26source%3DLinkedIn&urlhash=l-BG&isSdui=true,"About the job
+Paid paternity leave, Dental insurance",107957,157957,CAD
+11,Principal Backend Developer ,Autodesk,"Toronto, ON (Hybrid)",2026-01-25 05:14:00,12 hours ago,False,"For Canada-BC based roles, we expect a starting base salary between $131,500 and $180,840",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fautodesk%2Ewd1%2Emyworkdayjobs%2Ecom%2FExt%2Fjob%2FToronto-ON-CAN%2FPrincipal-Software-Engineer_25WD88307%3Fsrc%3DJB-10065%26source%3DLinkedIn&urlhash=l-BG&isSdui=true,"About the job
 Job Requisition ID #
 25WD88307
 English translation will follow!/La traduction en anglais suivra!
@@ -682,8 +682,8 @@ Diversity & Belonging
 We take pride in cultivating a culture of belonging where everyone can thrive. Learn more here: https://www.autodesk.com/company/diversity-and-belonging
 Are you an existing contractor or consultant with Autodesk? 
 Please search for open jobs and apply internally (not on this external site).
-… more"
-Senior Software Engineer ,Morningstar,"Toronto, ON (Hybrid)",2026-01-24 20:36:00,21 hours ago,False,"Compensation range for this position: $90,489 – 132,711",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fcareers%2Emorningstar%2Ecom%2Fus%2Fen%2Fjob%2FMORMORUSREQ054606EXTERNALENUS%2FSenior-Software-Engineer%3Futm_source%3Dlinkedin%26utm_medium%3Dphenom-feeds%26source%3DLinkedIn&urlhash=H8iM&isSdui=true,"About the job
+… more",131500,180840,CAD
+12,Senior Software Engineer ,Morningstar,"Toronto, ON (Hybrid)",2026-01-24 20:36:00,21 hours ago,False,"Compensation range for this position: $90,489 – 132,711",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fcareers%2Emorningstar%2Ecom%2Fus%2Fen%2Fjob%2FMORMORUSREQ054606EXTERNALENUS%2FSenior-Software-Engineer%3Futm_source%3Dlinkedin%26utm_medium%3Dphenom-feeds%26source%3DLinkedIn&urlhash=H8iM&isSdui=true,"About the job
 About Morningstar Retirement:
 At Morningstar Retirement Group, we’re all in for investors. Our mission is to empower investor success and help them realize their retirement goals. We offer personalized guidance on how much to save, how to invest, when to retire, and more, based on individual circumstances. We challenge the status quo and foster a culture of curiosity. We focus on solving problems, optimizing our product development process, and enhancing team productivity through collaboration and AI. We value product thinking, involve engineers early in the process, and appreciate contributions from all team members.
 The Role:
@@ -718,8 +718,8 @@ Compensation range for this position: $90,489 – 132,711
 Bonus Target: 12.5%
 If you receive and accept an offer from us, we require that personal and any related investments be disclosed confidentiality to our Compliance team (days vary by region). These investments will be reviewed to ensure they meet Code of Ethics requirements. If any conflicts of interest are identified, then you will be required to liquidate those holdings immediately. In addition, dependent on your department and location of work certain employee accounts must be held with an approved broker (for example all, U.S. employee accounts). If this applies and your account(s) are not with an approved broker, you will be required to move your holdings to an approved broker.
 Morningstar's hybrid work environment gives you the opportunity to collaborate in-person each week as we've found that we're at our best when we're purposely together on a regular basis. In most of our locations, our hybrid work model is four days in-office each week. A range of other benefits are also available to enhance flexibility as needs change. No matter where you are, you'll have tools and resources to engage meaningfully with your global colleagues.
-… more"
-"Quality Engineer II, AI Platform ",TD,"Toronto, ON (Hybrid)",2026-01-25 07:36:00,10 hours ago,False,"$76,800 - $115,200 CAD",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Ftd%2Ewd3%2Emyworkdayjobs%2Ecom%2FTD_Bank_Careers%2Fjob%2FToronto-Ontario%2FQuality-Engineer-II--AI-Platform_R_1452001%3Fsource%3DLinkedIn&urlhash=h7Al&isSdui=true,"About the job
+… more",90489,132711,CAD
+13,"Quality Engineer II, AI Platform ",TD,"Toronto, ON (Hybrid)",2026-01-25 07:36:00,10 hours ago,False,"$76,800 - $115,200 CAD",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Ftd%2Ewd3%2Emyworkdayjobs%2Ecom%2FTD_Bank_Careers%2Fjob%2FToronto-Ontario%2FQuality-Engineer-II--AI-Platform_R_1452001%3Fsource%3DLinkedIn&urlhash=h7Al&isSdui=true,"About the job
 Work Location:
 Toronto, Ontario, Canada
 Hours
@@ -835,8 +835,8 @@ Your accessibility is important to us. Please let us know if you’d like accomm
 We look forward to hearing from you!
 Language Requirement (Quebec Only)
 Sans Objet
-… more"
-GCP Data Analyst - BigQuery (Canada) ,RACKSPACE,"Toronto, ON (Hybrid)",2026-01-24 23:14:00,18 hours ago,False,"The anticipated starting pay range for Colorado is: $ 143,700 - $ 210,760",https://www.linkedin.com/jobs/view/4321491255/apply/?openSDUIApplyFlow=true&refId=rog74b8RXUyHuwzDICspOA%3D%3D&trackingId=RfhUenQXbt%2BpmnN%2F7VXB%2Bg%3D%3D&eBP=CwEAAAGb92xIoDm5lJvFkB7SSD086ma1Xi1RJoZ84zTi3UcwRP23-YX0a2RPdSlCD6EaP-zpKQBWO_QlPrGPuGy_Hi24dSdORVCpXtvTqJyHCnIFpjWP5xRnefm2uOp9fj0c797K2xrs_RvZSuocZAZB6OWmMpxntz1DEl8oulv5pgusROgyLRAxvt8OBwbmBAD298NWfX6v9znzQ6lOgz1xl4HM8MpiIQipv4IZxGdHu8lw-_JKjs0nrNl_nN8C6Hfez8ygREp9VZMsNGE1cUV09MVjrkzp8OEQL9Um9PwV_-5D3AWJq_q1W-CZC8LZf7QyXnSh_byeSLUbfh5XbZNdbdX_TI-Hi1TUWLmFrH8O1cDEpR2x9TcLuDXc9dRUJwnuDpxyaUucLlKfAYp0x2ejg4fLFxgdNl_Jobw476QMHMXmnt5Xy3PXQfyyhnJtkBH1xdIn4IeN8qvsshuqgccuoi6DHdwWoZ3LizBMvWxG3b_mfdgHAn8wxZrKIYh_TCypycMrgIpXX7kI4bU5aaWfFQFtjvLlMiR77wkVx0_c,"About the job
+… more",76800,115200,CAD
+14,GCP Data Analyst - BigQuery (Canada) ,RACKSPACE,"Toronto, ON (Hybrid)",2026-01-24 23:14:00,18 hours ago,False,"The anticipated starting pay range for Colorado is: $ 143,700 - $ 210,760",https://www.linkedin.com/jobs/view/4321491255/apply/?openSDUIApplyFlow=true&refId=rog74b8RXUyHuwzDICspOA%3D%3D&trackingId=RfhUenQXbt%2BpmnN%2F7VXB%2Bg%3D%3D&eBP=CwEAAAGb92xIoDm5lJvFkB7SSD086ma1Xi1RJoZ84zTi3UcwRP23-YX0a2RPdSlCD6EaP-zpKQBWO_QlPrGPuGy_Hi24dSdORVCpXtvTqJyHCnIFpjWP5xRnefm2uOp9fj0c797K2xrs_RvZSuocZAZB6OWmMpxntz1DEl8oulv5pgusROgyLRAxvt8OBwbmBAD298NWfX6v9znzQ6lOgz1xl4HM8MpiIQipv4IZxGdHu8lw-_JKjs0nrNl_nN8C6Hfez8ygREp9VZMsNGE1cUV09MVjrkzp8OEQL9Um9PwV_-5D3AWJq_q1W-CZC8LZf7QyXnSh_byeSLUbfh5XbZNdbdX_TI-Hi1TUWLmFrH8O1cDEpR2x9TcLuDXc9dRUJwnuDpxyaUucLlKfAYp0x2ejg4fLFxgdNl_Jobw476QMHMXmnt5Xy3PXQfyyhnJtkBH1xdIn4IeN8qvsshuqgccuoi6DHdwWoZ3LizBMvWxG3b_mfdgHAn8wxZrKIYh_TCypycMrgIpXX7kI4bU5aaWfFQFtjvLlMiR77wkVx0_c,"About the job
 About The Role
 We’re seeking a GCP Data Analyst with deep expertise in BigQuery, strong SQL and Python skills, and a sharp analytical mindset to support both data validation initiatives and ongoing analytics work. This role is ideal for someone who can navigate large datasets, build robust queries, and identify inconsistencies with precision and insight.
 The analyst will work across a variety of data workflows, from validating metrics during system migrations to supporting day-to-day data analysis and reporting needs. You’ll leverage advanced BigQuery features—such as authorized views, materialized views, UDFs, partitioning strategies, and time series analysis—to ensure data integrity and surface meaningful insights. Comfort working in Python with data frames and relevant packages is also essential, particularly for tasks involving data manipulation, anomaly detection, or prototyping workflows.
@@ -890,8 +890,8 @@ We are the multicloud solutions experts. We combine our expertise with the world
 More on Rackspace Technology
 Though we’re all different, Rackers thrive through our connection to a central goal: to be a valued member of a winning team on an inspiring mission. We bring our whole selves to work every day. And we embrace the notion that unique perspectives fuel innovation and enable us to best serve our customers and communities around the globe. We welcome you to apply today and want you to know that we are committed to offering equal employment opportunity without regard to age, color, disability, gender reassignment or identity or expression, genetic information, marital or civil partner status, pregnancy or maternity status, military or veteran status, nationality, ethnic or national origin, race, religion or belief, sexual orientation, or any legally protected characteristic. If you have a disability or special need that requires accommodation, please let us know.
 We may use artificial intelligence (AI) tools to support parts of the hiring process, such as reviewing applications, analyzing resumes, or assessing responses. These tools assist our recruitment team but do not replace human judgment. Final hiring decisions are ultimately made by humans. If you would like more information about how your data is processed, please contact us.
-… more"
-"Software Engineer II, Backend (Credit Decisioning) ",Affirm,"Toronto, ON (Remote)",2026-01-25 13:52:00,4 hours ago,False,"CAN base pay range per year: $125,000 - $175,000",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjob-boards%2Egreenhouse%2Eio%2Faffirm%2Fjobs%2F7597922003%3Fgh_src%3D689c81d53us&urlhash=T4Gy&isSdui=true,"About the job
+… more",143700,210760,CAD
+15,"Software Engineer II, Backend (Credit Decisioning) ",Affirm,"Toronto, ON (Remote)",2026-01-25 13:52:00,4 hours ago,False,"CAN base pay range per year: $125,000 - $175,000",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjob-boards%2Egreenhouse%2Eio%2Faffirm%2Fjobs%2F7597922003%3Fgh_src%3D689c81d53us&urlhash=T4Gy&isSdui=true,"About the job
 Affirm is reinventing credit to make it more honest and friendly, giving consumers the flexibility to buy now and pay later without any hidden fees or compounding interest.
 The Credit Decisioning team is essential to every transaction at Affirm, providing scalable underwriting decisions for integrated point-of-sale (POS) merchants and wallet platforms across the US, Canada, and the UK.
 This specific role is within the Credit Core sub-team, which focuses on building the foundations and credit levers for scaling our underwriting and providing responsible access to credit. A key part of this team's work involves developing new underwriting features and products to expand Affirm's product offerings and enable sustainable growth.
@@ -924,8 +924,8 @@ ESPP - An employee stock purchase plan enabling you to buy shares of Affirm at a
 We believe It’s On Us to provide an inclusive interview experience for all, including people with disabilities. We are happy to provide reasonable accommodations to candidates in need of individualized support during the hiring process.
 [For U.S. positions that could be performed in Los Angeles or San Francisco] Pursuant to the San Francisco Fair Chance Ordinance and Los Angeles Fair Chance Initiative for Hiring Ordinance, Affirm will consider for employment qualified applicants with arrest and conviction records.
 By clicking ""Submit Application,"" you acknowledge that you have read Affirm's Global Candidate Privacy Notice and hereby freely and unambiguously give informed consent to the collection, processing, use, and storage of your personal information as described therein.
-… more"
-"Senior Data Engineer (Microservices) - Toronto, ON ",League,"Toronto, ON (Hybrid)",2026-01-25 05:52:00,12 hours ago,False,"$136,000—$150,000 CAD",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjob-boards%2Egreenhouse%2Eio%2Fleagueinc%2Fjobs%2F5625193004&urlhash=EDY9&isSdui=true,"About the job
+… more",125000,175000,CAD
+16,"Senior Data Engineer (Microservices) - Toronto, ON ",League,"Toronto, ON (Hybrid)",2026-01-25 05:52:00,12 hours ago,False,"$136,000—$150,000 CAD",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjob-boards%2Egreenhouse%2Eio%2Fleagueinc%2Fjobs%2F5625193004&urlhash=EDY9&isSdui=true,"About the job
 About League
 Founded in 2014, League is the leading healthcare consumer experience (CX) platform, powered by artificial intelligence (AI), reaching more than 63 million people around the world and delivering the highest level of personalization in the industry. Payers, providers, and consumer health partners build on League’s platform to deliver high-engagement healthcare solutions proven to improve health outcomes. League has raised over $285 million in venture capital funding to date, powering the digital experiences for some of healthcare’s most trusted brands, including Highmark Health, Manulife, Medibank, and Shoppers Drug Mart.
 Position Summary
@@ -986,8 +986,8 @@ Use of AI Notice
 We are committed to ensuring fairness and transparency throughout our hiring process. League may use Artificial Intelligence (AI) tools to assist in the screening of applicants for this position. Please check out our stance on using AI in recruitment here.
 Privacy Policy
 Review our Privacy Policy for information on how League is protecting personal data.
-… more"
-"Staff Engineer, Search Systems ",MongoDB,"Toronto, ON",2026-01-25 07:46:00,10 hours ago,False,"$159,000—$221,000 CAD",https://www.linkedin.com/redir/redirect/?url=http%3A%2F%2Fboards%2Egreenhouse%2Eio%2Fmongodb%2Fjobs%2F7094786%3Fgh_src%3Dircv7l%26source%3DLinkedIn&urlhash=4gNJ&isSdui=true,"About the job
+… more",136000,150000,CAD
+17,"Staff Engineer, Search Systems ",MongoDB,"Toronto, ON",2026-01-25 07:46:00,10 hours ago,False,"$159,000—$221,000 CAD",https://www.linkedin.com/redir/redirect/?url=http%3A%2F%2Fboards%2Egreenhouse%2Eio%2Fmongodb%2Fjobs%2F7094786%3Fgh_src%3Dircv7l%26source%3DLinkedIn&urlhash=4gNJ&isSdui=true,"About the job
 MongoDB Search and Vector Search allows users to execute complex search queries and build RAG applications using the MongoDB Query Language. Our users are free to focus on relevance and data retrieval instead of the machinery needed to search data at scale.
 We are looking to speak to candidates who are based in Toronto for our hybrid working model.
 Candidate Profile
@@ -1021,8 +1021,8 @@ Req ID: 2263199619
 MongoDB’s base salary range for this role is posted below. Compensation at the time of offer is unique to each candidate and based on a variety of factors such as skill set, experience, qualifications, and work location. Salary is one part of MongoDB’s total compensation and benefits package. Other benefits for eligible employees may include: equity, participation in the employee stock purchase program, flexible paid time off, 20 weeks fully-paid gender-neutral parental leave, fertility and adoption assistance, Registered Retirement Savings Plan (RRSP) with employer match, mental health counseling, backup child and elder care, and health, dental, and vision benefits offerings. Please note, the base salary range listed below and the benefits in this paragraph are only applicable to candidates based in Canada.
 MongoDB’s base salary range for this role in Canada is:
 $159,000—$221,000 CAD
-… more"
-Financial Risk Management Market Risk Manager ,PwC Canada,"Toronto, ON (Hybrid)",2026-01-25 07:50:00,10 hours ago,False,"The salary range for this position is $112,400 - $162,400",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjobs-ca%2Epwc%2Ecom%2Fca%2Fen%2Fjob%2FPWCACA683232WDEXTERNALENCA%2FFinancial-Risk-Management-Market-Risk-Manager%3Futm_source%3Dlinkedin%26utm_medium%3Dphenom-feeds&urlhash=Jm9C&isSdui=true,"About the job
+… more",159000,221000,CAD
+18,Financial Risk Management Market Risk Manager ,PwC Canada,"Toronto, ON (Hybrid)",2026-01-25 07:50:00,10 hours ago,False,"The salary range for this position is $112,400 - $162,400",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjobs-ca%2Epwc%2Ecom%2Fca%2Fen%2Fjob%2FPWCACA683232WDEXTERNALENCA%2FFinancial-Risk-Management-Market-Risk-Manager%3Futm_source%3Dlinkedin%26utm_medium%3Dphenom-feeds&urlhash=Jm9C&isSdui=true,"About the job
 A career in our FS Risk and Regulatory - Financial Risk Management team, will provide you with the opportunity to contribute to a variety of risk management, regulatory, valuation, and financial analyses services to design solutions that address our clients’ regulatory, risk management and financial reporting challenges, as well as their broader business issues.
 Meaningful work you’ll be part of
 As a Financial Risk Management Market Risk Manager, you’ll work with a team of problem solvers as project leads, helping to solve complex business issues and deliver high quality client services. Responsibilities include but are not limited to:
@@ -1052,8 +1052,8 @@ We’re inspiring and empowering our people to change the world. Powered by the 
 PwC Canada acknowledges that we work and live across Turtle Island, on the land that is now known as Canada, which are the lands of the ancestral, treaty and unceded territories of the First Nations, Métis and Inuit Peoples. We recognize the systemic racism, colonialism and oppression that Indigenous Peoples have experienced and still go through, and we commit to allyship and solidarity.
 We’re committed to providing accommodation throughout the application, interview, and employment process. If you require accommodation to be at your best, please let us know during the application process.
 The use of artificial intelligence (AI) in recruiting is just getting started, so we know you have questions about how and why we use it. At certain points during our recruiting process, we rely on AI to improve your experience. This could be during resume review or curating personalized job recommendations, asking you clarifying questions via a chatbot or during our interview scheduling to improve your experience. Our use of AI helps ensure we combat bias by evaluating candidates equally and fairly, without seeing identity information, such as your name, or gender for example). AI also helps us better predict successful hires by reviewing all applicants for a role and the relationship between your skills, experience and likely success at PwC Canada. While AI supports parts of our recruitment process, final hiring decisions always involve human review. For more information about our use and protection of your data, please refer to our Privacy Policy (https://www.pwc.com/ca/en/privacy-policy.html). 683232WD
-… more"
-Associate Director - Stress Testing & Treasury Analytics Caribbean ,RBC,"Toronto, ON",2026-01-25 15:43:00,2 hours ago,False,,https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjobs%2Erbc%2Ecom%2Fca%2Fen%2Fjob%2FRBCAA0088R0000156822EXTERNALENCA%2FAssociate-Director-Stress-Testing-Treasury-Analytics-Caribbean%3Futm_source%3DLinkedIn%26utm_medium%3Dphenom-feeds%26utm_campaign%3Drbc_linkedin&urlhash=1syh&isSdui=true,"About the job
+… more",112400,162400,CAD
+19,Associate Director - Stress Testing & Treasury Analytics Caribbean ,RBC,"Toronto, ON",2026-01-25 15:43:00,2 hours ago,False,,https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fjobs%2Erbc%2Ecom%2Fca%2Fen%2Fjob%2FRBCAA0088R0000156822EXTERNALENCA%2FAssociate-Director-Stress-Testing-Treasury-Analytics-Caribbean%3Futm_source%3DLinkedIn%26utm_medium%3Dphenom-feeds%26utm_campaign%3Drbc_linkedin&urlhash=1syh&isSdui=true,"About the job
 Job Description
 What is the opportunity?
 RBC Caribbean Banking (“RBCC”) is hiring an Associate Director - Treasury Analytics, Automation and Stress Testing. This role will be responsible for identifying, delivering, and evolving the data ecosystem and its capabilities while ensuring the integrity and completeness of data in support of managing key risks, streamlining processes, reporting and adhering to regulatory requirements. The role will also be responsible for the development and implementation of stress testing tools to support the data generation and aggregation for various internal and regulatory stress testing programs (specific focus on ICAAP & Recovery Planning), working with key stakeholders to produce economic scenarios, building analytical tools with insights into how RBCC’s balance sheet and key financial ratios perform under stress.
@@ -1122,8 +1122,8 @@ Join our Talent Community
 Stay in-the-know about great career opportunities at RBC. Sign up and get customized info on our latest jobs, career tips and Recruitment events that matter to you.
 Expand your limits and create a new future together at RBC. Find out how we use our passion and drive to enhance the well-being of our clients and communities at jobs.rbc.com</a/span>
 RBC is presently inviting candidates to apply for this existing vacancy. Applying to this posting allows you to express your interest in this current career opportunity at RBC. Qualified applicants may be contacted to review their resume in more detail.
-… more"
-"Sr. Data Consultant, Business Intelligence / Consultant principal de données, Informatique décisionnelle ",ADP,"Etobicoke, ON (Hybrid)",2026-01-25 05:43:00,12 hours ago,False,"POUR RÉUSSIR DANS LE CADRE DE CE RÔLE : Exigences obligatoires | La rémunération pour ce rôle est de 107,400.00 CAD à 157,400.00 CAD/année* | The compensation for this role is CAD $107,400.00 - CAD $157,400.00 / Year*",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fclick%2Eappcast%2Eio%2Ft%2FFkG5NB0Zpnwm9PpWDWoszE68a-lGgo2oqTjTUY1i94b7Qhob0ufmbW9b5423mr0K%3Fsource%3DLinkedIn&urlhash=aZVQ&isSdui=true,"About the job
+… more",0,0,N/A
+20,"Sr. Data Consultant, Business Intelligence / Consultant principal de données, Informatique décisionnelle ",ADP,"Etobicoke, ON (Hybrid)",2026-01-25 05:43:00,12 hours ago,False,"POUR RÉUSSIR DANS LE CADRE DE CE RÔLE : Exigences obligatoires | La rémunération pour ce rôle est de 107,400.00 CAD à 157,400.00 CAD/année* | The compensation for this role is CAD $107,400.00 - CAD $157,400.00 / Year*",https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fclick%2Eappcast%2Eio%2Ft%2FFkG5NB0Zpnwm9PpWDWoszE68a-lGgo2oqTjTUY1i94b7Qhob0ufmbW9b5423mr0K%3Fsource%3DLinkedIn&urlhash=aZVQ&isSdui=true,"About the job
 ADP is hiring a Sr. Data Consultant, Business Intelligence
 Are you looking to grow your career in an agile, dynamic environment with plenty of opportunities to progress? 
 Do you want to continuously learn through ongoing training, development, and mentorship opportunities? 
@@ -1221,4 +1221,4 @@ The company uses an artificial intelligence tool during the initial pre-screenin
 A little about ADP: We are a comprehensive global provider of cloud-based human capital management (HCM) solutions that unite HR, payroll, talent, time, tax and benefits administration and a leader in business outsourcing services, analytics, and compliance expertise. We believe our people make all the difference in cultivating a down-to-earth culture that embraces our core values, welcomes ideas, encourages innovation, and values belonging. We've received recognition for our work by many esteemed organizations, learn more at ADP Awards and Recognition.
 Diversity, Equity, Inclusion & Equal Employment Opportunity at ADP: ADP is committed to an inclusive, diverse and equitable workplace, and is further committed to providing equal employment opportunities regardless of any protected characteristic including: race, color, genetic information, creed, national origin, religion, sex, affectional or sexual orientation, gender identity or expression, lawful alien status, ancestry, age, marital status, protected veteran status or disability. Hiring decisions are based upon ADP’s operating needs, and applicant merit including, but not limited to, qualifications, experience, ability, availability, cooperation, and job performance.
 Ethics at ADP: ADP has a long, proud history of conducting business with the highest ethical standards and full compliance with all applicable laws. We also expect our people to uphold our values with the highest level of integrity and behave in a manner that fosters an honest and respectful workplace. Click https://jobs.adp.com/life-at-adp/ to learn more about ADP’s culture and our full set of values.
-… more"
+… more",107400,157400,CAD

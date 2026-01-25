@@ -4,6 +4,7 @@ import json
 import pandas as pd
 import re
 from pathlib import Path
+from utils.logger import setup_logging
 from utils.file_path import FILTERED_FILE_PATH
 
 class SalaryParser:
@@ -73,6 +74,10 @@ def extract_salary(text:str):
     return result
 
 if __name__ == "__main__":
+    
+    # Will need to process mroe files
+    setup_logging()
+    logger = logging.getLogger(__name__)
     path = Path(FILTERED_FILE_PATH/'20260125_Arron_Machine Learning_filtered.csv')
     df = pd.read_csv(path)
     parser = SalaryParser(model_name="qwen2.5")
