@@ -3,6 +3,8 @@ import logging
 import json
 import pandas as pd
 import re
+from pathlib import Path
+from utils.file_path import FILTERED_FILE_PATH
 
 class SalaryParser:
     def __init__(self, model_name="qwen2.5"):
@@ -71,7 +73,8 @@ def extract_salary(text:str):
     return result
 
 if __name__ == "__main__":
-    df = pd.read_csv('./data/job_posts/jobs_Arron_Machine_Learning_20260125_0007.csv')
+    path = Path(FILTERED_FILE_PATH/'20260125_Arron_Machine Learning_filtered.csv')
+    df = pd.read_csv(path)
     parser = SalaryParser(model_name="qwen2.5")
     df[['min_salary', 'max_salary', 'currency']] = df['Salary'].apply(lambda x: pd.Series(parser.parse(x)))
-    df.to_csv('./data/job_posts/jobs_Arron_Machine_Learning_20260125_0007.csv')
+    df.to_csv(path)

@@ -335,7 +335,7 @@ class LinkedInScraper:
             df = df.loc[((df['Company'].isin(company_list)) | (df['Salary'] != '')) & (df['Reposted'] == params['repost'])]
         current_date = datetime.now().strftime("%Y%m%d")
         search = params['search']
-        filepath = Path(filepath / f"{current_date}_{user}_{search['keyword']}_{search['city']}_{search['period']}_filtered.csv")
+        filepath = Path(filepath / f"{current_date}_{user}_{search['keyword']}_filtered.csv")
         df.to_csv(filepath, index=False, encoding='utf-8-sig')
         self.logger.info(f"Filtered {len(df)} eligible jobs and saved to {filepath}")
     
