@@ -1,0 +1,12 @@
+company_list:
+
+user_name: 'User'
+
+search:
+  keyword: "Machine Learning"
+  city: "Toronto, Ontario, Canada"
+  distance: 10
+  period: "Past 24 hours"
+
+options:
+  headless: false  # Debug - False; Production - True
