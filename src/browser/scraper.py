@@ -3,6 +3,7 @@ import time
 import logging
 import pandas as pd
 from typing import List, Dict, Optional
+from playwright_stealth import stealth_sync
 from playwright.sync_api import sync_playwright, Page, BrowserContext, Locator, expect
 
 class LinkedInScraper:
@@ -39,7 +40,7 @@ class LinkedInScraper:
             )
             self.context = self.browser.new_context(no_viewport=True)
             self.page = self.context.new_page()
-            # self._is_active = True
+            stealth_sync(self.page)
             self.logger.info("Browser session started successfully.")
         except Exception as e:
             self.logger.critical(f"Failed to launch browser: {e}")
@@ -68,7 +69,7 @@ class LinkedInScraper:
             self.logger.error(f"Authentication failed: {e}")
             raise
 
-        if self.page.get_by_text('bot check').is_visible():
+        if self.page.get_by_text('security check').is_visible():
             self.logger.warning("Bot check detected. Pausing to wait for user input...")
             input("Press Enter after completing the bot check on the page...")
             self.logger.info("Resuming after bot check.")
@@ -178,7 +179,7 @@ class LinkedInScraper:
             company = parts[1]
             location = parts[2]
             # Clean posted time
-            posted_test = '\n'.join([t for t in parts if 'ago' in t or 'just posted' in t.lower()])
+            posted_text = '\n'.join([t for t in parts if 'ago' in t or 'just posted' in t.lower()])
             posted_text = posted_text.split('\n')
             for time_text in posted_text:
                 if 'Posted on' in time_text:
@@ -220,7 +221,7 @@ class LinkedInScraper:
                     desc_text = details.inner_text()
                 except:
                     desc_text = ''
-                    self.logger.warning(f"Could not extract description details for job #{count}.")
+                    self.logger.warning(f"Could not extract description details for {job_title} at {company}.")
                 if desc_text != '':
                     job_description = '\n'.join([line for line in desc_text.split('\n') if line.strip()])
                     # Salary extraction logic
@@ -237,7 +238,7 @@ class LinkedInScraper:
                                     salary.append(sentence)
                     salary = ' | '.join(salary)
             except Exception:
-                self.logger.debug(f"Could not extract description details for job #{count}.")
+                self.logger.debug(f"Could not extract description details for {job_title} at {company}.")
 
             # Extract URL
             try:
@@ -246,7 +247,7 @@ class LinkedInScraper:
                 pass
 
         except Exception as e:
-            self.logger.warning(f"Interaction failed for job #{count}: {e}")
+            self.logger.warning(f"Interaction failed for {job_title} at {company}")
             return
 
         # Store Data
@@ -263,7 +264,7 @@ class LinkedInScraper:
         })
         self.logger.info(f"Successfully scraped: {job_title} at {company}")
 
-    def save_to_csv(self, filepath: str):  # 把 filename 改成 filepath
+    def save_to_csv(self, filepath: str): 
         """
         Persists collected job data to a CSV file.
         Args:
@@ -281,6 +282,32 @@ class LinkedInScraper:
         except Exception as e:
             self.logger.error(f"Failed to save CSV to {filepath}: {e}")
 
+    def filter_eligible_jobs(self, filepath: str, company_list: list):
+        """
+        Filters collected jobs based on company eligibility and salary information.
+        
+        Keeps jobs that match either of these criteria:
+        - Company is in the provided company_list
+        - Job posting includes salary information
+        
+        Args:
+            filepath (str): Full path where filtered results will be saved (e.g., /app/data/filtered_jobs.csv)
+            company_list (list): List of company names to filter by
+        
+        Returns:
+            pd.DataFrame: Filtered job data as a pandas DataFrame
+        
+        Example:
+            filtered_df = scraper.filter_eligible_jobs('filtered_jobs.csv', ['Google', 'Microsoft'])
+        """
+        df = pd.DataFrame(self.job_list)
+        if company_list == []:
+            self.logger.info(f"No company list provided. No filter was applied to the output. ")
+        else:
+            df = df.loc[(df['Company'].isin(company_list)) | (df['Salary'] != '')]
+        df.to_csv(filepath, index=False, encoding='utf-8-sig')
+        self.logger.info(f"Filtered {len(df)} eligible jobs and saved to {filepath}")
+    
     def close(self):
         """
         Gracefully terminates the browser session.

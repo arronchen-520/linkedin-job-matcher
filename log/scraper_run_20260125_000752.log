@@ -1,0 +1,108 @@
+2026-01-25 00:07:52,152 - MainController - INFO - Loading configuration from: ./config/config_arron.yaml
+2026-01-25 00:07:52,154 - MainController - INFO - Starting task for [Arron]: Machine Learning in Toronto, Ontario, Canada
+2026-01-25 00:07:52,154 - LinkedInScraper - INFO - Initializing Playwright and launching browser...
+2026-01-25 00:07:52,819 - LinkedInScraper - INFO - Browser session started successfully.
+2026-01-25 00:07:52,819 - LinkedInScraper - INFO - Navigating to LinkedIn job search page...
+2026-01-25 00:07:53,589 - LinkedInScraper - INFO - Sign-in button detected. Attempting authentication...
+2026-01-25 00:07:54,106 - LinkedInScraper - INFO - Credentials submitted.
+2026-01-25 00:07:54,123 - LinkedInScraper - INFO - Executing search for keywords: 'Machine Learning' in 'Toronto, Ontario, Canada'
+2026-01-25 00:08:05,428 - LinkedInScraper - INFO - Applying time filter: Past 24 hours
+2026-01-25 00:08:08,605 - LinkedInScraper - INFO - Setting location filter: 10km
+2026-01-25 00:08:10,970 - LinkedInScraper - INFO - Location filters applied successfully.
+2026-01-25 00:08:10,970 - LinkedInScraper - INFO - Starting job scraping sequence...
+2026-01-25 00:08:12,406 - LinkedInScraper - INFO - Page content loaded. Extracting job cards...
+2026-01-25 00:08:12,422 - LinkedInScraper - INFO - Found 25 jobs on the current page.
+2026-01-25 00:08:13,297 - LinkedInScraper - INFO - Successfully scraped: Machine Learning Architect (AWS) - Canada  at RACKSPACE
+2026-01-25 00:08:14,404 - LinkedInScraper - INFO - Successfully scraped: Runtime Engineer at Lemurian Labs
+2026-01-25 00:08:15,486 - LinkedInScraper - INFO - Successfully scraped: Senior ML Performance Engineer at Lemurian Labs
+2026-01-25 00:08:16,595 - LinkedInScraper - INFO - Successfully scraped: Sr. AI Engineer, Data & Insights  at Viral Nation
+2026-01-25 00:08:17,687 - LinkedInScraper - INFO - Successfully scraped: Data Scientist Lead  at JPMorgan - XML
+2026-01-25 00:08:18,784 - LinkedInScraper - INFO - Successfully scraped: Senior Product Solutions Analyst  at Scotiabank
+2026-01-25 00:08:19,964 - LinkedInScraper - INFO - Successfully scraped: Staff Software Engineer - AI I  at Thomson Reuters
+2026-01-25 00:08:21,065 - LinkedInScraper - INFO - Successfully scraped: Physics Informed AI/ML Researcher  at Autodesk
+2026-01-25 00:08:22,165 - LinkedInScraper - INFO - Successfully scraped: Modelling / Forecasting Senior Analyst (Quants) 4162  at TD
+2026-01-25 00:08:23,261 - LinkedInScraper - INFO - Successfully scraped: Research Engineer / Research Scientist (Pre-training)  at Ideogram AI
+2026-01-25 00:08:24,386 - LinkedInScraper - INFO - Successfully scraped: Senior Software Engineer, AI Inference Systems  at NVIDIA
+2026-01-25 00:08:25,458 - LinkedInScraper - INFO - Successfully scraped: Member of Technical Staff, Training and Inference at Boson AI
+2026-01-25 00:08:26,515 - LinkedInScraper - INFO - Successfully scraped: Manager, Quantitative Analysis, Strategy, and Insights  at BMO
+2026-01-25 00:08:27,648 - LinkedInScraper - INFO - Successfully scraped: Senior Director, Software Engineering (Machine Learning)  at Affirm
+2026-01-25 00:08:28,715 - LinkedInScraper - INFO - Successfully scraped: Senior Machine Learning Engineer, Mapping  at Lyft
+2026-01-25 00:08:29,791 - LinkedInScraper - INFO - Successfully scraped: Senior Consultant, Financial Crimes - Data Analytics  at KPMG Canada
+2026-01-25 00:08:30,952 - LinkedInScraper - INFO - Successfully scraped: Associate, AI DevOps Engineer  at BMO
+2026-01-25 00:08:32,056 - LinkedInScraper - INFO - Successfully scraped: AI Solution Architect  at PwC Canada
+2026-01-25 00:08:33,136 - LinkedInScraper - INFO - Successfully scraped: Sr. AI Engineer, Content Generation  at Viral Nation
+2026-01-25 00:08:34,235 - LinkedInScraper - INFO - Successfully scraped: Senior Research Scientist Construction  at Autodesk
+2026-01-25 00:08:35,749 - LinkedInScraper - INFO - Successfully scraped: Applied AI Engineer at Valence
+2026-01-25 00:08:36,828 - LinkedInScraper - INFO - Successfully scraped: Member of Technical Staff, Agent Code  at Cohere
+2026-01-25 00:08:37,930 - LinkedInScraper - INFO - Successfully scraped: Python DevOps Developer/ A.I.  at Motion Recruitment
+2026-01-25 00:08:39,062 - LinkedInScraper - INFO - Successfully scraped: Advanced Analytics Specialist  at OntarioTeachers
+2026-01-25 00:08:40,176 - LinkedInScraper - INFO - Successfully scraped: Research Internship (Spring 2026)  at Cohere
+2026-01-25 00:08:40,179 - LinkedInScraper - INFO - Navigating to next page...
+2026-01-25 00:08:41,583 - LinkedInScraper - INFO - Page content loaded. Extracting job cards...
+2026-01-25 00:08:41,587 - LinkedInScraper - INFO - Found 25 jobs on the current page.
+2026-01-25 00:08:42,697 - LinkedInScraper - INFO - Successfully scraped: Principal Data Engineer - Intelligent Data Platforms (AI)  at BMO
+2026-01-25 00:08:43,836 - LinkedInScraper - INFO - Successfully scraped: Engineering Manager, Data, AI and Platform Development & Support  at BMO
+2026-01-25 00:08:44,937 - LinkedInScraper - INFO - Successfully scraped: Senior Manager, Data, Analytics and AI/ML Products, Deloitte Global Transformation  at Deloitte Canada
+2026-01-25 00:08:45,979 - LinkedInScraper - INFO - Successfully scraped: Manager, Financial Crimes- Data Analytics  at KPMG Canada
+2026-01-25 00:08:47,038 - LinkedInScraper - INFO - Successfully scraped: Data Engineer+ Data Scientist  at COGNITO INC
+2026-01-25 00:08:48,090 - LinkedInScraper - INFO - Successfully scraped: Staff Data Scientist I  at Mistplay Inc
+2026-01-25 00:08:49,208 - LinkedInScraper - INFO - Successfully scraped: Senior Research Machine Learning Scientist (B3617)  at TD Securities
+2026-01-25 00:08:50,309 - LinkedInScraper - INFO - Successfully scraped: Senior ML Platform / ML Infrastructure Engineer II  at Mistplay Inc
+2026-01-25 00:08:51,381 - LinkedInScraper - INFO - Successfully scraped: Manager, Advanced Analytics  at TD Securities
+2026-01-25 00:08:52,470 - LinkedInScraper - INFO - Successfully scraped: Senior Data Developer, Scheduling & Forecasting (ServiceOS)  at Dialogue
+2026-01-25 00:08:54,083 - LinkedInScraper - INFO - Successfully scraped: Principal Data Scientist, Quantitative Analysis and Strategy  at BMO
+2026-01-25 00:08:55,137 - LinkedInScraper - INFO - Successfully scraped: Senior Developer, Data, AI and Platform Development & Support  at BMO
+2026-01-25 00:08:56,219 - LinkedInScraper - INFO - Successfully scraped: Senior Data Architect, Artificial Intelligence / AWS Cloud  at BMO
+2026-01-25 00:08:57,310 - LinkedInScraper - INFO - Successfully scraped: Senior Analyst- Trading Surveillance  at TD Securities
+2026-01-25 00:08:58,433 - LinkedInScraper - INFO - Successfully scraped: Manager, Advanced Analytic ¨C Trading Surveillance  at TD Securities
+2026-01-25 00:08:59,490 - LinkedInScraper - INFO - Successfully scraped: Senior Manager, Advanced Analytics - AML & Transaction Monitoring  at TD Securities
+2026-01-25 00:09:00,626 - LinkedInScraper - INFO - Successfully scraped: Senior Manager, Advanced Analytics (Quants)  at TD Securities
+2026-01-25 00:09:01,757 - LinkedInScraper - INFO - Successfully scraped: Compiler Code Gen Engineer at Lemurian Labs
+2026-01-25 00:09:02,856 - LinkedInScraper - INFO - Successfully scraped: GCP Data Analyst - BigQuery (Canada)  at RACKSPACE
+2026-01-25 00:09:03,936 - LinkedInScraper - INFO - Successfully scraped: Compiler Tech Lead at Lemurian Labs
+2026-01-25 00:09:04,992 - LinkedInScraper - INFO - Successfully scraped: Technical Project Manager ¨C Agentic AI Technologies  at Techedin
+2026-01-25 00:09:06,121 - LinkedInScraper - INFO - Successfully scraped: Software Engineer II - Data Platform  at Okta, Inc.
+2026-01-25 00:09:07,186 - LinkedInScraper - INFO - Successfully scraped: Manager, Data Analyst, CFO Group  at RBC
+2026-01-25 00:09:08,261 - LinkedInScraper - INFO - Successfully scraped: Early Careers: Risk Analyst, AGRC  at Aon
+2026-01-25 00:09:09,348 - LinkedInScraper - INFO - Successfully scraped: Senior Manager, Financial Crimes- Data Analytics  at KPMG Canada
+2026-01-25 00:09:09,351 - LinkedInScraper - INFO - Navigating to next page...
+2026-01-25 00:09:10,361 - LinkedInScraper - INFO - Page content loaded. Extracting job cards...
+2026-01-25 00:09:10,381 - LinkedInScraper - INFO - Found 25 jobs on the current page.
+2026-01-25 00:09:11,501 - LinkedInScraper - INFO - Successfully scraped: Product Manager at Lemurian Labs
+2026-01-25 00:09:12,502 - LinkedInScraper - INFO - Successfully scraped: AI & Technology Strategy Manager  at Deloitte Canada
+2026-01-25 00:09:13,596 - LinkedInScraper - INFO - Successfully scraped: Manager, Insider Threat Technical Specialist (12 month fixed-term), Deloitte Global Risk and Brand  at Deloitte Canada
+2026-01-25 00:09:14,664 - LinkedInScraper - INFO - Successfully scraped: Vertical Insights Partner: US/C, Measurement Science, Ads at Uber Advertising
+2026-01-25 00:09:15,739 - LinkedInScraper - INFO - Successfully scraped: Software Development Engineer II, Amazon Fulfillment Technologies (AFT) - Workforce Optimization  at Amazon
+2026-01-25 00:09:16,845 - LinkedInScraper - INFO - Successfully scraped: Senior Data & Automation Engineer (Databricks)  at Fluent, Inc
+2026-01-25 00:09:17,909 - LinkedInScraper - INFO - Successfully scraped: Back-End Developer - Python, GCP  at Scotiabank
+2026-01-25 00:09:18,999 - LinkedInScraper - INFO - Successfully scraped: Lead Drilling & Sampling Data  at BHP Group - JW
+2026-01-25 00:09:20,090 - LinkedInScraper - INFO - Successfully scraped: Senior Product Manager - AI Developer Tools & SDK  at Fivetran
+2026-01-25 00:09:21,154 - LinkedInScraper - INFO - Successfully scraped: Learning Operations & AI Analyst  at Themis Solutions Inc.
+2026-01-25 00:09:22,213 - LinkedInScraper - INFO - Successfully scraped: Senior Data Operations Analyst  at Manulife
+2026-01-25 00:09:23,301 - LinkedInScraper - INFO - Successfully scraped: Senior Consultant, Financial Crimes - Data Analytics  at KPMG Canada
+2026-01-25 00:09:24,307 - LinkedInScraper - INFO - Successfully scraped: Pharmaceutical - Computational Biologist at Amaris Consulting
+2026-01-25 00:09:25,378 - LinkedInScraper - INFO - Successfully scraped: Associate, Product Management & Development  at S&P Global
+2026-01-25 00:09:26,447 - LinkedInScraper - INFO - Successfully scraped: MDI Specialist at Starcom Canada
+2026-01-25 00:09:27,496 - LinkedInScraper - INFO - Successfully scraped: Software Developer Backend - Application  at Dialogue
+2026-01-25 00:09:28,566 - LinkedInScraper - INFO - Successfully scraped: Technical Product Manager (Scheduling & Forecasting)  at Dialogue
+2026-01-25 00:09:29,595 - LinkedInScraper - INFO - Successfully scraped: Data Analyst, Digital Experience and Personalization  at Manulife
+2026-01-25 00:09:30,610 - LinkedInScraper - INFO - Successfully scraped: Technology Director (Customer Experience Solutions)  at Apply Digital
+2026-01-25 00:09:31,687 - LinkedInScraper - INFO - Successfully scraped: Data Engineer, Localization  at Lyft
+2026-01-25 00:09:32,764 - LinkedInScraper - INFO - Successfully scraped: Senior Software Engineer  at Morningstar
+2026-01-25 00:09:34,042 - LinkedInScraper - WARNING - Could not extract description details for Senior Full Stack Developer  at Motion Recruitment.
+2026-01-25 00:09:34,047 - LinkedInScraper - INFO - Successfully scraped: Senior Full Stack Developer  at Motion Recruitment
+2026-01-25 00:09:35,166 - LinkedInScraper - INFO - Successfully scraped: Senior Manager, Analytics & Experimentation // Gestionnaire senior, Analyse et exp¨¦rimentation  at Mistplay Inc
+2026-01-25 00:09:36,239 - LinkedInScraper - INFO - Successfully scraped: Software Development Engineer II, Amazon Fulfillment Technologies (AFT) - Workforce Optimization  at Amazon
+2026-01-25 00:09:37,304 - LinkedInScraper - INFO - Successfully scraped: D¨¦veloppeur(euse) Logiciel Backend - Application  at Dialogue
+2026-01-25 00:09:37,308 - LinkedInScraper - INFO - Navigating to next page...
+2026-01-25 00:09:38,252 - LinkedInScraper - INFO - Page content loaded. Extracting job cards...
+2026-01-25 00:09:38,255 - LinkedInScraper - INFO - Found 3 jobs on the current page.
+2026-01-25 00:09:39,244 - LinkedInScraper - INFO - Successfully scraped: Staff Platform Developer, Backend (Service OS)  at Dialogue
+2026-01-25 00:09:40,209 - LinkedInScraper - INFO - Successfully scraped: Analyste de donn¨¦es senior, Rapports clients  at Dialogue
+2026-01-25 00:09:41,190 - LinkedInScraper - INFO - Successfully scraped: D¨¦veloppeur(e) logiciel Expert(e), Backend (Service OS)  at Dialogue
+2026-01-25 00:09:41,194 - LinkedInScraper - INFO - Pagination end reached. Terminating scrape loop.
+2026-01-25 00:09:41,194 - LinkedInScraper - INFO - Saving 78 jobs to C:\Users\CXY\Downloads\job-matcher\data\job_posts\jobs_Arron_Machine_Learning_20260125_0007.csv...
+2026-01-25 00:09:41,205 - LinkedInScraper - INFO - File saved successfully.
+2026-01-25 00:09:41,211 - LinkedInScraper - INFO - Filtered 40 eligible jobs and saved to C:\Users\CXY\Downloads\job-matcher\data\job_posts\jobs_Arron_Machine_Learning_20260125_0007_filtered.csv
+2026-01-25 00:09:41,212 - MainController - INFO - Task completed successfully.
+2026-01-25 00:09:41,212 - LinkedInScraper - INFO - Closing browser resources.

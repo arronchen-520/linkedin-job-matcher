@@ -84,6 +84,7 @@ def get_run_parameters(args) -> dict:
             # Safely get options with defaults
             options = config_data.get('options', {})
             params['headless'] = options.get('headless', False)
+            params['company_list'] = config_data.get('company_list', [])
         except ValueError as e:
             logger.critical(f"Invalid Configuration: {e}")
             sys.exit(1)
@@ -97,7 +98,7 @@ def get_run_parameters(args) -> dict:
             'period': args.period
         }
         params['headless'] = args.headless
-    
+        params['company_list'] = args.company_list
     return params
 
 def run_scraping_task(params: dict, credentials: dict):
@@ -111,8 +112,10 @@ def run_scraping_task(params: dict, credentials: dict):
     # Generate Filename
     timestamp = datetime.now().strftime("%Y%m%d_%H%M")
     safe_keyword = search['keyword'].replace(" ", "_")
-    filename = f"jobs_{user}_{safe_keyword}_{timestamp}.csv"
-    full_path = DATA_DIR / filename
+    complete_file = f"jobs_{user}_{safe_keyword}_{timestamp}.csv"
+    complete_full_path = DATA_DIR / complete_file
+    filtered_file = f"jobs_{user}_{safe_keyword}_{timestamp}_filtered.csv"
+    filtered_full_path = DATA_DIR / filtered_file
 
     logger.info(f"Starting task for [{user}]: {search['keyword']} in {search['city']}")
 
@@ -125,8 +128,9 @@ def run_scraping_task(params: dict, credentials: dict):
         bot.filter_period(search['period'])
         bot.set_distance(search['distance'])
         bot.scrape_available_jobs()
-        bot.save_to_csv(str(full_path))
-        
+        bot.save_to_csv(str(complete_full_path))
+        bot.filter_eligible_jobs(str(filtered_full_path), params['company_list'])
+
         logger.info("Task completed successfully.")
         
     except KeyboardInterrupt:
@@ -144,6 +148,7 @@ def main():
     parser.add_argument("--distance", type=int, default=10)
     parser.add_argument("--period", type=str, default="Past 24 hours")
     parser.add_argument("--headless", action="store_true")
+    parser.add_argument("--company_list", type=list, nargs="+", default=[], help="Space-separated list of companies")
     
     args = parser.parse_args()
 
