@@ -2,6 +2,7 @@ import ollama
 import logging
 import json
 import re
+from utils.logger import setup_logging
 from typing import Dict, Any
 
 class ResumeMatcher:
@@ -73,27 +74,10 @@ class ResumeMatcher:
             )
 
             content = response['message']['content']
-            return self._parse_json_response(content)
+            return json.load(content)
 
         except Exception as e:
             logger.error(f"Inference failed: {e}")
-            return self._get_default_response()
-
-    def _parse_json_response(self, text: str) -> Dict[str, Any]:
-        """
-        Robustly extracts JSON from the LLM response, handling common formatting errors.
-        """
-        try:
-            return json.loads(text)
-        except json.JSONDecodeError:
-            # Fallback: Try to find the JSON block using regex if the model chatted around it
-            logger.warning("Raw JSON decode failed, attempting regex extraction.")
-            match = re.search(r'\{.*\}', text, re.DOTALL)
-            if match:
-                try:
-                    return json.loads(match.group(0))
-                except:
-                    pass
             return self._get_default_response()
 
     def _get_default_response(self) -> Dict[str, Any]:
@@ -106,7 +90,9 @@ class ResumeMatcher:
 
 # ================= MAIN EXECUTION (Example) =================
 if __name__ == "__main__":
+    setup_logging()
     logger = logging.getLogger(__name__)
+    logging.getLogger("httpx").setLevel(logging.WARNING)
     # Example usage for testing
     matcher = ResumeMatcher(model_name="qwen2.5")
 

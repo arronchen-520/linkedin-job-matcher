@@ -50,28 +50,12 @@ class SalaryParser:
             )
             
             content = response['message']['content']
-
-            clean_json = self._extract_json(content)
             
-            return clean_json
+            return json.loads(content)
 
         except Exception as e:
             self.logger.warning(f"Error parsing '{raw_text}': {e}")
             return {"min": 0, "max": 0, "currency": "Error"}
-
-    def _extract_json(self, text: str) -> dict:
-        """Helper to ensure we get a dict back even if LLM adds text around it"""
-        try:
-            return json.loads(text)
-        except json.JSONDecodeError:
-            match = re.search(r'\{.*\}', text, re.DOTALL)
-            if match:
-                return json.loads(match.group(0))
-            return {"min": 0, "max": 0, "currency": "ParseError"}
-
-def extract_salary(text:str):
-    result = parser.parse(text)
-    return result
 
 if __name__ == "__main__":
     
