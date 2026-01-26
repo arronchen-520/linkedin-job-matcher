@@ -77,9 +77,10 @@ if __name__ == "__main__":
     
     # Will need to process mroe files
     setup_logging()
+    logging.getLogger("httpx").setLevel(logging.WARNING)
     logger = logging.getLogger(__name__)
     path = Path(FILTERED_FILE_PATH/'20260125_Arron_Machine Learning_filtered.csv')
     df = pd.read_csv(path)
     parser = SalaryParser(model_name="qwen2.5")
     df[['min_salary', 'max_salary', 'currency']] = df['Salary'].apply(lambda x: pd.Series(parser.parse(x)))
-    df.to_csv(path)
+    df.to_csv(path, index = False)
