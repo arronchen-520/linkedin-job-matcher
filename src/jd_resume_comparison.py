@@ -1,9 +1,13 @@
 import ollama
 import logging
 import json
+import numpy as np
 import re
 from utils.logger import setup_logging
 from typing import Dict, Any
+from utils.file_path import FILTERED_FILE_PATH
+from pathlib import Path
+import pandas as pd
 from utils.resume_to_string import load_resume_pdf
 
 
@@ -41,29 +45,34 @@ class ResumeMatcher:
 
         # 2. The ATS Prompt
         prompt = f"""
-        You are a strict ATS (Applicant Tracking System) and Senior Technical Recruiter.
-        Evaluate the candidate based on the Job Description (JD).
+            Role: You are a cynical and strict Hiring Manager. Your goal is to FILTER OUT candidates who are not a perfect match. 
+            Do not be polite. Do not hallucinate skills. 
+            
+            Task: Analyze the fit between the Candidate's Resume and the Job Description (JD).
 
-        ### JOB DESCRIPTION:
-        {jd_text}
+            ### JOB DESCRIPTION:
+            {jd_text}
 
-        ### CANDIDATE RESUME:
-        {resume_text}
+            ### CANDIDATE RESUME:
+            {resume_text}
 
-        ### SCORING RULES:
-        1. **Hard Requirements:** If the candidate lacks a "Must Have" skill (e.g., "Proficient in AWS"), penalize heavily.
-        2. **Keywords:** Check for specific technologies mentioned in the JD.
-        3. **Experience:** Verify if the seniority level matches.
-        4. **Output:** Assign a score from 0 to 100.
+            ### STRICT SCORING RUBRIC (0-100):
+            - **100**: Perfect match. Has ALL skills, exact years of experience, and domain knowledge.
+            - **80-99**: Great match. Missing only trivial/nice-to-have skills.
+            - **60-79**: Good match. Has core tech stack but lacks domain specific knowledge or slightly under-qualified.
+            - **40-59**: Weak match. Missing a KEY requirement (e.g., JD asks for Java/C++, candidate only knows Python; or JD is Senior, candidate is Junior).
+            - **0-39**: Mismatch. Role is completely different (e.g., Front-end dev vs Data Scientist).
 
-        ### OUTPUT FORMAT (JSON ONLY):
-        Strictly output a valid JSON object with these keys:
-        {{
-            "match_score": <int>,
-            "reasoning": "<string: A concise, professional summary (max 2 sentences) of the fit>",
-            "missing_skills": [<list of strings: Top 3 critical skills/keywords missing from resume>]
-        }}
-        """
+            ### CRITICAL INSTRUCTION:
+            If the JD requires specific heavy engineering skills (e.g., "C++", "Java", "Distributed Systems", "Kubernetes", "React") and the resume is primarily "Data Science/ML" oriented without these explicit engineering skills, **the score MUST be below 50**.
+            
+            ### OUTPUT FORMAT (JSON ONLY):
+            {{
+                "match_score": <int>,
+                "reasoning": "<string: Brutally honest assessment. Start with the biggest GAP.>",
+                "missing_skills": [<list of strings: Top 3 critical missing hard skills>]
+            }}
+            """
 
         try:
             # 3. Inference
@@ -73,11 +82,12 @@ class ResumeMatcher:
                 format='json',  # Forces structured output
                 options={
                     'temperature': 0.1,  # Low temp for deterministic, consistent scoring
+                    'num_ctx': 8192
                 }
             )
 
             content = response['message']['content']
-            return json.load(content)
+            return json.loads(content)
 
         except Exception as e:
             logger.error(f"Inference failed: {e}")
@@ -96,25 +106,13 @@ if __name__ == "__main__":
     setup_logging()
     logger = logging.getLogger(__name__)
     logging.getLogger("httpx").setLevel(logging.WARNING)
-    # Example usage for testing
     matcher = ResumeMatcher(model_name="qwen2.5")
-
-    sample_jd = """
-    Software Engineer (Python).
-    Requirements:
-    - 3+ years of experience in Python and Django.
-    - Experience with AWS (EC2, Lambda).
-    - Knowledge of React is a plus.
-    """
-
-    sample_resume = """
-    Junior Developer.
-    Skills: Python, C++, HTML.
-    Experience: 1 year building internal tools using Python.
-    No cloud experience.
-    """
-
-    logging.info("Running Matcher...")
-    result = matcher.match(sample_resume, sample_jd)
-    
-    print(json.dumps(result, indent=2))
+    # Convert pdf to text
+    resume = load_resume_pdf('Arron Chen Resume 2025 Updated.pdf', logger = logger)
+    filename = '20260125_Arron_Machine Learning_filtered.csv'
+    path = Path(FILTERED_FILE_PATH/filename)
+    df = pd.read_csv(path, encoding='latin1') # 可能要改
+    df[['Match Score', 'Reasoning', 'Missing Skills']] = df['Job Description'].apply(lambda x: pd.Series(matcher.match(resume,x)))
+    df['Recommend Apply'] = np.where(df['Match Score'] >= 70, True, False)
+    df = df[['Job Title', 'Company', 'Posted Ago', 'Min Salary', 'Max Salary', 'Recommend Apply', 'Match Score', 'Reasoning', 'Missing Skills', 'URL', 'Posted Time', 'Salary', 'Reposted', 'Job Description']]
+    df.to_csv(path, index = False)
