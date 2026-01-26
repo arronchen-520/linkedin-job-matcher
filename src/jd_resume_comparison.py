@@ -4,6 +4,9 @@ import json
 import re
 from utils.logger import setup_logging
 from typing import Dict, Any
+from utils.resume_to_string import load_resume_pdf
+
+
 
 class ResumeMatcher:
     def __init__(self, model_name: str = "qwen2.5"):
