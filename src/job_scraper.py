@@ -14,13 +14,19 @@ from playwright.sync_api import sync_playwright, Page, BrowserContext, Locator, 
 
 class LinkedInScraper:
     """
-    Encapsulates the automation logic for scraping job postings from LinkedIn.
-    Manages browser state, authentication, search parameters, and data extraction.
+    Orchestrates the end-to-end automation for scraping job postings from LinkedIn.
+    
+    Responsibilities:
+    - Manages the Playwright browser lifecycle (start, context, close).
+    - Handles user authentication via environment variables.
+    - Executes job searches with configurable filters (location, date, distance).
+    - Parses job cards to extract metadata, descriptions, and salary info.
+    - Filters and persists data to CSV formats.
     """
 
     def __init__(self):
         """
-        Initializes the scraper instance with default state containers.
+        Initializes the scraper instance and sets up empty state containers.
         """
         self.playwright = None
         self.browser = None
@@ -31,19 +37,22 @@ class LinkedInScraper:
 
     def start_browser(self, headless: bool = False):
         """
-        Initializes the Playwright engine and launches the browser instance.
+        Initializes the Playwright engine and launches a persistent browser context.
+        
+        Uses a persistent context to maintain cookies and local storage (session data),
+        minimizing the need for repeated logins.
         
         Args:
-            headless (bool): If True, runs the browser without a visible UI.
+            headless (bool): If True, runs the browser in the background without a UI.
         """
         self.logger.info("Initializing Playwright and launching browser...")
         try:
             self.playwright = sync_playwright().start()
             self.context = self.playwright.chromium.launch_persistent_context(
-                user_data_dir=USER_DATA_DIR,  # Saved cookie and log-in
+                user_data_dir=USER_DATA_DIR,  # Persist cookies and login session
                 channel="chrome", 
                 headless=headless,    
-                user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 
+                user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 
                 viewport={"width": 1920, "height": 1280}, 
                 args=[
                     '--disable-blink-features=AutomationControlled',
@@ -61,7 +70,11 @@ class LinkedInScraper:
 
     def sign_in(self):
         """
-        Navigates to the login portal and authenticates the user.
+        Navigates to the LinkedIn login portal and handles authentication.
+        
+        Checks if the user is already logged in via cookies. If not, it attempts
+        to log in using credentials stored in the .env file.
+        Includes a pause handler for manual intervention if a security check is detected.
         """
         self.logger.info("Navigating to LinkedIn job search page...")
         try:
@@ -99,7 +112,11 @@ class LinkedInScraper:
 
     def search_jobs(self, keywords: str, city: str):
         """
-        Executes a search query with the provided keywords.
+        Executes a job search query using the provided keywords and location.
+        
+        Args:
+            keywords (str): Job title or skills (e.g., "Python Developer").
+            city (str): The location for the search (e.g., "Toronto, ON").
         """
         self.logger.info(f"Executing search for keywords: '{keywords}' in '{city}'")
         try:
@@ -111,12 +128,14 @@ class LinkedInScraper:
 
     def set_distance(self, distance: int):
         """
-        Applies radius filters to the search results.
+        Applies a radius filter to the search results.
         
         Args:
-            distance (int): The search radius in kilometers (the value should be a multiple of 5).
+            distance (int): The search radius in kilometers. 
+                            Note: The UI slider snaps to specific increments, so the value 
+                            is rounded to the nearest multiple of 5.
         """
-        distance = int(round(distance / 5) * 5) # Make sure the distance is a multiple of 5.
+        distance = int(round(distance / 5) * 5) # Ensure distance is a multiple of 5 compatible with UI.
         self.logger.info(f"Setting location filter: {distance}km")
         try:
             location_bpx = self.page.locator('svg#location-marker-small')
@@ -134,7 +153,11 @@ class LinkedInScraper:
 
     def filter_period(self, period: str):
         """
-        Filters search results by the job posting date.
+        Filters search results by the date posted.
+        
+        Args:
+            period (str): One of ['Past 24 hours', 'Past week', 'Past month'].
+                          Defaults to 'Past 24 hours' if invalid.
         """
         self.logger.info(f"Applying time filter: {period}")
         valid_periods = ['Past 24 hours', 'Past week', 'Past month']
@@ -152,7 +175,13 @@ class LinkedInScraper:
 
     def scrape_available_jobs(self):
         """
-        Iterates through pagination and collects job data from each page.
+        Iterates through search pagination and extracts job data from each card.
+        
+        Mechanics:
+        1. Waits for the results list to load.
+        2. Iterates through all visible job cards.
+        3. Processes each job individually.
+        4. Handles pagination clicks until the end is reached.
         """
         self.logger.info("Starting job scraping sequence...")
         exit_loop = False
@@ -184,7 +213,18 @@ class LinkedInScraper:
 
     def _process_single_job(self, job_element: Locator, count: int):
         """
-        Helper method to extract details from a single job element.
+        Extracts detailed information from a single job card.
+        
+        Actions:
+        - Parses title, company, location, and post date from the card text.
+        - Clicks the card to load the details panel.
+        - Extracts the full job description.
+        - Identifies salary information (if present in text).
+        - Detects 'Reposted' status.
+        
+        Args:
+            job_element (Locator): The Playwright locator for the job card.
+            count (int): The current job index for logging purposes.
         """
         job_element.scroll_into_view_if_needed()
         
@@ -288,10 +328,11 @@ class LinkedInScraper:
 
     def save_to_csv(self, filepath: Path, search): 
         """
-        Persists collected job data to a CSV file.
+        Persists the collected job list to a CSV file.
+        
         Args:
-            filepath (Path): Full path not including file name.
-            search (Dict): Search parameters.
+            filepath (Path): The directory path to save the file.
+            search (Dict): Search parameters to construct the filename.
         """
         if not self.job_list:
             self.logger.warning("No jobs were collected. Skipping CSV generation.")
@@ -309,21 +350,15 @@ class LinkedInScraper:
 
     def filter_eligible_jobs(self, filepath: Path, params: dict):
         """
-        Filters collected jobs based on company eligibility and salary information.
+        Filters the raw job list based on user preferences and saves a secondary CSV.
         
-        Keeps jobs that match either of these criteria:
-        - Company is in the provided company_list
-        - Job posting includes salary information
-
-        - And whether or not the job is reposted based on the user config.
+        Filter Logic:
+        1. Keep job if Company is in `params['company_list']` OR if the job has `Salary` info.
+        2. Filter based on the `Reposted` status preference.
         
         Args:
-            filepath (str): Full path where filtered results will be saved (e.g., /app/data/filtered_jobs.csv)
-            params (dict): Config parameters
-        
-        Returns:
-            pd.DataFrame: Filtered job data as a pandas DataFrame
-
+            filepath (Path): Directory path for the filtered output.
+            params (dict): Configuration dictionary containing 'company_list', 'user_name', and 'repost'.
         """
         df = pd.DataFrame(self.job_list)
         company_list = params['company_list']
@@ -340,6 +375,12 @@ class LinkedInScraper:
         self.logger.info(f"Filtered {len(df)} eligible jobs and saved to {filepath}")
     
     def run(self, params):
+        """
+        Main entry point for the scraper execution flow.
+        
+        Args:
+            params (dict): Run configuration loaded from YAML.
+        """
         try:
             search = params['search']
             self.logger.info(f"Starting task for [{params['user_name']}]: {search['keyword']} in {search['city']}")
@@ -359,7 +400,7 @@ class LinkedInScraper:
 
     def close(self):
         """
-        Gracefully terminates the browser session.
+        Gracefully terminates the browser context and stops the Playwright engine.
         """
         self.logger.info("Closing browser resources.")
         if self.context:
