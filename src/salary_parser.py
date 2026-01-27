@@ -1,26 +1,43 @@
-import ollama
-import logging
 import json
+import os
+import logging
 import pandas as pd
-import re
+import ollama
 from pathlib import Path
+from typing import Dict, Union
 from utils.logger import setup_logging
 from utils.file_path import FILTERED_FILE_PATH
 
 class SalaryParser:
-    def __init__(self, model_name):
+    """
+    A utility class to extract and standardize salary information from job descriptions
+    using a local Large Language Model (LLM).
+    """
+
+    def __init__(self, model_name: str):
+        """
+        Initializes the SalaryParser with a specific LLM model.
+
+        Args:
+            model_name (str): The name of the Ollama model to use (e.g., 'llama3.1').
+        """
         self.model = model_name
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def parse(self, raw_text: str) -> dict:
+    def parse(self, raw_text: str) -> Dict[str, Union[int, str]]:
         """
-        Parses raw salary string into structured annual salary data.
-        Returns: {'min': int, 'max': int, 'currency': str}
+        Parses a raw salary string into structured annual salary data.
+
+        Args:
+            raw_text (str): The raw salary text from a job posting.
+
+        Returns:
+            dict: A dictionary containing 'min' (int), 'max' (int), and 'currency' (str).
         """
         if not raw_text or pd.isna(raw_text) or str(raw_text).strip() == "":
             return {"min": 0, "max": 0, "currency": "N/A"}
 
-        # Key Prompt
+        # Key Prompt (Kept exactly as provided)
         prompt = f"""
         You are a data extraction engine. Extract annual salary details from the text.
 
@@ -41,31 +58,52 @@ class SalaryParser:
         """
 
         try:
-            # ollama, format = 'json'
+            # Inference using Ollama with temperature 0 for deterministic results
             response = ollama.chat(
                 model=self.model,
                 messages=[{'role': 'user', 'content': prompt}],
                 format='json', 
-                options={'temperature': 0} # Certainty
+                options={'temperature': 0}
             )
             
             content = response['message']['content']
-            
             return json.loads(content)
 
         except Exception as e:
             self.logger.warning(f"Error parsing '{raw_text}': {e}")
             return {"min": 0, "max": 0, "currency": "Error"}
 
+    def process_file(self, filename: str):
+        """
+        Loads a CSV file, parses the 'Salary' column, and updates the file with 
+        structured 'Min Salary', 'Max Salary', and 'Currency' columns.
+
+        Args:
+            filename (str): The name of the CSV file located in the filtered file path.
+        """
+        path = Path(FILTERED_FILE_PATH / filename)
+        
+        try:
+            df = pd.read_csv(path)
+            self.logger.info(f"Processing salary data for: {filename}")
+            
+            # Apply parsing logic across the 'Salary' column
+            salary_data = df['Salary'].apply(lambda x: pd.Series(self.parse(x)))
+            df[['Min Salary', 'Max Salary', 'Currency']] = salary_data
+            
+            # Save updated dataframe back to the source path
+            df.to_csv(path, index=False)
+            self.logger.info(f"Successfully saved structured salary data to {path}")
+            
+        except Exception as e:
+            self.logger.error(f"Failed to process file {filename}: {e}")
+
 if __name__ == "__main__":
-    
-    # Will need to process mroe files
+    # Setup global logging
     setup_logging()
     logging.getLogger("httpx").setLevel(logging.WARNING)
-    logger = logging.getLogger(__name__)
+
+    # Initialize parser and execute processing
     filename = '20260127_Arron_Machine Learning_filtered.csv'
-    path = Path(FILTERED_FILE_PATH/filename)
-    df = pd.read_csv(path)
-    parser = SalaryParser(model_name="llama3.1") # or gemma3:12b
-    df[['Min Salary', 'Max Salary', 'Currency']] = df['Salary'].apply(lambda x: pd.Series(parser.parse(x)))
-    df.to_csv(path, index = False)
+    parser = SalaryParser(model_name="llama3.1")
+    parser.process_file(filename)
