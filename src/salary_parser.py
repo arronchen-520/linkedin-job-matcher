@@ -8,7 +8,7 @@ from utils.logger import setup_logging
 from utils.file_path import FILTERED_FILE_PATH
 
 class SalaryParser:
-    def __init__(self, model_name="qwen2.5"):
+    def __init__(self, model_name):
         self.model = model_name
         self.logger = logging.getLogger(self.__class__.__name__)
 
@@ -63,9 +63,9 @@ if __name__ == "__main__":
     setup_logging()
     logging.getLogger("httpx").setLevel(logging.WARNING)
     logger = logging.getLogger(__name__)
-    filename = '20260125_Arron_Machine Learning_filtered.csv'
+    filename = '20260127_Arron_Machine Learning_filtered.csv'
     path = Path(FILTERED_FILE_PATH/filename)
     df = pd.read_csv(path)
-    parser = SalaryParser(model_name="qwen2.5")
+    parser = SalaryParser(model_name="llama3.1") # or gemma3:12b
     df[['Min Salary', 'Max Salary', 'Currency']] = df['Salary'].apply(lambda x: pd.Series(parser.parse(x)))
     df.to_csv(path, index = False)

@@ -1,3 +1,2 @@
-2026/01/25-18:09:47.156 8420 Reusing MANIFEST C:\Users\CXY\Downloads\job-matcher\browser_user\Default\Local Storage\leveldb/MANIFEST-000001
-2026/01/25-18:09:47.160 8420 Recovering log #3
-2026/01/25-18:09:47.162 8420 Reusing old log C:\Users\CXY\Downloads\job-matcher\browser_user\Default\Local Storage\leveldb/000003.log 
+2026/01/27-00:14:10.109 2a74 Creating DB C:\Users\CXY\Downloads\job-matcher\browser_user\Default\Local Storage\leveldb since it was missing.
+2026/01/27-00:14:10.122 2a74 Reusing MANIFEST C:\Users\CXY\Downloads\job-matcher\browser_user\Default\Local Storage\leveldb/MANIFEST-000001
