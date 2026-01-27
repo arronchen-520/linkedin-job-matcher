@@ -1,47 +1,61 @@
 import ollama
 import logging
 import json
-import numpy as np
-from utils.logger import setup_logging
-from typing import Dict, Any
-from utils.file_path import FILTERED_FILE_PATH
-from pathlib import Path
-import pandas as pd
 import time
+import pandas as pd
+import numpy as np
+from pathlib import Path
+from typing import Dict, Any
+from utils.logger import setup_logging
+from utils.file_path import FILTERED_FILE_PATH
 from utils.resume_to_string import load_resume_pdf
 
-class ResumeMatcher:
-    def __init__(self, model_name: str):
+class LocalLLMMatcher:
+    """
+    A local matching engine powered by Ollama. 
+    Serves as a high-privacy fallback to API-based models, running entirely 
+    on local hardware (e.g., RTX 3080).
+    """
+
+    def __init__(self, model_name: str = "gemma3:12b"):
         """
-        Initializes the ResumeMatcher with a specific LLM model.
-        
+        Initializes the LocalLLMMatcher with a specific Ollama model.
+
         Args:
-            model_name (str): The Ollama model tag to use.
+            model_name (str): The name/tag of the local Ollama model to use.
         """
         self.model = model_name
+        self.logger = logging.getLogger(__name__)
 
-    def match(self, resume_text: str, jd_text: str):
+    def _get_default_response(self) -> Dict[str, Any]:
         """
-        Analyzes the alignment between a resume and a job description.
-
-        Args:
-            resume_text (str): Plain text content of the resume.
-            jd_text (str): Plain text content of the job description.
+        Returns a safe default response in case of inference failure.
 
         Returns:
-            dict: A dictionary containing:
-                - match_score (int): 0-100
-                - reasoning (str): Brief explanation
-                - missing_skills (list): Key missing requirements
+            dict: Default structure with score 0.
         """
-        # 1. Validation & Truncation
-        # We truncate to ~12k characters to ensure we fit within standard context windows
-        # while keeping the most relevant info (header, skills, recent exp).
+        return {
+            "match_score": 0,
+            "reasoning": "Error processing data during local inference.",
+            "missing_skills": []
+        }
+
+    def _evaluate_match(self, resume_text: str, jd_text: str) -> dict:
+        """
+        Executes the matching logic using the local Ollama instance.
+        
+        Args:
+            resume_text (str): Content of the candidate's resume.
+            jd_text (str): Content of the job description.
+
+        Returns:
+            dict: Evaluation results containing score, reasoning, and skills.
+        """
         if not resume_text or not jd_text:
-            logger.warning("Empty resume or JD provided.")
+            self.logger.warning("Empty resume or JD provided.")
             return self._get_default_response()
 
-        # 2. The ATS Prompt
+        # The Prompt remains untouched as per requirements
         prompt = f"""
         ### ROLE:
         You are an elite Technical Talent Acquisition Specialist with 20 years of experience. Be extremely skeptical: prioritize verifiable impact and evidence over keyword lists or self-claims. 
@@ -79,11 +93,11 @@ class ResumeMatcher:
         """
 
         try:
-            # 3. Inference
+            # Inference using Ollama
             response = ollama.chat(
                 model=self.model,
                 messages=[{'role': 'user', 'content': prompt}],
-                format='json',  # Forces structured output
+                format='json',
                 options={
                     'temperature': 0.1,  
                     'num_ctx': 12288, 
@@ -91,47 +105,84 @@ class ResumeMatcher:
                 }
             )
 
-            # --- 新增：获取并打印 Token 用量 ---
+            # Token Usage Monitoring
             input_tokens = response.get('prompt_eval_count', 0)
             output_tokens = response.get('eval_count', 0)
-            
-            # 使用 print 实时显示 (因为 logger 可能会被过滤或不显示在控制台)
-            print(f"📊 [Token Usage] In: {input_tokens} | Out: {output_tokens} | Total: {input_tokens + output_tokens}")
-            # --------------------------------
+            print(f"📊 [Local Token Usage] In: {input_tokens} | Out: {output_tokens} | Total: {input_tokens + output_tokens}")
 
             content = response['message']['content']
-
-            print(content)
-            
             return json.loads(content)
 
         except Exception as e:
-            logger.error(f"Inference failed: {e}")
+            self.logger.error(f"Local inference failed: {e}")
             return self._get_default_response()
 
-    def _get_default_response(self) -> Dict[str, Any]:
-        """Returns a safe default object in case of errors."""
-        return {
-            "match_score": 0,
-            "reasoning": "Error processing data",
-            "missing_skills": []
-        }
+    def trigger_local_evaluate(self, resume: str, jd: str) -> pd.Series:
+        """
+        Public wrapper to facilitate pandas DataFrame integration.
+        
+        Args:
+            resume (str): Candidate resume string.
+            jd (str): Job description string.
 
-# ================= MAIN EXECUTION (Example) =================
+        Returns:
+            pd.Series: Match Score, Reasoning, and Missing Skills for DataFrame assignment.
+        """
+        result = self._evaluate_match(resume, jd)
+        return pd.Series([result['match_score'], result['reasoning'], result['missing_skills']])
+
+    def process_job_data(self, filename: str, resume_path: str):
+        """
+        Orchestrates the local processing flow from CSV reading to result saving.
+
+        Args:
+            filename (str): The target CSV file located in the filtered file directory.
+            resume_path (str): The file path to the candidate's PDF resume.
+        """
+        start_time = time.time()
+        
+        try:
+            # Resource Loading
+            resume_str = load_resume_pdf(resume_path, logger=self.logger)
+            path = Path(FILTERED_FILE_PATH / filename)
+            df = pd.read_csv(path)
+            self.logger.info(f"Loaded {len(df)} records for local processing.")
+
+            # Processing
+            self.logger.info(f"Engaging LocalLLMMatcher with model: {self.model}")
+            
+            # Using the trigger method for pandas apply
+            results = df['Job Description'].apply(lambda x: self.trigger_local_evaluate(resume_str, x))
+            df[['Match Score', 'Reasoning', 'Missing Skills']] = results
+
+            # Automated Flagging
+            df['Recommend Apply'] = np.where(df['Match Score'] >= 80, True, False)
+
+            # Reorder columns and Save
+            cols = [
+                'Job Title', 'Company', 'Posted Ago', 'Min Salary', 'Max Salary', 
+                'Recommend Apply', 'Match Score', 'Reasoning', 'Missing Skills', 
+                'URL', 'Posted Time', 'Salary', 'Reposted', 'Job Description'
+            ]
+            df = df[cols]
+            df.to_csv(path, index=False)
+            
+            elapsed = time.time() - start_time
+            self.logger.info(f"Local process finished in {elapsed:.2f} seconds. Results saved to: {path}")
+
+        except Exception as e:
+            self.logger.critical(f"Local processing crashed: {e}")
+
+# ================= MAIN EXECUTION =================
 if __name__ == "__main__":
-    start = time.time()
     setup_logging()
-    logger = logging.getLogger(__name__)
     logging.getLogger("httpx").setLevel(logging.WARNING)
-    matcher = ResumeMatcher(model_name="gemma3:12b") # or llama3.1
-    # Convert pdf to text
-    resume = load_resume_pdf('Arron Chen Resume 2025 Updated.pdf', logger = logger)
-    filename = '20260127_Arron_Machine Learning_filtered.csv'
-    path = Path(FILTERED_FILE_PATH/filename)
-    df = pd.read_csv(path) # 可能要改
-    df[['Match Score', 'Reasoning', 'Missing Skills']] = df['Job Description'].apply(lambda x: pd.Series(matcher.match(resume,x)))
-    df['Recommend Apply'] = np.where(df['Match Score'] >= 60, True, False)
-    df = df[['Job Title', 'Company', 'Posted Ago', 'Min Salary', 'Max Salary', 'Recommend Apply', 'Match Score', 'Reasoning', 'Missing Skills', 'URL', 'Posted Time', 'Salary', 'Reposted', 'Job Description']]
-    df.to_csv(path, index = False)
-    end = time.time()  
-    print(f"全部耗时: {end - start:.2f} 秒")
+
+    # Instantiate the local matcher
+    # You can specify "llama3.1" or "gemma3:12b" here
+    matcher = LocalLLMMatcher(model_name="gemma3:12b")
+    
+    matcher.process_job_data(
+        filename='20260127_Arron_Machine Learning_filtered.csv',
+        resume_path='Arron Chen Resume 2025 Updated.pdf'
+    )
