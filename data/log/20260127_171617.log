@@ -1,0 +1,130 @@
+2026-01-27 17:16:17,828 - utils.config_loader - INFO - Loading configuration from: C:\Users\CXY\Downloads\job-matcher\config\config_arron.yaml
+2026-01-27 17:16:17,830 - LinkedInScraper - INFO - Starting task for [Arron]: Machine Learning at Google in Toronto, Ontario, Canada
+2026-01-27 17:16:17,830 - LinkedInScraper - INFO - Initializing Playwright and launching browser...
+2026-01-27 17:16:18,463 - LinkedInScraper - INFO - Tracing started.
+2026-01-27 17:16:18,502 - LinkedInScraper - INFO - Browser session started successfully.
+2026-01-27 17:16:18,502 - LinkedInScraper - INFO - Navigating to LinkedIn job search page...
+2026-01-27 17:16:19,580 - LinkedInScraper - INFO - Sign-in button not found. User may already be logged in.
+2026-01-27 17:16:19,601 - LinkedInScraper - INFO - Executing search for keywords: 'Machine Learning at Google' in 'Toronto, Ontario, Canada'
+2026-01-27 17:16:19,898 - LinkedInScraper - INFO - Applying time filter: Past 24 hours
+2026-01-27 17:16:24,370 - LinkedInScraper - INFO - Setting location filter: 10km
+2026-01-27 17:16:27,030 - LinkedInScraper - INFO - Location filters applied successfully.
+2026-01-27 17:16:27,030 - LinkedInScraper - INFO - Starting job scraping sequence...
+2026-01-27 17:16:28,522 - LinkedInScraper - INFO - Page content loaded. Extracting job cards...
+2026-01-27 17:16:28,584 - LinkedInScraper - INFO - Found 25 jobs on the current page.
+2026-01-27 17:16:29,396 - LinkedInScraper - INFO - Successfully scraped: Applied AI Scientist  at RBC
+2026-01-27 17:16:30,677 - LinkedInScraper - INFO - Successfully scraped: Fulltime AI Architect at E-Solutions
+2026-01-27 17:16:32,443 - LinkedInScraper - INFO - Successfully scraped: Scientifique II, Recherche en apprentissage automatique  at TD
+2026-01-27 17:16:33,639 - LinkedInScraper - INFO - Successfully scraped: Senior Data Scientist  at RBC
+2026-01-27 17:16:34,884 - LinkedInScraper - INFO - Successfully scraped: Scientifique principal, Recherche en apprentissage automatique  at TD
+2026-01-27 17:16:36,173 - LinkedInScraper - INFO - Successfully scraped: AI Architect at Arkhya Tech. Inc.
+2026-01-27 17:16:37,940 - LinkedInScraper - INFO - Successfully scraped: Data Science Lead  at Deloitte Canada
+2026-01-27 17:16:39,111 - LinkedInScraper - INFO - Successfully scraped: Member of Technical Staff, MLE  at Cohere
+2026-01-27 17:16:40,326 - LinkedInScraper - INFO - Successfully scraped: Artificial Intelligence Engineer, LearnWith.AI (Remote) - $200,000/year USD  at Crossover 
+2026-01-27 17:16:42,461 - LinkedInScraper - INFO - Successfully scraped: Artificial Intelligence Engineer  at New York Technology Partners
+2026-01-27 17:16:43,706 - LinkedInScraper - INFO - Successfully scraped: Director of AI  at Apply Digital
+2026-01-27 17:16:45,517 - LinkedInScraper - INFO - Successfully scraped: Ingénieur II, Apprentissage automatique  at TD
+2026-01-27 17:16:46,371 - LinkedInScraper - INFO - Successfully scraped: Machine Learning Architect (AWS) - Canada  at RACKSPACE
+2026-01-27 17:16:47,780 - LinkedInScraper - INFO - Successfully scraped: Senior ML Platform Engineer  at Kobo
+2026-01-27 17:16:49,080 - LinkedInScraper - INFO - Successfully scraped: Machine Learning Engineer at Altera
+2026-01-27 17:16:50,396 - LinkedInScraper - INFO - Successfully scraped: Engineering Manager, AI/ML - Mobile Maintenance Management Software  at Andiamo
+2026-01-27 17:16:51,727 - LinkedInScraper - INFO - Successfully scraped: Member of Technical Staff, Pretraining evaluations  at Cohere
+2026-01-27 17:16:53,164 - LinkedInScraper - INFO - Successfully scraped: Principal Software Engineer - AI/ML  at TDL Group
+2026-01-27 17:16:54,416 - LinkedInScraper - INFO - Successfully scraped: Research Machine Learning Scientist II  at TD
+2026-01-27 17:16:55,775 - LinkedInScraper - INFO - Successfully scraped: Senior AI Developer (LLM/VLM/Agent Applications)  at Autodesk
+2026-01-27 17:16:57,124 - LinkedInScraper - INFO - Successfully scraped: Data Scientist - Global Tech Leader  at Andiamo
+2026-01-27 17:16:58,629 - LinkedInScraper - INFO - Successfully scraped: Machine Learning Engineer II  at TD
+2026-01-27 17:17:03,002 - LinkedInScraper - WARNING - Could not extract description details for Data Scientist  at Sanofi.
+2026-01-27 17:17:03,029 - LinkedInScraper - INFO - Successfully scraped: Data Scientist  at Sanofi
+2026-01-27 17:17:04,293 - LinkedInScraper - INFO - Successfully scraped: AI Researcher  at Block
+2026-01-27 17:17:05,665 - LinkedInScraper - WARNING - Could not extract description details for Customer Engineer I, Cloud AI, Startups, Google Cloud  at Google.
+2026-01-27 17:17:05,710 - LinkedInScraper - INFO - Successfully scraped: Customer Engineer I, Cloud AI, Startups, Google Cloud  at Google
+2026-01-27 17:17:05,752 - LinkedInScraper - INFO - Navigating to next page...
+2026-01-27 17:17:07,390 - LinkedInScraper - INFO - Page content loaded. Extracting job cards...
+2026-01-27 17:17:07,467 - LinkedInScraper - INFO - Found 25 jobs on the current page.
+2026-01-27 17:17:08,437 - LinkedInScraper - INFO - Successfully scraped: AI Engineer  at MLSE (Maple Leaf Sports & Entertainment Partnership)
+2026-01-27 17:17:10,300 - LinkedInScraper - INFO - Successfully scraped: Machine Learning Associate  at Vector Institute
+2026-01-27 17:17:11,745 - LinkedInScraper - INFO - Successfully scraped: Research Engineer / Research Scientist Intern  at Ideogram AI
+2026-01-27 17:17:13,112 - LinkedInScraper - INFO - Successfully scraped: Senior Machine Learning Engineer  at Scribd, Inc.
+2026-01-27 17:17:14,449 - LinkedInScraper - INFO - Successfully scraped: Member of Technical Staff, Senior/Staff MLE  at Cohere
+2026-01-27 17:17:15,915 - LinkedInScraper - INFO - Successfully scraped: Machine Learning Engineer II  at TD Securities
+2026-01-27 17:17:17,461 - LinkedInScraper - INFO - Successfully scraped: Artificial Intelligence Software Developer - Mobile Maintenance Management Software  at Andiamo
+2026-01-27 17:17:18,676 - LinkedInScraper - INFO - Successfully scraped: Machine Learning Engineer  at Scribd, Inc.
+2026-01-27 17:17:21,304 - LinkedInScraper - INFO - Successfully scraped: Applied AI Engineer – Agentic Workflows  at Cohere
+2026-01-27 17:17:22,820 - LinkedInScraper - INFO - Successfully scraped: Research Machine Learning Scientist II  at TD Securities
+2026-01-27 17:17:24,270 - LinkedInScraper - INFO - Successfully scraped: Senior Research Machine Learning Scientist (B3617)  at TD
+2026-01-27 17:17:25,822 - LinkedInScraper - INFO - Successfully scraped: Generative AI Engineer at Viva Tech Solutions
+2026-01-27 17:17:27,903 - LinkedInScraper - INFO - Successfully scraped: AI Architect Toronto Canada (100% Onsite) at Damcosoft
+2026-01-27 17:17:29,954 - LinkedInScraper - INFO - Successfully scraped: Senior Research Machine Learning Scientist (B3617)  at TD Securities
+2026-01-27 17:17:31,573 - LinkedInScraper - WARNING - Could not extract description details for Data Science Expert - AI Content Specialist at Alignerr.
+2026-01-27 17:17:31,628 - LinkedInScraper - INFO - Successfully scraped: Data Science Expert - AI Content Specialist at Alignerr
+2026-01-27 17:18:02,874 - LinkedInScraper - INFO - Successfully scraped: AI Architect | Toronto Canada (100% Onsite)  at TestingXperts
+2026-01-27 17:18:04,447 - LinkedInScraper - INFO - Successfully scraped: Senior Applied Machine Learning Scientist, Predictive AI(B3617)  at TD Securities
+2026-01-27 17:18:05,945 - LinkedInScraper - INFO - Successfully scraped: Senior Data Scientist - Global Finance Leader  at Andiamo
+2026-01-27 17:18:07,378 - LinkedInScraper - INFO - Successfully scraped: Senior Applied Machine Learning Scientist, Conversational AI (B3617)  at TD Securities
+2026-01-27 17:18:09,155 - LinkedInScraper - INFO - Successfully scraped: Staff Data Scientist I  at Mistplay Inc
+2026-01-27 17:18:10,726 - LinkedInScraper - INFO - Successfully scraped: Manager, Machine Learning - Agentic AI  at Loblaw Digital
+2026-01-27 17:18:13,515 - LinkedInScraper - INFO - Successfully scraped: Sr. Manager, Data Scientist  at Rogers Communications Inc.
+2026-01-27 17:18:15,077 - LinkedInScraper - INFO - Successfully scraped: Senior Data Scientist - Medical Software Company  at Andiamo
+2026-01-27 17:18:16,379 - LinkedInScraper - INFO - Successfully scraped: Senior Manager, Data Science – Payments & Treasury  at Gusto
+2026-01-27 17:18:18,079 - LinkedInScraper - INFO - Successfully scraped: Senior ML Platform / ML Infrastructure Engineer II  at Mistplay Inc
+2026-01-27 17:18:18,151 - LinkedInScraper - INFO - Navigating to next page...
+2026-01-27 17:18:19,475 - LinkedInScraper - INFO - Page content loaded. Extracting job cards...
+2026-01-27 17:18:19,561 - LinkedInScraper - INFO - Found 25 jobs on the current page.
+2026-01-27 17:18:21,250 - LinkedInScraper - INFO - Successfully scraped: Senior AI Solution Architect at Focus Cloud Group
+2026-01-27 17:18:22,909 - LinkedInScraper - INFO - Successfully scraped: Senior ML Ops Engineer at E-Solutions
+2026-01-27 17:18:24,636 - LinkedInScraper - INFO - Successfully scraped: Director, Artificial Intelligence (A.I.) Business Strategy and Architecture at Alquemy Search & Consulting
+2026-01-27 17:18:26,301 - LinkedInScraper - INFO - Successfully scraped: Senior ML Performance Engineer at Lemurian Labs
+2026-01-27 17:18:28,052 - LinkedInScraper - INFO - Successfully scraped: Artificial Intelligence Engineer, IgniteTech (Remote) - $100,000/year USD  at Crossover 
+2026-01-27 17:18:29,472 - LinkedInScraper - INFO - Successfully scraped: Intern, Physics-Based Character Motion Research  at Autodesk, Inc.
+2026-01-27 17:18:31,711 - LinkedInScraper - INFO - Successfully scraped: Intern, Physics-Based Character Motion Research  at Autodesk, Inc.
+2026-01-27 17:18:33,587 - LinkedInScraper - INFO - Successfully scraped: Senior Manager - Credit Risk Model Development  at BMO
+2026-01-27 17:18:36,549 - LinkedInScraper - INFO - Successfully scraped: ML Ops Developer, Fusion  at Autodesk
+2026-01-27 17:18:38,131 - LinkedInScraper - INFO - Successfully scraped: Senior Software Engineer - AI/Computer Vision (Camera Systems)  at Motorola Solutions
+2026-01-27 17:18:40,526 - LinkedInScraper - INFO - Successfully scraped: Lead AI Engineer, IgniteTech (Remote) - $100,000/year USD  at Crossover 
+2026-01-27 17:18:42,402 - LinkedInScraper - INFO - Successfully scraped: Conseiller ou conseillère en IA - Industrie du commerce de détail -Stratégie et consultation  at Accenture
+2026-01-27 17:18:44,335 - LinkedInScraper - INFO - Successfully scraped: Manager, Modelling and Best Practices (Ontario, Atlantic and Western regions)  at Desjardins
+2026-01-27 17:18:45,749 - LinkedInScraper - INFO - Successfully scraped: AI Engineering Specialist  at CGI
+2026-01-27 17:18:47,669 - LinkedInScraper - INFO - Successfully scraped: Runtime Engineer at Lemurian Labs
+2026-01-27 17:18:49,590 - LinkedInScraper - INFO - Successfully scraped: Software Engineer, Evaluation Frontend  at Cohere
+2026-01-27 17:18:51,281 - LinkedInScraper - INFO - Successfully scraped: Compiler Code Gen Engineer at Lemurian Labs
+2026-01-27 17:18:53,140 - LinkedInScraper - INFO - Successfully scraped: Practicum Student – AI-driven respiratory virus forecasting  at Public Health Ontario
+2026-01-27 17:18:54,972 - LinkedInScraper - INFO - Successfully scraped: Gen AI Solution Lead  at Yochana
+2026-01-27 17:18:56,790 - LinkedInScraper - INFO - Successfully scraped: ML OPS Engineer at Arkhya Tech. Inc.
+2026-01-27 17:18:58,919 - LinkedInScraper - INFO - Successfully scraped: GenAI Developer/Engineer - Toronto  at Caspian One
+2026-01-27 17:19:01,022 - LinkedInScraper - INFO - Successfully scraped: Senior ML Ops Engineer at Arkhya Tech. Inc.
+2026-01-27 17:19:02,914 - LinkedInScraper - INFO - Successfully scraped: Product Data Scientist  at GPTZero
+2026-01-27 17:19:04,491 - LinkedInScraper - INFO - Successfully scraped: Data Scientist - Data-Driven Global Investment Firm  at Andiamo
+2026-01-27 17:19:05,930 - LinkedInScraper - INFO - Successfully scraped: Gen AI Architect  at Quantum World Technologies Inc.
+2026-01-27 17:19:06,048 - LinkedInScraper - INFO - Navigating to next page...
+2026-01-27 17:19:08,219 - LinkedInScraper - INFO - Page content loaded. Extracting job cards...
+2026-01-27 17:19:08,291 - LinkedInScraper - INFO - Found 18 jobs on the current page.
+2026-01-27 17:19:09,424 - LinkedInScraper - INFO - Successfully scraped: AI Advisor – Retail – Strategy & Consulting  at Accenture
+2026-01-27 17:19:10,902 - LinkedInScraper - INFO - Successfully scraped: Principal Staff Engineer – AI Infrastructure - AI/ML Leader  at Andiamo
+2026-01-27 17:19:43,412 - LinkedInScraper - INFO - Successfully scraped: AI Solutions Director (Remote, Canada) at Nearform
+2026-01-27 17:19:45,227 - LinkedInScraper - INFO - Successfully scraped: Principal Engineer  at Thomson Reuters
+2026-01-27 17:19:46,828 - LinkedInScraper - INFO - Successfully scraped: Quality Assurance Specialist GENAI  at Quantum World Technologies Inc.
+2026-01-27 17:19:48,405 - LinkedInScraper - INFO - Successfully scraped: Decision Analytics Associate  at ZS
+2026-01-27 17:19:50,112 - LinkedInScraper - INFO - Successfully scraped: Manager, Quantitative Analytics & Monitoring  at RBC
+2026-01-27 17:19:52,573 - LinkedInScraper - INFO - Successfully scraped: AI Technical Lead - Backend Development at Astra-North Infoteck Inc.  ~ Conquering today’s challenges, achieving tomorrow’s vision!
+2026-01-27 17:20:24,627 - LinkedInScraper - INFO - Successfully scraped: Senior ML Ops Engineer || Hybrid || Toronto Canada (Hybrid)  at TestingXperts
+2026-01-27 17:20:56,082 - LinkedInScraper - INFO - Successfully scraped: Senior MLOps Engineer – Kubernetes, Cloud ML Platforms (AWS/Azure/GCP) | Toronto, Canada (Hybrid)  at TestingXperts
+2026-01-27 17:20:58,088 - LinkedInScraper - INFO - Successfully scraped: Analyst/Consultant/Senior Consultant, Credit Risk Models - Financial Engineering & Modeling  at Deloitte Canada
+2026-01-27 17:20:59,953 - LinkedInScraper - WARNING - Could not extract description details for Physics Subject Matter Expert - AI Content Specialist at Alignerr.
+2026-01-27 17:21:00,060 - LinkedInScraper - INFO - Successfully scraped: Physics Subject Matter Expert - AI Content Specialist at Alignerr
+2026-01-27 17:21:02,127 - LinkedInScraper - INFO - Successfully scraped: Director - Data and AI Practice  at Iris Software Inc.
+2026-01-27 17:21:03,958 - LinkedInScraper - WARNING - Could not extract description details for Environmental Engineering - AI Data Trainer at Alignerr.
+2026-01-27 17:21:04,067 - LinkedInScraper - INFO - Successfully scraped: Environmental Engineering - AI Data Trainer at Alignerr
+2026-01-27 17:21:06,381 - LinkedInScraper - INFO - Successfully scraped: Manager, Model Validation  at Industrial and Commercial Bank of China (Canada)
+2026-01-27 17:21:08,394 - LinkedInScraper - WARNING - Could not extract description details for Mechanical Engineering Expert - AI Content Specialist at Alignerr.
+2026-01-27 17:21:08,521 - LinkedInScraper - INFO - Successfully scraped: Mechanical Engineering Expert - AI Content Specialist at Alignerr
+2026-01-27 17:21:10,566 - LinkedInScraper - INFO - Successfully scraped: Director - Data & AI Practice  at Iris Software Inc.
+2026-01-27 17:21:11,970 - LinkedInScraper - WARNING - Could not extract description details for Biochemistry Subject Matter Expert - AI Content Specialist at Alignerr.
+2026-01-27 17:21:12,095 - LinkedInScraper - INFO - Successfully scraped: Biochemistry Subject Matter Expert - AI Content Specialist at Alignerr
+2026-01-27 17:21:12,355 - LinkedInScraper - INFO - Pagination end reached. Terminating scrape loop.
+2026-01-27 17:21:12,356 - LinkedInScraper - INFO - Saving 93 jobs to C:\Users\CXY\Downloads\job-matcher\data\job_posts\complete_posts\20260127_Machine Learning at Google_Toronto, Ontario, Canada_Past 24 hours.csv...
+2026-01-27 17:21:12,367 - LinkedInScraper - INFO - File saved successfully.
+2026-01-27 17:21:12,374 - LinkedInScraper - INFO - Filtered 37 eligible jobs and saved to C:\Users\CXY\Downloads\job-matcher\data\job_posts\filtered_posts\20260127_Arron_Machine Learning at Google_filtered.csv
+2026-01-27 17:21:12,374 - LinkedInScraper - INFO - Task completed successfully.
+2026-01-27 17:21:12,374 - LinkedInScraper - INFO - Closing browser resources.
+2026-01-27 17:21:21,803 - LinkedInScraper - INFO - Trace saved to trace.zip

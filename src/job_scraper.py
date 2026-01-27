@@ -34,8 +34,9 @@ class LinkedInScraper:
         self.page: Optional[Page] = None
         self.job_list: List[Dict] = []
         self.logger = logging.getLogger(self.__class__.__name__)
+        self.is_tracing = False
 
-    def start_browser(self, headless: bool = False):
+    def start_browser(self, headless: bool = False, enable_tracing: bool = False):
         """
         Initializes the Playwright engine and launches a persistent browser context.
         
@@ -60,7 +61,16 @@ class LinkedInScraper:
                     '--disable-dev-shm-usage'
                 ]
             )
-            # self.context = self.browser.new_context(no_viewport=True)
+            # Start tracing if enabled
+            if enable_tracing:
+                self.is_tracing = True
+                self.context.tracing.start(
+                    name="linkedin_scraping_trace",
+                    screenshots=True,
+                    snapshots=True,
+                    sources=True
+                )
+                self.logger.info("Tracing started.")
             self.page = self.context.new_page()
             # stealth_sync(self.page)
             self.logger.info("Browser session started successfully.")
@@ -171,21 +181,29 @@ class LinkedInScraper:
             self.page.get_by_role('radio', name=period).click() 
             self.page.get_by_role('button', name='Show results').click()
         except Exception as e:
-            self.logger.error(f"Failed to apply time filter: {e}")
+            self.logger.warning(f"Failed to apply time filter: {e}")
 
-    def scrape_available_jobs(self):
+    def scrape_available_jobs(self, max_page):
         """
         Iterates through search pagination and extracts job data from each card.
-        
-        Mechanics:
-        1. Waits for the results list to load.
-        2. Iterates through all visible job cards.
-        3. Processes each job individually.
-        4. Handles pagination clicks until the end is reached.
+
+        Args:
+            max_page (int): The maximum number of pages to scrape before stopping.
+
+        Returns:
+            None: Extracted data is handled via _process_single_job.
+
+        Workflow:
+        1. Validates presence of SearchResultsMainContent.
+        2. Locates all job cards using data-view-name attributes.
+        3. Sequentially processes cards via _process_single_job.
+        4. Detects and clicks the 'Next' pagination button.
+        5. Terminates if max_page is reached or the 'Next' button is missing.
         """
         self.logger.info("Starting job scraping sequence...")
         exit_loop = False
-        
+        cnt_page = 1
+
         while not exit_loop:
             try:
                 self.page.locator('div[componentkey = "SearchResultsMainContent"]').wait_for()
@@ -204,9 +222,14 @@ class LinkedInScraper:
                 if next_button.count() == 0:
                     self.logger.info('Pagination end reached. Terminating scrape loop.')
                     exit_loop = True
+                elif cnt_page == max_page:
+                    self.logger.info('Max page reached. Terminating scrape loop.')
+                    exit_loop = True
                 else:
                     self.logger.info('Navigating to next page...')
                     next_button.first.click()
+                    cnt_page += 1
+                    
             except Exception as e:
                 self.logger.error(f"Unexpected error during pagination loop: {e}")
                 exit_loop = True
@@ -278,7 +301,7 @@ class LinkedInScraper:
             # Extract description/salary
             try:
                 try:
-                    details = self.page.get_by_text('About the job').locator('..').locator('..')
+                    details = self.page.get_by_role('heading', name = 'About the job').locator('..').locator('..')
                     details.wait_for()
                     desc_text = details.inner_text()
                 except:
@@ -384,12 +407,12 @@ class LinkedInScraper:
         try:
             search = params['search']
             self.logger.info(f"Starting task for [{params['user_name']}]: {search['keyword']} in {search['city']}")
-            self.start_browser(headless=params['headless'])
+            self.start_browser(headless=params['headless'], enable_tracing=params['tracing'])
             self.sign_in()
             self.search_jobs(search['keyword'], search['city'])
             self.filter_period(search['period'])
             self.set_distance(search['distance'])
-            self.scrape_available_jobs()
+            self.scrape_available_jobs(params['max_page'])
             self.save_to_csv(COMPLETE_FILE_PATH, search)
             self.filter_eligible_jobs(FILTERED_FILE_PATH, params)
             self.logger.info("Task completed successfully.")
@@ -398,12 +421,15 @@ class LinkedInScraper:
         except Exception as e:
             self.logger.critical(f"Unexpected error: {e}", exc_info=True)
 
-    def close(self):
+    def close(self, trace_path: str = "trace.zip"):
         """
         Gracefully terminates the browser context and stops the Playwright engine.
         """
         self.logger.info("Closing browser resources.")
         if self.context:
+            if self.is_tracing:
+                self.context.tracing.stop(path=trace_path)
+                self.logger.info(f"Trace saved to {trace_path}")
             self.context.close()
         if self.playwright:
             self.playwright.stop()

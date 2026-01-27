@@ -70,11 +70,15 @@ def get_run_parameters(config_path: str | Path) -> dict:
         validate_config(config_data)
         params['user_name'] = config_data.get('user_name', 'User')
         params['search'] = config_data['search']
+        params['max_page'] = config_data.get('max_page', 8)
         # Safely get options with defaults
         options = config_data.get('options', {})
         params['headless'] = options.get('headless', False)
+        params['tracing'] = options.get('tracing', False)
+        params['trace_path'] = options.get('trace_path', 'trace.zip')
         params['company_list'] = config_data.get('company_list', [])
         params['repost'] = config_data.get('repost', False)
+        
     except ValueError as e:
         logger.critical(f"Invalid Configuration: {e}")
         raise ValueError(f"Invalid Configuration: {e}")

@@ -17,3 +17,9 @@ options:
 
 # Whether or not to include reposted jobs (boolean)
 repost: False
+
+# For internal debug only
+tracing: false
+
+# Maximum page the scraper will go through
+max_page: 8

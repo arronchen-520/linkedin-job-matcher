@@ -67,5 +67,11 @@ search:
 
 options:
   headless: false  # Debug - False; Production - True
+  tracing: true
+  trace_path: 'trace.zip'
 
 repost: False
+
+tracing: false
+
+max_page: 10

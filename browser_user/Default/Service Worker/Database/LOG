@@ -1,2 +1,3 @@
-2026/01/27-00:14:12.636 6af8 Creating DB C:\Users\CXY\Downloads\job-matcher\browser_user\Default\Service Worker\Database since it was missing.
-2026/01/27-00:14:12.640 6af8 Reusing MANIFEST C:\Users\CXY\Downloads\job-matcher\browser_user\Default\Service Worker\Database/MANIFEST-000001
+2026/01/27-17:39:03.467 9e14 Reusing MANIFEST C:\Users\CXY\Downloads\job-matcher\browser_user\Default\Service Worker\Database/MANIFEST-000001
+2026/01/27-17:39:03.468 9e14 Recovering log #3
+2026/01/27-17:39:03.468 9e14 Reusing old log C:\Users\CXY\Downloads\job-matcher\browser_user\Default\Service Worker\Database/000003.log 
