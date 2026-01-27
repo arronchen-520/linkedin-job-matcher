@@ -8,7 +8,6 @@ from utils.file_path import FILTERED_FILE_PATH
 from pathlib import Path
 import pandas as pd
 import time
-from utils.LLM_ICL import icl_example
 from utils.resume_to_string import load_resume_pdf
 
 class ResumeMatcher:
