@@ -75,13 +75,16 @@ python main.py --config data/config/example.yaml
 
 ```
 CareerCopilot/
+├── browser_user/
+├── config/
 ├── data/            # config, sample resumes, user_data (cookies)
-│   ├── config/
+│   ├── job_posts/
+│   │   ├── complete_posts/
+│   │   └── filtered_posts/
+│   ├── log/
 │   └── resumes/
-├── docs/            # demo GIFs, usage notes, parsing docs
 ├── src/             # scraper, parsers, matcher implementation
-├── output/          # raw/filtered CSV results
-├── main.py          # pipeline entrypoint
+│   └── utils/
 ├── requirements.txt # recommended deps
 └── .env             # credentials template
 ```
