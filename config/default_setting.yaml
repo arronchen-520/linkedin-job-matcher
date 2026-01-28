@@ -26,3 +26,5 @@ max_page: 8
 resume: "resume.pdf"
 
 salary: true # Only filter jobs that has a salary range
+
+job_type: 'full time' # or 'co-op'/'intern'/'contract'/'rotational' Natual Language is fine

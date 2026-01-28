@@ -3,6 +3,7 @@ from pathlib import Path
 from utils.logger import setup_logging
 from utils.config_loader import get_run_parameters
 from utils.file_path import CONFIG_DIR
+from job_filter import filter_eligible_jobs
 from job_scraper import LinkedInScraper
 from salary_parser import SalaryParser
 from deepseek_jd_resume_matcher import DeepseekMatcher
@@ -27,6 +28,13 @@ def CareerCopilot(config_name):
         logger.error(f"Application crashed at Linkedin Scrapper: {e}")
         sys.exit(1)
     
+    # Job Filter
+    try:
+        df = filter_eligible_jobs(df, params)
+    except Exception as e:
+        logger.error(f"Application crashed at Linkedin Scrapper: {e}")
+        sys.exit(1)
+
     # Salary Parser
     try:
         parser = SalaryParser(model_name="llama3.1")
