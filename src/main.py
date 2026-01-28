@@ -24,7 +24,7 @@ def CareerCopilot(config_name):
         df = scraper.run(params) # Filtered jobs
         scraper.close()
     except Exception as e:
-        logger.error(f"Application crashed: {e}")
+        logger.error(f"Application crashed at Linkedin Scrapper: {e}")
         sys.exit(1)
     
     # Salary Parser
@@ -32,7 +32,7 @@ def CareerCopilot(config_name):
         parser = SalaryParser(model_name="llama3.1")
         parser.process_df(df)
     except Exception as e:
-        logger.error(f"Application crashed: {e}")
+        logger.error(f"Application crashed at Salary Parser: {e}")
         sys.exit(1)
 
     # Resume-JD Matcher
@@ -42,10 +42,10 @@ def CareerCopilot(config_name):
         df = matcher.process_job_data(
             df = df,
             resume = params['resume'],
-            filename = f"{current_date}_{params['user']}_{params['search']['keyword']}.csv"
+            filename = f"{current_date}_{params['user_name']}_{params['search']['keyword']}.csv"
         )
     except Exception as e:
-        logger.error(f"Application crashed: {e}")
+        logger.error(f"Application crashed at Resume-JD Matcher: {e}")
         sys.exit(1)
 
     return df

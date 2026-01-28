@@ -17,59 +17,47 @@ class DeepseekMatcher:
     A specialized matching engine powered by DeepSeek-V3.
     Designed to be integrated into the CareerCopilot ecosystem for high-precision 
     resume-to-JD alignment analysis.
-
     """
 
     def __init__(self, api_key: str = None, base_url: str = "https://api.deepseek.com"):
         """
         Initializes the DeepSeek client and loads environment variables.
-
-        Args:
-            api_key (str): DeepSeek API key. Defaults to DEEPSEEK_API_KEY from .env.
-            base_url (str): The target API endpoint.
         """
         load_dotenv()
+        self.logger = logging.getLogger(self.__class__.__name__)
+        
         self.api_key = api_key or os.getenv("DEEPSEEK_API_KEY")
         if not self.api_key:
+            self.logger.critical("DEEPSEEK_API_KEY not found in environment or .env file.")
             raise ValueError("API Key not found. Please set DEEPSEEK_API_KEY in .env")
         
         self.client = OpenAI(api_key=self.api_key, base_url=base_url)
-        self.logger = logging.getLogger(__name__)
+        self.logger.info(f"DeepseekMatcher initialized with base_url: {base_url}")
 
     def _get_token_count(self, text: str, model_encoding: str = "gpt-4") -> int:
         """
         Calculates token count to manage context limits and optimize API costs.
-
-        Args:
-            text (str): Input text string.
-            model_encoding (str): Encoding standard to utilize.
-
-        Returns:
-            int: Total token count estimate.
         """
         text = str(text)
         try:
             encoding = tiktoken.encoding_for_model(model_encoding)
-            return len(encoding.encode(text))
+            count = len(encoding.encode(text))
+            self.logger.debug(f"Token count calculated: {count} tokens.")
+            return count
         except Exception as e:
-            self.logger.warning(f"Token counting failed: {e}, falling back to character-based estimation.")
+            self.logger.warning(f"Tiktoken failed: {e}. Falling back to character-based heuristic.")
             return len(text) // 4
 
     def _evaluate_match(self, resume_text: str, jd_text: str) -> dict:
         """
         Internal method to execute the DeepSeek API call for single JD evaluation.
-
-        Args:
-            resume_text (str): Cleaned resume text content.
-            jd_text (str): Cleaned job description content.
-
-        Returns:
-            dict: Structured evaluation results containing score, reasoning, and gaps.
         """
         # 1. Token Safety Gate
         jd_token_count = self._get_token_count(jd_text)
+        resume_token_count = self._get_token_count(resume_text)
+        
         if jd_token_count > 10000:
-            self.logger.warning(f"JD too long ({jd_token_count} tokens). Aborting API call.")
+            self.logger.error(f"Safety Gate: JD is too large ({jd_token_count} tokens). Skipping API call to prevent cost overflow.")
             return {
                 "match_score": np.nan,
                 "reasoning": "JOB DESCRIPTION TOO LONG: Exceeded 10,000 token limit. Manual review required.",
@@ -97,8 +85,9 @@ class DeepseekMatcher:
         """
 
         user_content = f"RESUME:\n{resume_text}\n\n\nJOB DESCRIPTION:\n{jd_text}"
+        self.logger.debug(f"Sending payload to DeepSeek. JD length: {len(jd_text)} chars.")
+        
         start_time = time.time()
-
         try:
             response = self.client.chat.completions.create(
                 model="deepseek-chat",
@@ -114,58 +103,61 @@ class DeepseekMatcher:
             elapsed_time = time.time() - start_time
             usage = response.usage
 
-            self.logger.info(
-                f"API Success | Time: {elapsed_time:.2f}s | "
-                f"Tokens: {usage.total_tokens} (Cache Hit: {getattr(usage, 'prompt_cache_hit_tokens', 0)})"
+            self.logger.debug(
+                f"DeepSeek Match Complete | Time: {elapsed_time:.2f}s | "
+                f"Total Tokens: {usage.total_tokens} | "
+                f"Prompt Cache Hit: {getattr(usage, 'prompt_cache_hit_tokens', 0)}"
             )
 
             return json.loads(response.choices[0].message.content)
 
+        except json.JSONDecodeError as e:
+            self.logger.error(f"Failed to parse DeepSeek JSON response: {e}")
+            return None
         except Exception as e:
-            self.logger.error(f"DeepSeek API Error: {str(e)}")
+            self.logger.error(f"DeepSeek API call failed: {str(e)}", exc_info=True)
             return None
 
     def trigger_deepseek_evaluate(self, resume: str, jd: str) -> pd.Series:
         """
         Public entry point for row-by-row DataFrame evaluation.
-        
-        Args:
-            resume (str): Candidate resume string.
-            jd (str): Job description string.
-
-        Returns:
-            pd.Series: Match Score, Reasoning, and Missing Skills for DataFrame assignment.
         """
+        self.logger.debug("Triggering evaluation for single row...")
         result = self._evaluate_match(resume, jd)
+        
         if result is None:
+            self.logger.warning("Evaluation returned None. Defaulting to error Series.")
             return pd.Series([0, "API Error: Consult system logs.", []])
+            
         return pd.Series([result['match_score'], result['reasoning'], result['missing_skills']])
 
     def process_job_data(self, df: pd.DataFrame, resume: str, filename = 'result.csv'):
         """
         Orchestrates the end-to-end evaluation flow from CSV loading to result persistence.
-
-        Args:
-            df (pd.DataFrame): The df returned by salary parser.
-            resume_path (str): The file path to the candidate's PDF resume.
         """
+        self.logger.info(f"Starting batch process: {len(df)} jobs total.")
         try:
             # Resource Loading
             resume_str = load_resume_pdf(resume, logger=self.logger)
+            self.logger.info(f"Successfully loaded and parsed resume: {resume}")
             
             path = Path(FILTERED_FILE_PATH / filename)
-            # df = pd.read_csv(path)
-            self.logger.info(f"Loaded {len(df)} records for matching.")
+            self.logger.info(f"Final results will be saved to: {path}")
 
             # Processing
-            self.logger.info("Engaging DeepSeekMatcher engine...")
+            self.logger.info("Iterating through jobs via DeepSeekMatcher...")
             
             # Use trigger_deepseek_evaluate for pandas apply
+            # Note: For large DFs, consider a progress bar or batching
             results = df['Job Description'].apply(lambda x: self.trigger_deepseek_evaluate(resume_str, x))
+            
+            self.logger.info("Applying AI results to DataFrame columns...")
             df[['Match Score', 'Reasoning', 'Missing Skills']] = results
 
             # Automated Flagging
+            high_match_count = (df['Match Score'] >= 80).sum()
             df['Recommend Apply'] = df['Match Score'] >= 80
+            self.logger.info(f"Filtering complete. Found {high_match_count} high-score matches.")
 
             # Data Integrity & Formatting
             cols = [
@@ -174,11 +166,18 @@ class DeepseekMatcher:
                 'URL', 'Posted Time', 'Salary', 'Reposted', 'Job Description'
             ]
             df = df[cols]
+            
+            # File Persistence
             df.to_csv(path, index=False)
-            self.logger.info(f"Analysis complete. Results persisted to: {path}")
+            self.logger.info(f"Job processing successful. File exported: {path}")
+            
             return df
+            
+        except FileNotFoundError as e:
+            self.logger.error(f"File system error: {e}")
         except Exception as e:
-            self.logger.critical(f"Matching process aborted due to fatal error: {e}")
+            self.logger.critical(f"Matching process aborted due to fatal error: {e}", exc_info=True)
+            return None
 
 # if __name__ == "__main__":
 #     # Configure logging for the execution environment
