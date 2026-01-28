@@ -83,6 +83,7 @@ def get_run_parameters(config_path: str | Path) -> dict:
         params['trace_path'] = options.get('trace_path', 'trace.zip')
         params['company_list'] = config_data.get('company_list', [])
         params['repost'] = config_data.get('repost', False)
+        params['salary'] = config_data.get('salary', False)
         
     except ValueError as e:
         logger.critical(f"Invalid Configuration: {e}")

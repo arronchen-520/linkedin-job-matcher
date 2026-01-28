@@ -24,3 +24,5 @@ max_page: 8
 
 # File name in /data/resumes/
 resume: "resume.pdf"
+
+salary: true # Only filter jobs that has a salary range

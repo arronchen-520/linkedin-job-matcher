@@ -7,37 +7,41 @@
 
 ---
 
-## 🚀 Hook — Why this repo will actually help you（吸引点）
+## 🚀 Hook — Why CareerCopilot actually works（吸引点）
 
 **English (Top):**
 
-* Tired of sifting through noisy job boards? CareerCopilot connects the whole loop: high-fidelity scraping, LLM-powered parsing, resume↔JD matching, and auto-fill — all configurable and reproducible.
-* Built for speed and signal: local LLMs reduce API costs, token guards avoid waste; the matcher explains *why* a job fits (or doesn't) so you can decide fast.
-* Designed by an engineer: clear configs, robust session persistence (avoid repeat captchas), CSV outputs ready for dashboards or interviews.
+* Cut through noise: CareerCopilot doesn't just scrape — it **structures** LinkedIn postings into a ready-to-analyze table (title, company, posted_time, is_repost, raw_salary_text, normalized_salary_range) so you immediately get clean data to filter and visualize.
+* Explainable decisions: For every job we return a **Match Score** (0–100), a short **Reasoning** explaining *why* the score was given, and a `Missing Skills` list you can act on.
+* Salary-savvy: LLM-powered salary extraction normalizes messy salary text into min/max numeric ranges and currency (supports ranges, yearly/monthly/hourly, and common abbreviations).
+* Faster, cheaper, and safer: Local LLMs for parse-heavy tasks reduce API cost; token-size guards and summarization protect you from runaway bills.
 
 **中文 (Bottom)：**
 
-* 是否厌倦了海量低质量岗位？CareerCopilot 将整个流程串联起来：高质量爬取 → LLM 解析 → 简历与职位匹配 → 自动填表，全部可配置、可复现。
-* 以效率与信号为核心：本地 LLM 降低 API 成本，token 限制避免浪费；匹配器会给出**为什么**适合或不适合的理由，帮助你快速决策。
-* 工程师友好：配置明确、会话持久化（减少验证码），输出 CSV 可直接用于可视化或面试展示。
+* 明确结构化：CareerCopilot 不只是爬取网页内容——它把 LinkedIn 的职位信息**表格化**（`title, company, posted_time, is_repost, raw_salary_text, normalized_salary_range`），方便筛选与可视化。
+* 可解释的申请建议：每条职位都会输出 **Match Score（0–100）**、简短的 **Reasoning（为什么）**，以及 `Missing Skills` 列表，方便你立刻采取行动。
+* 薪资智能解析：用 LLM 自动把乱七八糟的薪资字段解析并标准化为 `min/max + currency + period`（支持年薪/月薪/时薪等常见格式和缩写）。
+* 更快、更省、更稳健：将解析型任务放在本地 LLM，减少 API 成本；对长文本做自动摘要来避免昂贵调用。
 
 ---
 
-## ✨ What it does / 功能亮点（快速浏览）
+## ✨ Features / 功能亮点（快速浏览）
 
 **English:**
 
-* 🤖 Hybrid LLM stack: local Ollama (Llama3) for parse-heavy tasks + remote matcher for high-quality reasoning.
-* 🧭 Config-first pipeline: YAML driven searches; re-run experiments deterministically.
-* 🛡️ Safe-by-default: token-size guards, rate limits and optional headful mode for manual captcha solves.
-* 📊 Outputs: `output/filtered/` CSV with `Match Score`, `Reasoning`, `Missing Skills` — ready for dashboards.
+* 🗂️ **LinkedIn → Table**: Standardizes each job into row fields: `job_title`, `company`, `location`, `posted_time`, `is_repost`, `raw_salary_text`, `min_salary`, `max_salary`, `currency`, `period`.
+* 🧠 **LLM Salary Extraction**: Auto-extract and normalize salary into numeric ranges and period with confidence flags.
+* 📈 **Scoring + Explanation**: `match_score`, `reasoning`, `missing_skills` — score + human-readable explanation for each job.
+* 🔁 **De-dup & Repost detection**: Mark reposts and near-duplicates so you focus on fresh listings.
+* ⚠️ **Token & Cost Guards**: Auto-summarize long JDs and split requests to protect against high API costs.
 
 **中文：**
 
-* 🤖 LLM 混合设计：本地 Ollama（Llama3）处理解析任务；远程 matcher 提供高质量推理。
-* 🧭 配置优先：YAML 驱动搜索；实验可复现。
-* 🛡️ 默认安全：token/大小校验、速率限制，可选有头浏览以人工通过验证码。
-* 📊 输出：`output/filtered/` CSV（包含 Match Score、Reasoning、Missing Skills），可直接做数据展示。
+* 🗂️ **表格化输出**：把每条职位标准化为字段，方便导出为 CSV/Excel 或用于 BI 工具。
+* 🧠 **LLM 薪资解析**：将原始薪资文本自动解析为数值区间并输出置信度与原始文本。
+* 📈 **评分与解释**：每条岗位含 `match_score`、可读的 `reasoning` 与 `missing_skills`，支持自动筛选与人工复核。
+* 🔁 **去重与 repost 识别**：标注 repost，优先查看新岗位。
+* ⚠️ **成本保护**：长文本自动摘要、分片调用，降低付费 API 的不确定开销。
 
 ---
 
@@ -54,59 +58,103 @@ cp .env.example .env  # fill creds
 python main.py --config data/config/example.yaml
 ```
 
+**中文：**
+
+```bash
+git clone https://github.com/arronchen-520/CareerCopilot.git && cd CareerCopilot
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python -m playwright install chromium
+cp .env.example .env 
+python main.py --config data/config/example.yaml
+```
+
 ---
 
 ## 📁 Structure / 项目结构
+
 ```
 CareerCopilot/
 ├── data/            # config, sample resumes, user_data (cookies)
-├── docs/            # demo GIFs, usage notes
+│   ├── config/
+│   └── resumes/
+├── docs/            # demo GIFs, usage notes, parsing docs
 ├── src/             # scraper, parsers, matcher implementation
 ├── output/          # raw/filtered CSV results
 ├── main.py          # pipeline entrypoint
 ├── requirements.txt # recommended deps
-└── .env.example     # credentials template
+└── .env             # credentials template
 ```
 
 ---
 
-## 🔧 Config example / 配置示例
+## 🔧 Config example / 配置示例（保留并增强）
 
-**English:**
-
-`data/config/example.yaml`
+`config/default_setting.yaml`（演示）
 
 ```yaml
 user: "Arron"
 resume: "data/resumes/Arron_Resume.pdf"
 headless: False
+
 max_page: 6
 search:
   keyword: "Data Scientist"
   city: "Toronto, Ontario, Canada"
-  distance: 10
-  period: "Past 24 hours"
+  distance: 25
+  period: "Past 7 days"
+repost: false (ignore reposted jobs)
+companies: (list of companies that you are interested in; only jobs from these companies will be returned; you can leave it empty to keep all jobs)
+  - "Google"
+  - "Shopify"
+  - "Airbnb"
+salary: true (only jobs that have posted salaries will be returned)
+
 ```
 
+## 🧾 Output schema / 输出字段示例
+
+* `job_title` — 职位标题
+* `company` — 公司名
+* `location` — 地址/城市
+* `posted_time` — 发布时间（原文+标准化 ISO 时间）
+* `is_repost` — 是否为重复/转发（bool）
+* `raw_salary_text` — 页面原文中抓到的薪资字段
+* `min_salary` — 标准化最小薪资（数值）
+* `max_salary` — 标准化最大薪资（数值）
+* `currency` — 货币（USD/CAD/GBP/…）
+* `period` — 年/月/小时（year/month/hour）
+* `match_score` — 0–100 推荐分
+* `recommend_apply` — 布尔（例如 `match_score >= 80`）
+* `reasoning` — 简短的匹配解释（可用于复盘或自动化决策）
+* `missing_skills` — 列表/字符串，表明缺失的关键技能
+
 ---
 
-## 🧾 Output & interpretation / 输出与解读
+## 🧾 Why Score + Reasoning + Missing Skills matters / 保留解释
 
-* `Match Score` (0-100) — 高分（>=60）表示推荐申请；
-* `Reasoning` — 匹配解释，写明哪些经验命中或缺失；
-* `Missing Skills` — 自动列出需要补的关键技能。
-
----
-
-## 🛠️ Implementation notes / 实现要点
-
-* Playwright + persistent `user_data_dir`（减少重复登录与 Captcha）。
-* Ollama local model for salary / entity extraction; remote matcher for high-quality reasoning.
-* Token-size safeguards: long JDs auto-summarized before sending to paid APIs.
+* Match Score: prioritize high-potential roles quickly.
+* Reasoning: provides actionable text you can reuse in cover letters or interview prep.
+* Missing Skills: quickly decide if a gap is short-term fixable or a hard blocker.
 
 ---
 
-## 🧾 License & closing / 许可证与结语
+## 🧪 Example usage patterns / 常见使用场景（保留）
+
+* Daily job pull with preferred companies highlighted.
+* Salary heatmaps and market research via `min_salary`/`max_salary`.
+* Auto-notifications
+
+---
+
+## 🛠 Troubleshooting / 常见问题（保留）
+
+* Captcha/blocked: run with `headless: False`, authenticate once to persist `user_data_dir`.
+* Playwright browser missing: run `python -m playwright install chromium`.
+* Ollama connection: ensure `ollama serve` is running if used.
+
+---
+
+## License / 许可证
 
 Apache-2.0
-

@@ -84,3 +84,5 @@ repost: False
 max_page: 10
 
 resume: "Arron Chen Resume 2025 Updated.pdf"
+
+salary: true # Only filter jobs that has a salary range

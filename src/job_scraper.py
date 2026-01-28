@@ -388,9 +388,23 @@ class LinkedInScraper:
         user = params['user_name']
 
         if company_list == []:
-            self.logger.info(f"No company list provided. No filter was applied to the output. ")
+            self.logger.info(f"No company list provided. ")
         else:
-            df = df.loc[((df['Company'].isin(company_list)) | (df['Salary'] != '')) & (df['Reposted'] == params['repost'])]
+            self.logger.info(f"Filtering companies... ")
+            df = df[df['Company'].isin(company_list)]
+        
+        if not params['salary']:
+            self.logger.info(f"No salary boolean provided. ")
+        else:
+            self.logger.info(f"Filtering jobs with salaries... ")
+            df = df[df['Salary'] != '']
+
+        if params['repost']:
+            self.logger.info(f"No repost boolean provided. ")
+        else:
+            self.logger.info(f"Filtering newly posted jobs... ")
+            df = df[~df['Reposted']]
+
         current_date = datetime.now().strftime("%Y%m%d")
         search = params['search']
         filepath = Path(filepath / f"{current_date}_{user}_{search['keyword']}_filtered.csv")
