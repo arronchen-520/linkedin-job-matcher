@@ -9,8 +9,7 @@ import tqdm
 from openai import OpenAI
 from pathlib import Path
 from dotenv import load_dotenv
-from utils.file_path import FILTERED_FILE_PATH
-from utils.logger import setup_logging
+from utils.file_path import OUTPUT_DIR
 from utils.resume_to_string import load_resume_pdf
 
 class DeepseekMatcher:
@@ -142,7 +141,7 @@ class DeepseekMatcher:
             resume_str = load_resume_pdf(resume, logger=self.logger)
             self.logger.info(f"Successfully loaded and parsed resume: {resume}")
             
-            path = Path(FILTERED_FILE_PATH / filename)
+            path = Path(OUTPUT_DIR / filename)
             self.logger.info(f"Final results will be saved to: {path}")
 
             # Processing

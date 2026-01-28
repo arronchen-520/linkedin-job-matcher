@@ -3,7 +3,6 @@ import re
 import logging
 import sys
 from pathlib import Path
-from utils.logger import setup_logging
 from utils.file_path import RESUME_DIR
 
 def load_resume_pdf(file_name: str, logger: logging.Logger) -> str:

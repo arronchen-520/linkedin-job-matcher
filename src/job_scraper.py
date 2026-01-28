@@ -6,10 +6,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Optional
-from utils.config_loader import get_run_parameters
-from utils.logger import setup_logging
-from utils.file_path import USER_DATA_DIR, CONFIG_DIR, COMPLETE_FILE_PATH, FILTERED_FILE_PATH
-from playwright_stealth import stealth_sync
+from utils.file_path import USER_DATA_DIR, JD_DIR
 from playwright.sync_api import sync_playwright, Page, BrowserContext, Locator, expect
 
 class LinkedInScraper:
@@ -390,8 +387,8 @@ class LinkedInScraper:
             self.filter_period(search['period'])
             self.set_distance(search['distance'])
             self.scrape_available_jobs(params['max_page'])
-            result = self.save_to_csv(COMPLETE_FILE_PATH, search)
-            # result = self.filter_eligible_jobs(FILTERED_FILE_PATH, params)
+            result = self.save_to_csv(JD_DIR, search)
+            # result = self.filter_eligible_jobs(OUTPUT_DIR, params)
             self.logger.info("Task completed successfully.")
             return result
         except KeyboardInterrupt:

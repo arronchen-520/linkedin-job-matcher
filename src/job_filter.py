@@ -1,19 +1,11 @@
-import os
-import time
 import logging
 import pandas as pd
-from dotenv import load_dotenv
 from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Optional
-from utils.config_loader import get_run_parameters
-from utils.logger import setup_logging
-from utils.file_path import USER_DATA_DIR, CONFIG_DIR, COMPLETE_FILE_PATH, FILTERED_FILE_PATH
-from playwright_stealth import stealth_sync
-from playwright.sync_api import sync_playwright, Page, BrowserContext, Locator, expect
 
 
-def filter_eligible_jobs(df, params: dict):
+
+def filter_eligible_jobs(df: pd.DataFrame, params: dict):
     """
     Filters the raw job list based on user preferences and saves a secondary CSV.
     
@@ -55,6 +47,8 @@ def filter_eligible_jobs(df, params: dict):
     else:
         logger.info(f"Filtering newly posted jobs... ")
         df = df[~df['Reposted']]
+
+    df = df.sort_values(by = 'match_score', ascending = False)
 
     current_date = datetime.now().strftime("%Y%m%d")
     search = params['search']

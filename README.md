@@ -123,11 +123,10 @@ salary: true   # only jobs that have posted salaries
 CareerCopilot/
 ├── browser_user/
 ├── config/
-├── data/            # config, sample resumes, user_data (cookies)
+├── data/            
 │   ├── job_posts/
-│   │   ├── complete_posts/
-│   │   └── filtered_posts/
 │   ├── log/
+│   ├── output/
 │   └── resumes/
 ├── src/             # scraper, parsers, matcher implementation
 │   └── utils/

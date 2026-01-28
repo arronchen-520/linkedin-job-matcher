@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Dict, Union
 from utils.logger import setup_logging
 import numpy as np
-from utils.file_path import FILTERED_FILE_PATH
+from utils.file_path import OUTPUT_DIR
 
 class SalaryParser:
     """
@@ -82,7 +82,7 @@ class SalaryParser:
         Args:
             filename (str): The name of the CSV file located in the filtered file path.
         """
-        path = Path(FILTERED_FILE_PATH / filename)
+        path = Path(OUTPUT_DIR / filename)
         
         try:
             df = pd.read_csv(path)
