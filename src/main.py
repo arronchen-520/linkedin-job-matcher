@@ -50,6 +50,7 @@ def CareerCopilot(config_name):
         df = matcher.process_job_data(
             df = df,
             resume = params['resume'],
+            job_type = params['job_type'],
             filename = f"{current_date}_{params['user_name']}_{params['search']['keyword']}.csv"
         )
     except Exception as e:

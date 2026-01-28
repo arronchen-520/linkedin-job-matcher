@@ -49,7 +49,7 @@ class DeepseekMatcher:
             self.logger.warning(f"Tiktoken failed: {e}. Falling back to character-based heuristic.")
             return len(text) // 4
 
-    def _evaluate_match(self, resume_text: str, jd_text: str) -> dict:
+    def _evaluate_match(self, resume_text: str, jd_text: str, job_type: str) -> dict:
         """
         Internal method to execute the DeepSeek API call for single JD evaluation.
         """
@@ -85,7 +85,7 @@ class DeepseekMatcher:
         Keys: 'match_score' (int), 'reasoning' (2-sentence string), 'missing_skills' (list of strings).
         """
 
-        user_content = f"RESUME:\n{resume_text}\n\n\nJOB DESCRIPTION:\n{jd_text}"
+        user_content = f"RESUME:\n{resume_text}\n\n Note: The candidate is interested in {job_type} jobs. \n\nJOB DESCRIPTION:\n{jd_text}"
         self.logger.debug(f"Sending payload to DeepSeek. JD length: {len(jd_text)} chars.")
         
         start_time = time.time()
@@ -119,12 +119,12 @@ class DeepseekMatcher:
             self.logger.error(f"DeepSeek API call failed: {str(e)}", exc_info=True)
             return None
 
-    def trigger_deepseek_evaluate(self, resume: str, jd: str) -> pd.Series:
+    def trigger_deepseek_evaluate(self, resume: str, jd: str, job_type: str) -> pd.Series:
         """
         Public entry point for row-by-row DataFrame evaluation.
         """
         self.logger.debug("Triggering evaluation for single row...")
-        result = self._evaluate_match(resume, jd)
+        result = self._evaluate_match(resume, jd, job_type)
         
         if result is None:
             self.logger.warning("Evaluation returned None. Defaulting to error Series.")
@@ -132,7 +132,7 @@ class DeepseekMatcher:
             
         return pd.Series([result['match_score'], result['reasoning'], result['missing_skills']])
 
-    def process_job_data(self, df: pd.DataFrame, resume: str, filename = 'result.csv'):
+    def process_job_data(self, df: pd.DataFrame, resume: str, job_type = 'full time', filename = 'result.csv'):
         """
         Orchestrates the end-to-end evaluation flow from CSV loading to result persistence.
         """
@@ -151,7 +151,7 @@ class DeepseekMatcher:
 
             # Use trigger_deepseek_evaluate for pandas apply
             # Note: For large DFs, consider a progress bar or batching
-            results = df['Job Description'].progress_apply(lambda x: self.trigger_deepseek_evaluate(resume_str, x))
+            results = df['Job Description'].progress_apply(lambda x: self.trigger_deepseek_evaluate(resume_str, x, job_type))
             
             self.logger.info("Applying AI results to DataFrame columns...")
             df[['Match Score', 'Reasoning', 'Missing Skills']] = results
