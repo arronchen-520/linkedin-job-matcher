@@ -6,6 +6,7 @@ import ollama
 from pathlib import Path
 from typing import Dict, Union
 from utils.logger import setup_logging
+import numpy as np
 from utils.file_path import FILTERED_FILE_PATH
 
 class SalaryParser:
@@ -94,16 +95,39 @@ class SalaryParser:
             # Save updated dataframe back to the source path
             df.to_csv(path, index=False)
             self.logger.info(f"Successfully saved structured salary data to {path}")
-            
+            return df 
         except Exception as e:
             self.logger.error(f"Failed to process file {filename}: {e}")
+            return df
 
-if __name__ == "__main__":
-    # Setup global logging
-    setup_logging()
-    logging.getLogger("httpx").setLevel(logging.WARNING)
+    def process_df(self, df: pd.DataFrame):
+        """
+        Loads a df, parses the 'Salary' column, and updates the file with 
+        structured 'Min Salary', 'Max Salary', and 'Currency' columns.
 
-    # Initialize parser and execute processing
-    filename = '20260127_Arron_Machine Learning_filtered.csv'
-    parser = SalaryParser(model_name="llama3.1")
-    parser.process_file(filename)
+        Args:
+            df: The dataframe object from LinkedinScrapper
+        """
+        
+        try:
+            self.logger.info(f"Processing salary data.")
+            
+            # Apply parsing logic across the 'Salary' column
+            salary_data = df['Salary'].apply(lambda x: pd.Series(self.parse(x)))
+            df[['Min Salary', 'Max Salary', 'Currency']] = salary_data
+            
+            # Return df
+            self.logger.info(f"Successfully extracted structured salary. ")
+            
+        except Exception as e:
+            df[['Min Salary', 'Max Salary', 'Currency']] = np.nan
+            self.logger.error(f"Failed to process file.")
+
+# if __name__ == "__main__":
+#     # Setup global logging
+#     setup_logging()
+#     logging.getLogger("httpx").setLevel(logging.WARNING)
+#     # Initialize parser and execute processing
+#     filename = '20260127_Arron_Machine Learning_filtered.csv'
+#     parser = SalaryParser(model_name="llama3.1")
+#     parser.process_file(filename)

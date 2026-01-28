@@ -396,6 +396,7 @@ class LinkedInScraper:
         filepath = Path(filepath / f"{current_date}_{user}_{search['keyword']}_filtered.csv")
         df.to_csv(filepath, index=False, encoding='utf-8-sig')
         self.logger.info(f"Filtered {len(df)} eligible jobs and saved to {filepath}")
+        return df
     
     def run(self, params):
         """
@@ -414,12 +415,15 @@ class LinkedInScraper:
             self.set_distance(search['distance'])
             self.scrape_available_jobs(params['max_page'])
             self.save_to_csv(COMPLETE_FILE_PATH, search)
-            self.filter_eligible_jobs(FILTERED_FILE_PATH, params)
+            result = self.filter_eligible_jobs(FILTERED_FILE_PATH, params)
             self.logger.info("Task completed successfully.")
+            return result
         except KeyboardInterrupt:
             self.logger.warning("Process interrupted by user.")
+            return None
         except Exception as e:
             self.logger.critical(f"Unexpected error: {e}", exc_info=True)
+            return None
 
     def close(self, trace_path: str = "trace.zip"):
         """
@@ -430,14 +434,16 @@ class LinkedInScraper:
             if self.is_tracing:
                 self.context.tracing.stop(path=trace_path)
                 self.logger.info(f"Trace saved to {trace_path}")
+            if self.page:
+                self.page.close()
             self.context.close()
         if self.playwright:
             self.playwright.stop()
 
-if __name__ == '__main__':
-    setup_logging()
-    logger = logging.getLogger(__name__)
-    params = get_run_parameters(CONFIG_DIR / 'config_arron.yaml')
-    scraper = LinkedInScraper()
-    scraper.run(params)
-    scraper.close()
+# if __name__ == '__main__':
+#     setup_logging()
+#     logger = logging.getLogger(__name__)
+#     params = get_run_parameters(CONFIG_DIR / 'config_arron.yaml')
+#     scraper = LinkedInScraper()
+#     scraper.run(params)
+#     scraper.close()

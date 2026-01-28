@@ -13,13 +13,14 @@ search:
 
 # Browser Settings
 options:
-  headless: false  # Debug - False; Production - True
+  headless: true  # Debug - False; Production - True
+  tracing: false # For internal debug only
 
 # Whether or not to include reposted jobs (boolean)
 repost: False
 
-# For internal debug only
-tracing: false
-
 # Maximum page the scraper will go through
 max_page: 8
+
+# File name in /data/resumes/
+resume: "resume.pdf"

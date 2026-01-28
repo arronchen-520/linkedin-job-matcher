@@ -8,8 +8,6 @@ import tiktoken
 from openai import OpenAI
 from pathlib import Path
 from dotenv import load_dotenv
-
-# Assuming these utilities are part of your local project structure
 from utils.file_path import FILTERED_FILE_PATH
 from utils.logger import setup_logging
 from utils.resume_to_string import load_resume_pdf
@@ -143,19 +141,20 @@ class DeepseekMatcher:
             return pd.Series([0, "API Error: Consult system logs.", []])
         return pd.Series([result['match_score'], result['reasoning'], result['missing_skills']])
 
-    def process_job_data(self, filename: str, resume_path: str):
+    def process_job_data(self, df: pd.DataFrame, resume: str, filename = 'result.csv'):
         """
         Orchestrates the end-to-end evaluation flow from CSV loading to result persistence.
 
         Args:
-            filename (str): The target CSV file located in the filtered file directory.
+            df (pd.DataFrame): The df returned by salary parser.
             resume_path (str): The file path to the candidate's PDF resume.
         """
         try:
             # Resource Loading
-            resume_str = load_resume_pdf(resume_path, logger=self.logger)
+            resume_str = load_resume_pdf(resume, logger=self.logger)
+            
             path = Path(FILTERED_FILE_PATH / filename)
-            df = pd.read_csv(path)
+            # df = pd.read_csv(path)
             self.logger.info(f"Loaded {len(df)} records for matching.")
 
             # Processing
@@ -177,18 +176,18 @@ class DeepseekMatcher:
             df = df[cols]
             df.to_csv(path, index=False)
             self.logger.info(f"Analysis complete. Results persisted to: {path}")
-
+            return df
         except Exception as e:
             self.logger.critical(f"Matching process aborted due to fatal error: {e}")
 
-if __name__ == "__main__":
-    # Configure logging for the execution environment
-    setup_logging()
-    logging.getLogger("httpx").setLevel(logging.WARNING)
+# if __name__ == "__main__":
+#     # Configure logging for the execution environment
+#     setup_logging()
+#     logging.getLogger("httpx").setLevel(logging.WARNING)
 
-    # Instance execution
-    matcher = DeepseekMatcher()
-    matcher.process_job_data(
-        filename='20260127_Arron_Machine Learning_filtered.csv',
-        resume_path='Arron Chen Resume 2025 Updated.pdf'
-    )
+#     # Instance execution
+#     matcher = DeepseekMatcher()
+#     matcher.process_job_data(
+#         filename='20260127_Arron_Machine Learning_filtered.csv',
+#         resume_path='Arron Chen Resume 2025 Updated.pdf'
+#     )

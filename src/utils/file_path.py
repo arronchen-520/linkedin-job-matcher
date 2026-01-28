@@ -7,3 +7,4 @@ COMPLETE_FILE_PATH = DATA_DIR / "complete_posts"
 FILTERED_FILE_PATH = DATA_DIR / "filtered_posts"
 USER_DATA_DIR = PROJECT_ROOT / 'browser_user'
 RESUME_DIR = PROJECT_ROOT / 'data' / 'resumes'
+EXTENSION_DIR = PROJECT_ROOT / 'extension' / '2.19.6_0'

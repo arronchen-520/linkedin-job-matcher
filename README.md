@@ -1,127 +1,128 @@
-# LinkedIn Job Scraper & Auto-Applier
+🤖 AI CareerCopilot
+CareerCopilot is an automated job search agent. It scrapes LinkedIn job postings, standardizes salary data using local LLMs (Llama 3), and utilizes the DeepSeek-V3 model to score and match your resume against specific Job Descriptions (JDs).
 
-> Automate LinkedIn job discovery, structured parsing, and data preparation for downstream resume matching (educational / research use only).
+📖 Overview
+Job hunting is tedious. CareerCopilot automates the entire pipeline:
 
-## Problem
+Scraper: Navigates LinkedIn using a stealth browser to aggregate jobs based on complex filters (location, radius, date).
 
-Job searching is tedious and repetitive. This tool automates the discovery phase (scraping), parses job postings into structured data, and prepares clean outputs for analysis or resume–JD matching.
+Salary Parser: Uses a local Llama 3.1 model (via Ollama) to extract and normalize salary ranges (hourly/monthly → annual) from unstructured text.
 
-## Key Features
+Matcher: Uses the DeepSeek-V3 API to act as a "Technical Recruiter," scoring the candidate's resume against every specific JD and providing a "Recommend Apply" boolean.
 
-* Headless browser automation with Playwright to collect job listings and details
-* YAML-based configuration for running multiple profiles and search strategies
-* Structured CSV outputs for easy analysis with Pandas, vector stores, or LLMs
+🚀 Features
+Anti-Detection Scraping: Uses playwright-stealth and persistent user contexts (cookies) to survive LinkedIn's bot checks.
 
-## Architecture
+Cost-Effective AI:
 
-**Stack:** Python + Playwright + LLM (OpenAI / Gemini)
+Zero-cost local inference for high-volume tasks (Salary Parsing) using Ollama.
 
-1. **Scraper** — Uses Playwright to collect job metadata (title, company, location, posting time, description, apply link)
-2. **Controller** — Config-driven execution pipeline suitable for multiple user profiles
-3. **Data Layer** — Saves structured job data to CSV under `./data/job_posts/`
+Low-cost, high-intelligence API (DeepSeek) only for the final high-value matching step.
 
-## 🚀 Getting Started
+Smart Filtering: Automatically removes "Reposted" jobs to ensure fresh opportunities.
 
-### 1. Prerequisites
+Token Safety: Checks token counts before API calls to prevent cost overruns on massive JDs.
 
-* Python 3.9+
-* Google Chrome / Chromium (or Playwright-managed browsers)
+🛠️ Prerequisites
+Before running this project, ensure you have the following installed:
 
-### 2. Installation
+Python 3.10+
 
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/linkedin-scraper.git
-cd linkedin-scraper
+Ollama: Required for local salary parsing.
 
-# Install Python dependencies
+Download Ollama
+
+Run in terminal: ollama pull llama3.1
+
+DeepSeek API Key: Required for the reasoning/matching engine.
+
+LinkedIn Account: Valid credentials for scraping.
+
+📦 Installation
+Clone the Repository
+
+Bash
+git clone https://github.com/yourusername/CareerCopilot.git
+cd CareerCopilot
+Install Python Dependencies
+
+Bash
 pip install -r requirements.txt
+Install Browser Binaries Playwright requires the Chromium browser to function:
 
-# Install Playwright browsers (example: chromium only)
+Bash
 playwright install chromium
-# Or install all supported browsers
-# playwright install
-```
+Environment Setup Create a .env file in the root directory and add your credentials:
 
-### 3. requirements.txt (Example)
-
-```text
-playwright>=1.40.0
-pandas>=2.0.0
-python-dotenv>=1.0.0
-pyyaml>=6.0
-typing-extensions>=4.5.0
-# Optional: LLM client
-# openai>=1.0.0
-```
-
-## Configuration
-
-**Important:** Never commit `.env` files or credentials to version control.
-
-### Step A — Credentials (`.env`)
-
-Create a `.env` file in the project root to store sensitive information:
-
-```
-# .env (example)
+代码段
 LINKEDIN_EMAIL=your_email@example.com
 LINKEDIN_PASSWORD=your_password
-# Optional: OPENAI_API_KEY=sk-...
-```
+DEEPSEEK_API_KEY=sk-your-deepseek-key
+⚙️ Configuration
+Create a YAML configuration file in data/config/ (e.g., config_arron.yaml).
 
-### Step B — User Preferences (YAML)
+Template:
 
-Create a config file under `./config/`, for example `config_arron.yaml`:
+YAML
+user: "Jack"
+user_name: "Jack"
+# Path to your PDF resume
+resume: "data/resumes/Kack_Resume.pdf" 
 
-```yaml
-task:
-  keyword: "Machine Learning Engineer"
+# Browser Settings
+headless: False  # Set to True to run invisibly (background)
+tracing: False   # Set to True for debugging logs
+max_page: 8      # Maximum number of pages to scrape per run
+
+# Search Parameters
+search:
+  keyword: "Python Developer"
   city: "Toronto, Ontario, Canada"
-  distance: 10                # Radius in km
-  period: "Past 24 hours"    # Options: "Past 24 hours", "Past week", "Past month"
+  distance: 25            # Radius in km
+  period: "Past 24 hours" # Options: Past 24 hours, Past week, Past month
 
-settings:
-  headless: true              # Set to false to see the browser
-  max_results: 100            # Optional: maximum number of jobs to scrape
-  rate_limit: 1.0             # Optional: delay (seconds) between actions
-```
+# Filter Logic
+repost: False    # Set False to ignore "Reposted" jobs
+company_list: [] # Whitelist: If not empty, only these companies are kept.
+▶️ Usage
+Ensure Ollama is running in the background, then execute the main script:
 
-## Usage
+Bash
+python main.py
+Application Flow:
+Scraper: Launches the browser, logs in, scrapes jobs based on your config, and saves a raw CSV.
 
-### Run with a configuration file
+Salary Parser: Reads the raw CSV and uses Llama 3.1 to extract specific salary numbers.
 
-```bash
-python main.py --config ./config/config_arron.yaml
-```
+Matcher: Reads your PDF resume and calls DeepSeek API to score every job.
 
-### Run with command-line arguments (legacy mode)
+Result: The final processed file is saved in output/filtered/.
 
-```bash
-python main.py --keyword "Data Scientist" --city "Vancouver"
-```
+🏗️ Project Structure
+Plaintext
+CareerCopilot/
+├── data/
+│   ├── config/          # YAML search configurations
+│   ├── resumes/         # Candidate PDF resumes
+│   └── user_data/       # Browser cookies/cache (managed by Playwright)
+├── output/              # Scraped and processed CSVs
+├── utils/               # Helper modules (logger, paths, file loading)
+├── job_scraper.py       # LinkedIn automation logic
+├── salary_parser.py     # Local LLM salary extraction
+├── deepseek_jd_resume_matcher.py  # Resume matching logic
+├── main.py              # Application entry point
+├── requirements.txt     # Python dependencies
+└── .env                 # API Keys and Credentials
+⚠️ Disclaimer
+Educational Use Only: This tool is intended for personal and educational use.
 
-### Output
+Terms of Service: Scraping LinkedIn may violate their User Agreement.
 
-* **Data:** CSV files are saved to `./data/job_posts/`, e.g.
-  `jobs_Arron_Machine_Learning_20231027.csv`
-* **Logs:** Execution logs are stored in `./log/scraper_run.log`
+Risk: Do not set max_page too high or run the script continuously to avoid account flagging. The developers are not responsible for any account restrictions.
 
-## Development & Debugging
+Troubleshooting
+Q: The browser opens but gets stuck on a Captcha/Security Check. A: The script uses a persistent user_data_dir. On the first run, you may need to manually solve the captcha in the browser window. Subsequent runs will use the saved session cookies and skip login.
 
-* Set `headless: false` to observe browser behavior during runs
-* Tune `rate_limit` and `max_results` to reduce the risk of triggering platform defenses
+Q: Salary Parser error: "Connection Refused"? A: Ensure Ollama is installed and running (ollama serve).
 
-## ⚠️ Disclaimer
-
-* **For educational purposes only.** Scraping LinkedIn may violate their Terms of Service. Use this tool responsibly and at your own risk.
-* Avoid aggressive scraping behavior (high frequency or concurrency).
-* Do not commit `.env` files or any credentials to public repositories.
-
-## Optional Extensions
-
-* Persist results to a database (SQLite / Postgres) instead of CSV
-* Parse job descriptions into structured fields (responsibilities, requirements)
-* Integrate local or hosted LLMs (e.g., Qwen, Llama, OpenAI) for resume–JD matching
-
----
+Q: DeepSeek API errors? A: Verify your API key in the .env file and check your credit balance.

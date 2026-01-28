@@ -1,3 +1,8 @@
 .env
 browser_user/
 data/resumes/
+data/job_posts/complete_posts/
+data/job_posts/filtered_posts/
+config/config_arron.yaml
+data/log/
+data/developments/

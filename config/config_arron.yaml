@@ -5,6 +5,7 @@ company_list:
   - Microsoft
   - Apple
   - TD
+  - TD Securities
   - RBC
   - Scotiabank
   - BMO
@@ -56,6 +57,14 @@ company_list:
   - Air Canada
   - Workday
   - Intuit
+  - Affirm
+  - Wayfair
+  - Expedia
+  - Booking
+  - OpenText
+  - Cohere
+  - Stripe
+  - Pinterest
 
 user_name: "Arron"
 
@@ -66,12 +75,12 @@ search:
   period: "Past 24 hours"
 
 options:
-  headless: false  # Debug - False; Production - True
-  tracing: true
+  headless: true  # Debug - False; Production - True
+  tracing: false
   trace_path: 'trace.zip'
 
 repost: False
 
-tracing: false
-
 max_page: 10
+
+resume: "Arron Chen Resume 2025 Updated.pdf"

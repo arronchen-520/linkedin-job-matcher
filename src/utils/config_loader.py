@@ -25,6 +25,10 @@ def validate_config(config: dict) -> dict:
     Returns the config dict if valid, raises ValueError otherwise.
     """
     logger = logging.getLogger(__name__)
+    if 'resume' not in config: # Required
+        msg = "Missing 'sresume' section in config file."
+        logger.critical(msg)
+        raise ValueError(msg)
     if 'search' not in config: # Required
         msg = "Missing 'search' section in config file."
         logger.critical(msg)
@@ -69,6 +73,7 @@ def get_run_parameters(config_path: str | Path) -> dict:
     try:
         validate_config(config_data)
         params['user_name'] = config_data.get('user_name', 'User')
+        params['resume'] = config_data['resume'] # Validated above
         params['search'] = config_data['search']
         params['max_page'] = config_data.get('max_page', 8)
         # Safely get options with defaults
