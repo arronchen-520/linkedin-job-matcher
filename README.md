@@ -91,7 +91,7 @@ CareerCopilot/
 
 ---
 
-## 🔧 Config example / 配置示例（保留并增强）
+## 🔧 Config example / 配置示例
 
 `config/default_setting.yaml`（演示）
 
@@ -134,7 +134,7 @@ salary: true (only jobs that have posted salaries will be returned)
 
 ---
 
-## 🧾 Why Score + Reasoning + Missing Skills matters / 保留解释
+## 🧾 Why Score + Reasoning + Missing Skills matters
 
 * Match Score: prioritize high-potential roles quickly.
 * Reasoning: provides actionable text you can reuse in cover letters or interview prep.
@@ -142,7 +142,7 @@ salary: true (only jobs that have posted salaries will be returned)
 
 ---
 
-## 🧪 Example usage patterns / 常见使用场景（保留）
+## 🧪 Example usage patterns / 常见使用场景
 
 * Daily job pull with preferred companies highlighted.
 * Salary heatmaps and market research via `min_salary`/`max_salary`.
@@ -150,7 +150,7 @@ salary: true (only jobs that have posted salaries will be returned)
 
 ---
 
-## 🛠 Troubleshooting / 常见问题（保留）
+## 🛠 Troubleshooting / 常见问题
 
 * Captcha/blocked: run with `headless: False`, authenticate once to persist `user_data_dir`.
 * Playwright browser missing: run `python -m playwright install chromium`.
