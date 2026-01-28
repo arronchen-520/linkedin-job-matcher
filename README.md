@@ -155,6 +155,24 @@ salary: true (only jobs that have posted salaries will be returned)
 
 ---
 
+## Disclaimer / 免责声明（中英）
+
+**English:**
+
+* This project is provided for personal, educational, and research purposes only. It is **not** legal advice. You are responsible for ensuring that your use complies with LinkedIn's Terms of Service and all applicable laws and regulations in your jurisdiction. Scraping websites may violate terms and could result in account restrictions or legal consequences.
+* Do NOT share your real account credentials in public repositories. Store secrets locally and securely (e.g., use environment variables and do not commit `.env`).
+* Salary parsing and match scoring are heuristic and may be inaccurate. The LLM and automated parsers can make mistakes — always verify salary and job details on the original posting before applying or negotiating. Use `reasoning` as guidance, not definitive judgement.
+* Use at your own risk. The maintainers are not liable for losses, damages, or legal issues arising from use of the project.
+
+**中文：**
+
+* 本项目仅供个人、教育与研究用途，并非法律意见。你须自行确保使用行为遵守 LinkedIn 服务条款及所在司法辖区的相关法律法规。爬取网站可能违反条款，可能导致账号受限或法律风险。
+* 请勿在公共仓库中共享真实账户凭证。请安全保存密钥（例如使用环境变量），不要提交 `.env` 等包含敏感信息的文件。
+* 薪资解析与匹配评分具有启发性，可能不准确。LLM 与自动化解析可能出现错误 — 在申请或谈薪前请务必在原始岗位页面核实薪资与岗位信息。将 `reasoning` 作为参考而非最终结论。
+* 自行承担风险。维护者对因使用本项目导致的任何损失、损害或法律问题不承担责任。
+
+---
+
 ## License / 许可证
 
 Apache-2.0
