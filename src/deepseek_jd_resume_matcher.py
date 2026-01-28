@@ -5,6 +5,7 @@ import logging
 import pandas as pd
 import numpy as np
 import tiktoken
+import tqdm
 from openai import OpenAI
 from pathlib import Path
 from dotenv import load_dotenv
@@ -146,10 +147,11 @@ class DeepseekMatcher:
 
             # Processing
             self.logger.info("Iterating through jobs via DeepSeekMatcher...")
-            
+            tqdm.pandas(desc="DeepSeek Matching Progress")
+
             # Use trigger_deepseek_evaluate for pandas apply
             # Note: For large DFs, consider a progress bar or batching
-            results = df['Job Description'].apply(lambda x: self.trigger_deepseek_evaluate(resume_str, x))
+            results = df['Job Description'].progress_apply(lambda x: self.trigger_deepseek_evaluate(resume_str, x))
             
             self.logger.info("Applying AI results to DataFrame columns...")
             df[['Match Score', 'Reasoning', 'Missing Skills']] = results

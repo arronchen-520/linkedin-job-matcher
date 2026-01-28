@@ -71,7 +71,7 @@ user_name: "Arron"
 search:
   keyword: "Machine Learning"
   city: "Toronto, Ontario, Canada"
-  distance: 10
+  distance: 5
   period: "Past 24 hours"
 
 options:
@@ -81,7 +81,7 @@ options:
 
 repost: False
 
-max_page: 8
+max_page: 10
 
 resume: "Arron Chen Resume 2025 Updated.pdf"
 
