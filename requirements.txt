@@ -1,11 +1,38 @@
-fitz==0.0.1.dev2
-numpy==2.4.1
-ollama==0.6.1
-openai==2.16.0
-pandas==3.0.0
-playwright==1.50.0
-playwright_stealth==1.0.6
-python-dotenv==1.2.1
-PyYAML==6.0.2
-PyYAML==6.0.3
-tiktoken==0.12.0
+# Core (runtime)
+pandas>=2.0
+numpy>=1.25
+pyyaml>=6.0
+python-dotenv>=1.0
+requests>=2.30
+httpx>=0.24             # async/modern HTTP client (optional alternative to requests)
+tqdm>=4.65
+loguru>=0.7
+
+# Scraping / browser automation
+playwright>=1.40        # run: python -m playwright install chromium
+
+# Text / PDF parsing
+PyPDF2>=3.0
+pdfminer.six>=20230524
+pdfplumber>=0.7.6       # higher-level PDF text extraction (optional, often more robust)
+python-docx>=0.8.11     # if you want to parse .docx resumes
+
+# NLP / small utilities (optional but useful)
+spacy>=3.6              # optional: faster NLP operations (NER, tokenization)
+ftfy>=6.1.1             # text cleaning fixes for messy job descriptions
+
+# ML / matching (optional)
+scikit-learn>=1.2
+xgboost>=1.7
+sentence-transformers>=2.2.2  # useful if you embed text locally for similarity matching
+
+# Local LLM / client
+ollama==0.1.0   
+
+# Dev / QA
+pytest>=7.0
+black>=24.3
+
+# Lint / formatting (recommended)
+ruff>=0.14.0
+pre-commit>=3.4.0

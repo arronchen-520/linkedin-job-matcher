@@ -1,128 +1,112 @@
-🤖 AI CareerCopilot
-CareerCopilot is an automated job search agent. It scrapes LinkedIn job postings, standardizes salary data using local LLMs (Llama 3), and utilizes the DeepSeek-V3 model to score and match your resume against specific Job Descriptions (JDs).
+# 🤖 CareerCopilot
 
-📖 Overview
-Job hunting is tedious. CareerCopilot automates the entire pipeline:
+> **Automate your job hunt — discover better roles, faster, and apply with confidence.**
+> 自动化你的求职流程 — 更快发现更合适的岗位，并自信投递。
 
-Scraper: Navigates LinkedIn using a stealth browser to aggregate jobs based on complex filters (location, radius, date).
+[![GitHub stars](https://img.shields.io/github/stars/arronchen-520/CareerCopilot?style=social)](https://github.com/arronchen-520/CareerCopilot) [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](#) [![License](https://img.shields.io/badge/license-Apache--2.0-green)](#)
 
-Salary Parser: Uses a local Llama 3.1 model (via Ollama) to extract and normalize salary ranges (hourly/monthly → annual) from unstructured text.
+---
 
-Matcher: Uses the DeepSeek-V3 API to act as a "Technical Recruiter," scoring the candidate's resume against every specific JD and providing a "Recommend Apply" boolean.
+## 🚀 Hook — Why this repo will actually help you（吸引点）
 
-🚀 Features
-Anti-Detection Scraping: Uses playwright-stealth and persistent user contexts (cookies) to survive LinkedIn's bot checks.
+**English (Top):**
 
-Cost-Effective AI:
+* Tired of sifting through noisy job boards? CareerCopilot connects the whole loop: high-fidelity scraping, LLM-powered parsing, resume↔JD matching, and auto-fill — all configurable and reproducible.
+* Built for speed and signal: local LLMs reduce API costs, token guards avoid waste; the matcher explains *why* a job fits (or doesn't) so you can decide fast.
+* Designed by an engineer: clear configs, robust session persistence (avoid repeat captchas), CSV outputs ready for dashboards or interviews.
 
-Zero-cost local inference for high-volume tasks (Salary Parsing) using Ollama.
+**中文 (Bottom)：**
 
-Low-cost, high-intelligence API (DeepSeek) only for the final high-value matching step.
+* 是否厌倦了海量低质量岗位？CareerCopilot 将整个流程串联起来：高质量爬取 → LLM 解析 → 简历与职位匹配 → 自动填表，全部可配置、可复现。
+* 以效率与信号为核心：本地 LLM 降低 API 成本，token 限制避免浪费；匹配器会给出**为什么**适合或不适合的理由，帮助你快速决策。
+* 工程师友好：配置明确、会话持久化（减少验证码），输出 CSV 可直接用于可视化或面试展示。
 
-Smart Filtering: Automatically removes "Reposted" jobs to ensure fresh opportunities.
+---
 
-Token Safety: Checks token counts before API calls to prevent cost overruns on massive JDs.
+## ✨ What it does / 功能亮点（快速浏览）
 
-🛠️ Prerequisites
-Before running this project, ensure you have the following installed:
+**English:**
 
-Python 3.10+
+* 🤖 Hybrid LLM stack: local Ollama (Llama3) for parse-heavy tasks + remote matcher for high-quality reasoning.
+* 🧭 Config-first pipeline: YAML driven searches; re-run experiments deterministically.
+* 🛡️ Safe-by-default: token-size guards, rate limits and optional headful mode for manual captcha solves.
+* 📊 Outputs: `output/filtered/` CSV with `Match Score`, `Reasoning`, `Missing Skills` — ready for dashboards.
 
-Ollama: Required for local salary parsing.
+**中文：**
 
-Download Ollama
+* 🤖 LLM 混合设计：本地 Ollama（Llama3）处理解析任务；远程 matcher 提供高质量推理。
+* 🧭 配置优先：YAML 驱动搜索；实验可复现。
+* 🛡️ 默认安全：token/大小校验、速率限制，可选有头浏览以人工通过验证码。
+* 📊 输出：`output/filtered/` CSV（包含 Match Score、Reasoning、Missing Skills），可直接做数据展示。
 
-Run in terminal: ollama pull llama3.1
+---
 
-DeepSeek API Key: Required for the reasoning/matching engine.
+## ⚡ Quickstart — one-liner to get started / 快速开始
 
-LinkedIn Account: Valid credentials for scraping.
+**English:**
 
-📦 Installation
-Clone the Repository
-
-Bash
-git clone https://github.com/yourusername/CareerCopilot.git
-cd CareerCopilot
-Install Python Dependencies
-
-Bash
+```bash
+git clone https://github.com/arronchen-520/CareerCopilot.git && cd CareerCopilot
+python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-Install Browser Binaries Playwright requires the Chromium browser to function:
+python -m playwright install chromium
+cp .env.example .env  # fill creds
+python main.py --config data/config/example.yaml
+```
 
-Bash
-playwright install chromium
-Environment Setup Create a .env file in the root directory and add your credentials:
+---
 
-代码段
-LINKEDIN_EMAIL=your_email@example.com
-LINKEDIN_PASSWORD=your_password
-DEEPSEEK_API_KEY=sk-your-deepseek-key
-⚙️ Configuration
-Create a YAML configuration file in data/config/ (e.g., config_arron.yaml).
-
-Template:
-
-YAML
-user: "Jack"
-user_name: "Jack"
-# Path to your PDF resume
-resume: "data/resumes/Kack_Resume.pdf" 
-
-# Browser Settings
-headless: False  # Set to True to run invisibly (background)
-tracing: False   # Set to True for debugging logs
-max_page: 8      # Maximum number of pages to scrape per run
-
-# Search Parameters
-search:
-  keyword: "Python Developer"
-  city: "Toronto, Ontario, Canada"
-  distance: 25            # Radius in km
-  period: "Past 24 hours" # Options: Past 24 hours, Past week, Past month
-
-# Filter Logic
-repost: False    # Set False to ignore "Reposted" jobs
-company_list: [] # Whitelist: If not empty, only these companies are kept.
-▶️ Usage
-Ensure Ollama is running in the background, then execute the main script:
-
-Bash
-python main.py
-Application Flow:
-Scraper: Launches the browser, logs in, scrapes jobs based on your config, and saves a raw CSV.
-
-Salary Parser: Reads the raw CSV and uses Llama 3.1 to extract specific salary numbers.
-
-Matcher: Reads your PDF resume and calls DeepSeek API to score every job.
-
-Result: The final processed file is saved in output/filtered/.
-
-🏗️ Project Structure
-Plaintext
+## 📁 Structure / 项目结构
+```
 CareerCopilot/
-├── data/
-│   ├── config/          # YAML search configurations
-│   ├── resumes/         # Candidate PDF resumes
-│   └── user_data/       # Browser cookies/cache (managed by Playwright)
-├── output/              # Scraped and processed CSVs
-├── utils/               # Helper modules (logger, paths, file loading)
-├── job_scraper.py       # LinkedIn automation logic
-├── salary_parser.py     # Local LLM salary extraction
-├── deepseek_jd_resume_matcher.py  # Resume matching logic
-├── main.py              # Application entry point
-├── requirements.txt     # Python dependencies
-└── .env                 # API Keys and Credentials
-⚠️ Disclaimer
-Educational Use Only: This tool is intended for personal and educational use.
+├── data/            # config, sample resumes, user_data (cookies)
+├── docs/            # demo GIFs, usage notes
+├── src/             # scraper, parsers, matcher implementation
+├── output/          # raw/filtered CSV results
+├── main.py          # pipeline entrypoint
+├── requirements.txt # recommended deps
+└── .env.example     # credentials template
+```
 
-Terms of Service: Scraping LinkedIn may violate their User Agreement.
+---
 
-Risk: Do not set max_page too high or run the script continuously to avoid account flagging. The developers are not responsible for any account restrictions.
+## 🔧 Config example / 配置示例
 
-Troubleshooting
-Q: The browser opens but gets stuck on a Captcha/Security Check. A: The script uses a persistent user_data_dir. On the first run, you may need to manually solve the captcha in the browser window. Subsequent runs will use the saved session cookies and skip login.
+**English:**
 
-Q: Salary Parser error: "Connection Refused"? A: Ensure Ollama is installed and running (ollama serve).
+`data/config/example.yaml`
 
-Q: DeepSeek API errors? A: Verify your API key in the .env file and check your credit balance.
+```yaml
+user: "Arron"
+resume: "data/resumes/Arron_Resume.pdf"
+headless: False
+max_page: 6
+search:
+  keyword: "Data Scientist"
+  city: "Toronto, Ontario, Canada"
+  distance: 10
+  period: "Past 24 hours"
+```
+
+---
+
+## 🧾 Output & interpretation / 输出与解读
+
+* `Match Score` (0-100) — 高分（>=60）表示推荐申请；
+* `Reasoning` — 匹配解释，写明哪些经验命中或缺失；
+* `Missing Skills` — 自动列出需要补的关键技能。
+
+---
+
+## 🛠️ Implementation notes / 实现要点
+
+* Playwright + persistent `user_data_dir`（减少重复登录与 Captcha）。
+* Ollama local model for salary / entity extraction; remote matcher for high-quality reasoning.
+* Token-size safeguards: long JDs auto-summarized before sending to paid APIs.
+
+---
+
+## 🧾 License & closing / 许可证与结语
+
+Apache-2.0
+
