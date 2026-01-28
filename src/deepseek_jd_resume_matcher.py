@@ -5,7 +5,7 @@ import logging
 import pandas as pd
 import numpy as np
 import tiktoken
-import tqdm
+from tqdm import tqdm
 from openai import OpenAI
 from pathlib import Path
 from dotenv import load_dotenv
@@ -167,7 +167,7 @@ class DeepseekMatcher:
                 'URL', 'Posted Time', 'Salary', 'Reposted', 'Job Description'
             ]
             df = df[cols]
-            
+            df = df.sort_values(by = 'Match Score', ascending = False)
             # File Persistence
             df.to_csv(path, index=False)
             self.logger.info(f"Job processing successful. File exported: {path}")

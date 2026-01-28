@@ -2,6 +2,7 @@ import logging
 import pandas as pd
 from datetime import datetime
 from pathlib import Path
+from utils.file_path import OUTPUT_DIR
 
 
 
@@ -17,7 +18,7 @@ def filter_eligible_jobs(df: pd.DataFrame, params: dict):
         df: Dataframe of scraped jobs.
         params (dict): Configuration dictionary containing 'company_list', 'user_name', and 'repost'.
     """
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger('JobFilter')
     company_list = params['company_list']
     user = params['user_name']
 
@@ -48,11 +49,9 @@ def filter_eligible_jobs(df: pd.DataFrame, params: dict):
         logger.info(f"Filtering newly posted jobs... ")
         df = df[~df['Reposted']]
 
-    df = df.sort_values(by = 'match_score', ascending = False)
-
     current_date = datetime.now().strftime("%Y%m%d")
     search = params['search']
-    filepath = Path(filepath / f"{current_date}_{user}_{search['keyword']}.csv")
+    filepath = Path(OUTPUT_DIR / f"{current_date}_{user}_{search['keyword']}.csv")
     df.to_csv(filepath, index=False, encoding='utf-8-sig')
     logger.info(f"Filtered {len(df)} eligible jobs and saved to {filepath}")
     return df

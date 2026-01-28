@@ -10,13 +10,13 @@
 ## 🚀 Why CareerCopilot? / 为什么选择 CareerCopilot？
 
 **English:**
-* **Cut through noise**: CareerCopilot doesn't just scrape — it **structures** LinkedIn postings into a ready-to-analyze table (title, company, posted_time, normalized_salary_range) so you immediately get clean data.
+* **Cut through noise**: CareerCopilot doesn't just scrape — it **structures** job postings into a ready-to-analyze table (title, company, posted_time, normalized_salary_range) so you immediately get clean data.
 * **Explainable decisions**: For every job, we return a **Match Score** (0–100), a short **Reasoning** explaining *why*, and a `Missing Skills` list.
 * **Salary-savvy**: LLM-powered extraction normalizes messy salary text into min/max numeric ranges (supports yearly/monthly/hourly and common abbreviations).
 * **Faster & Safer**: Local LLMs (Ollama) reduce API costs; token-size guards and summarization protect you from runaway bills.
 
 **中文：**
-* **明确结构化**：不只是爬取内容，而是将 LinkedIn 职位**表格化**，方便直接进行筛选与数据分析。
+* **明确结构化**：不只是爬取内容，而是将职位**表格化**，方便直接进行筛选与数据分析。
 * **可解释的申请建议**：每条职位输出 **Match Score (0–100)**、匹配理由 **Reasoning** 以及 **Missing Skills**，辅助决策。
 * **薪资智能解析**：利用 LLM 将非标薪资文本标准化为 `min/max + currency + period`，支持多种周期和缩写。
 * **更省更稳健**：支持本地 LLM 降低成本；内置 Token 长度守护与自动摘要功能，防止 API 账单爆表。
@@ -26,7 +26,7 @@
 ## ✨ Features / 功能亮点
 
 **English:**
-* 🗂️ **LinkedIn → Table**: Standardizes jobs into: `job_title`, `company`, `location`, `posted_time`, `is_repost`, etc.
+* 🗂️ **Job Site → Table**: Standardizes jobs into: `job_title`, `company`, `location`, `posted_time`, `is_repost`, etc.
 * 🧠 **LLM Salary Extraction**: Auto-normalize salary into numeric ranges and currency types.
 * 📈 **Scoring + Explanation**: Human-readable reasoning and skill-gap analysis for every role.
 * 🔁 **De-dup & Repost Detection**: Focus on fresh listings by marking duplicates and reposts.
@@ -146,9 +146,9 @@ CareerCopilot/
 
 ## Disclaimer / 免责声明（中英）
 
-English: This project is for personal research only. You are responsible for complying with LinkedIn's Terms of Service. Scraping may result in account restrictions. Use at your own risk.
+English: This project is for personal research and education only. You are responsible for complying with LinkedIn's Terms of Service. Scraping may result in account restrictions. Use at your own risk.
 
-中文： 本项目仅供科研用途。你须自行确保遵守 LinkedIn 服务条款，爬取行为可能导致账号受限。请自行承担风险。
+中文： 本项目仅供科研学习用途。你须自行确保遵守 LinkedIn 服务条款，爬取行为可能导致账号受限。请自行承担风险。
 
 ---
 
