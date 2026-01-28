@@ -70,15 +70,15 @@ class DeepseekMatcher:
         Analyze the alignment between a candidate's resume and a job description. 
 
         ### SCORING RUBRIC:
-        * 80-100: Strong Match. Only missing minor "nice-to-have" tools or has minor (within 25% safe zone) seniority gap.
-        * 60-79: Moderate Match. Core skills match but missing specific domain or tools.
+        * 80-100: Strong Match. High likelihood of being accepted by hiring manager. Only missing minor "nice-to-have" tools or has minor (within 20% safe zone) seniority gap.
+        * 60-79: Moderate Match. Likelihood depends on candidate's interview prep. Core skills match but missing specific domain or tools.
         * 0-59: Reject. Deal-breakers present (Language mismatch, huge seniority gap).
 
         ### CRITICAL RULES:
-        * Overqualified: If the candidate has more years of experience or has a better position than the job description, the score should be < 70. The reasoning can start with "Overqualified."
         * Be skeptical: Prioritize verifiable skills and evidence over self-claims.
         * Seniority Delta: If the candidate's years of experience is "significantly" lower than the job requirement, the score should be < 60.
         * Anti-assumption: Do not infer unstated expertise (e.g., no "Python → FastAPI"). 
+        * Overqualified: If the candidate is clearly overqualified, the score should be < 70.
 
         ### OUTPUT:
         Output strictly in JSON. No preamble. No markdown code blocks.

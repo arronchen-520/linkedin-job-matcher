@@ -389,15 +389,24 @@ class LinkedInScraper:
 
         if company_list == []:
             self.logger.info(f"No company list provided. ")
+            if not params['salary']:
+                self.logger.info(f"No salary boolean provided. ")
+            else:
+                self.logger.info(f"Filtering jobs with salaries... ")
+                df = df[df['Salary'] != '']
         else:
-            self.logger.info(f"Filtering companies... ")
-            df = df[df['Company'].isin(company_list)]
+            if not params['salary']:
+                self.logger.info(f"No salary boolean provided. ")
+                df = df[df['Company'].isin(company_list)]
+            else:
+                self.logger.info(f"Filtering jobs with either intested companies or presented salaries... ")
+                df = df[(df['Salary'] != '') | (df['Company'].isin(company_list))]
         
-        if not params['salary']:
-            self.logger.info(f"No salary boolean provided. ")
-        else:
-            self.logger.info(f"Filtering jobs with salaries... ")
-            df = df[df['Salary'] != '']
+        # if not params['salary']:
+        #     self.logger.info(f"No salary boolean provided. ")
+        # else:
+        #     self.logger.info(f"Filtering jobs with salaries... ")
+        #     df = df[df['Salary'] != '']
 
         if params['repost']:
             self.logger.info(f"No repost boolean provided. ")
