@@ -85,6 +85,7 @@ def get_run_parameters(config_path: str | Path) -> dict:
         params['repost'] = config_data.get('repost', False)
         params['salary'] = config_data.get('salary', False)
         params['job_type'] = config_data.get('job_type', 'full time')
+        params['current_salary'] = config_data.get('job_type', '')
         
     except ValueError as e:
         logger.critical(f"Invalid Configuration: {e}")

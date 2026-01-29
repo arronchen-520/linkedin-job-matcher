@@ -48,7 +48,7 @@ class DeepseekMatcher:
             self.logger.warning(f"Tiktoken failed: {e}. Falling back to character-based heuristic.")
             return len(text) // 4
 
-    def _evaluate_match(self, resume_text: str, jd_text: str, job_type: str) -> dict:
+    def _evaluate_match(self, resume_text: str, jd_text: str, job_type: str, current_salary: str) -> dict:
         """
         Internal method to execute the DeepSeek API call for single JD evaluation.
         """
@@ -75,16 +75,16 @@ class DeepseekMatcher:
 
         ### CRITICAL RULES:
         * Be skeptical: Prioritize verifiable skills and evidence over self-claims.
-        * Seniority Delta: If the candidate's years of experience is "significantly" lower than the job requirement, the score should be < 60.
         * Anti-assumption: Do not infer unstated expertise (e.g., no "Python → FastAPI"). 
-        * Overqualified: If the candidate is clearly overqualified, the score should be < 70.
+        * Overqualified: If the candidate is clearly very overqualified (title, seniority), the score should be < 70. If the candidate's current salary (if given) is higher than the job's salary range (if given), the score should be < 60.
 
         ### OUTPUT:
         Output strictly in JSON. No preamble. No markdown code blocks.
         Keys: 'match_score' (int), 'reasoning' (2-sentence string), 'missing_skills' (list of strings).
         """
-
-        user_content = f"RESUME:\n{resume_text}\n\n Note: The candidate is interested in {job_type} jobs. \n\nJOB DESCRIPTION:\n{jd_text}"
+        if current_salary == '':
+            current_salary = 'unknown'
+        user_content = f"Note: The candidate is interested in {job_type} jobs. \n The candidate's current salary is {current_salary} \n\n RESUME:\n{resume_text} \n\n JOB DESCRIPTION:\n{jd_text}"
         self.logger.debug(f"Sending payload to DeepSeek. JD length: {len(jd_text)} chars.")
         
         start_time = time.time()
@@ -118,12 +118,12 @@ class DeepseekMatcher:
             self.logger.error(f"DeepSeek API call failed: {str(e)}", exc_info=True)
             return None
 
-    def trigger_deepseek_evaluate(self, resume: str, jd: str, job_type: str) -> pd.Series:
+    def trigger_deepseek_evaluate(self, resume: str, jd: str, job_type: str, current_salary : str) -> pd.Series:
         """
         Public entry point for row-by-row DataFrame evaluation.
         """
         self.logger.debug("Triggering evaluation for single row...")
-        result = self._evaluate_match(resume, jd, job_type)
+        result = self._evaluate_match(resume, jd, job_type, current_salary)
         
         if result is None:
             self.logger.warning("Evaluation returned None. Defaulting to error Series.")
@@ -131,7 +131,7 @@ class DeepseekMatcher:
             
         return pd.Series([result['match_score'], result['reasoning'], result['missing_skills']])
 
-    def process_job_data(self, df: pd.DataFrame, resume: str, job_type = 'full time', filename = 'result.csv'):
+    def process_job_data(self, df: pd.DataFrame, resume: str, job_type = 'full time', current_salary = '', filename = 'result.csv'):
         """
         Orchestrates the end-to-end evaluation flow from CSV loading to result persistence.
         """
@@ -150,7 +150,7 @@ class DeepseekMatcher:
 
             # Use trigger_deepseek_evaluate for pandas apply
             # Note: For large DFs, consider a progress bar or batching
-            results = df['Job Description'].progress_apply(lambda x: self.trigger_deepseek_evaluate(resume_str, x, job_type))
+            results = df['Job Description'].progress_apply(lambda x: self.trigger_deepseek_evaluate(resume_str, x, job_type, current_salary))
             
             self.logger.info("Applying AI results to DataFrame columns...")
             df[['Match Score', 'Reasoning', 'Missing Skills']] = results
@@ -161,12 +161,15 @@ class DeepseekMatcher:
             self.logger.info(f"Filtering complete. Found {high_match_count} high-score matches.")
 
             # Data Integrity & Formatting
-            cols = [
-                'Job Title', 'Company', 'Posted Ago', 'Min Salary', 'Max Salary',
-                'Recommend Apply', 'Match Score', 'Reasoning', 'Missing Skills',
-                'URL', 'Posted Time', 'Salary', 'Reposted', 'Job Description'
-            ]
-            df = df[cols]
+            try:
+                cols = [
+                    'Job Title', 'Company', 'Posted Ago', 'Min Salary', 'Max Salary',
+                    'Recommend Apply', 'Match Score', 'Reasoning', 'Missing Skills',
+                    'URL', 'Posted Time', 'Salary', 'Reposted', 'Job Description'
+                ]
+                df = df[cols]
+            except:
+                self.logger.warning('Missing critical columns. Outputing...')
             df = df.sort_values(by = 'Match Score', ascending = False)
             # File Persistence
             df.to_csv(path, index=False)
@@ -182,12 +185,15 @@ class DeepseekMatcher:
 
 # if __name__ == "__main__":
 #     # Configure logging for the execution environment
-#     setup_logging()
+#     logger = logging.getLogger(__name__)
 #     logging.getLogger("httpx").setLevel(logging.WARNING)
 
 #     # Instance execution
+#     df = pd.read_csv('./data/output/20260128_Arron_Machine Learning.csv')
 #     matcher = DeepseekMatcher()
 #     matcher.process_job_data(
-#         filename='20260127_Arron_Machine Learning_filtered.csv',
-#         resume_path='Arron Chen Resume 2025 Updated.pdf'
+#         df = df,
+#         resume='Arron Chen Resume 2025 Updated.pdf',
+#         job_type='full time',
+#         filename='20260128_Arron_Machine Learning.csv'
 #     )

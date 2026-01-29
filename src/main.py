@@ -51,6 +51,7 @@ def CareerCopilot(config_name):
             df = df,
             resume = params['resume'],
             job_type = params['job_type'],
+            current_salary = params['current_salary'],
             filename = f"{current_date}_{params['user_name']}_{params['search']['keyword']}.csv"
         )
     except Exception as e:

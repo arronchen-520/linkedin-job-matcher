@@ -26,7 +26,7 @@
 ## ✨ Features / 功能亮点
 
 **English:**
-* 🗂️ **Job Site → Table**: Standardizes jobs into: `job_title`, `company`, `location`, `posted_time`, `is_repost`, etc.
+* 🗂️ **Job Description → Table**: Standardizes jobs into: `job_title`, `company`, `location`, `posted_time`, `is_repost`, etc.
 * 🧠 **LLM Salary Extraction**: Auto-normalize salary into numeric ranges and currency types.
 * 📈 **Scoring + Explanation**: Human-readable reasoning and skill-gap analysis for every role.
 * 🔁 **De-dup & Repost Detection**: Focus on fresh listings by marking duplicates and reposts.
@@ -112,7 +112,8 @@ companies:     # filter by specific companies; leave empty to keep all
   - "Shopify"
   - "Airbnb"
 salary: true   # only jobs that have posted salaries
-
+job_type: 'full time' # input can be natual language
+current_salary: '' # Optional, input can be natual language
 ```
 
 ---

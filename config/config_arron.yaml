@@ -90,3 +90,5 @@ resume: "Arron Chen Resume 2025 Updated.pdf"
 salary: true # Only filter jobs that has a salary range
 
 job_type: "full time"
+
+current_salary: "$120,000 CAD" 
