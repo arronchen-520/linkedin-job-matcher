@@ -5,6 +5,7 @@ from utils.config_loader import get_run_parameters
 from utils.file_path import CONFIG_DIR
 from job_filter import filter_eligible_jobs
 from job_scraper import LinkedInScraper
+from data_uploader import upload_table_to_supabase
 from salary_parser import SalaryParser
 from deepseek_jd_resume_matcher import DeepseekMatcher
 import logging
@@ -28,6 +29,12 @@ def CareerCopilot(config_name):
         logger.error(f"Application crashed at Linkedin Scrapper: {e}")
         sys.exit(1)
     
+     # DataUploader
+    try:
+        upload_table_to_supabase(df)
+    except Exception as e:
+        logger.error(f"Unable to upload data to Supabase. Skipping.")
+
     # Job Filter
     try:
         df = filter_eligible_jobs(df, params)
@@ -57,6 +64,8 @@ def CareerCopilot(config_name):
     except Exception as e:
         logger.error(f"Application crashed at Resume-JD Matcher: {e}")
         sys.exit(1)
+
+
 
     return df
 
