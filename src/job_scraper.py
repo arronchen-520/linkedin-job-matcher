@@ -288,13 +288,6 @@ class LinkedInScraper:
         try:
             job_element.click()
 
-            # Check whether or not this is a reposted job
-            reposted = self.page.get_by_text('Reposted').count()
-            if reposted == 0:
-                reposted = False
-            else:
-                reposted = True
-
             # Extract description/salary
             try:
                 try:
@@ -304,6 +297,17 @@ class LinkedInScraper:
                 except:
                     desc_text = ''
                     self.logger.warning(f"Could not extract description details for {job_title} at {company}.")
+                
+                # Check whether or not this is a reposted job
+                try:
+                    reposted = self.page.get_by_text('Reposted').count()
+                    if reposted == 0:
+                        reposted = False
+                    else:
+                        reposted = True
+                except:
+                    self.logger.warning('Cannot verify if the job is reposted or not. ')
+
                 if desc_text != '':
                     job_description = '\n'.join([line for line in desc_text.split('\n') if line.strip()])
                     # Salary extraction logic

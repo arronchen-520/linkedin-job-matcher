@@ -84,7 +84,7 @@ class DeepseekMatcher:
         """
         if current_salary == '':
             current_salary = 'unknown'
-        user_content = f"Note: The candidate is interested in {job_type} jobs. \n The candidate's current salary is {current_salary} \n\n RESUME:\n{resume_text} \n\n JOB DESCRIPTION:\n{jd_text}"
+        user_content = f"Note: The candidate is interested in {job_type} jobs. \n The candidate's current salary is {current_salary}. \n\n RESUME:\n{resume_text} \n\n JOB DESCRIPTION:\n{jd_text}"
         self.logger.debug(f"Sending payload to DeepSeek. JD length: {len(jd_text)} chars.")
         
         start_time = time.time()
