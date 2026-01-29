@@ -29,9 +29,9 @@ def CareerCopilot(config_name):
         logger.error(f"Application crashed at Linkedin Scrapper: {e}")
         sys.exit(1)
     
-     # DataUploader
+    # DataUploader
     try:
-        upload_table_to_supabase(df)
+        upload_table_to_supabase(df, params, destination = 'JOB_POSTS')
     except Exception as e:
         logger.error(f"Unable to upload data to Supabase. Skipping.")
 
@@ -65,7 +65,11 @@ def CareerCopilot(config_name):
         logger.error(f"Application crashed at Resume-JD Matcher: {e}")
         sys.exit(1)
 
-
+    # DataUploader
+    try:
+        upload_table_to_supabase(df, params, destination = 'MATCH_OUTPUT')
+    except Exception as e:
+        logger.error(f"Unable to upload data to Supabase. Skipping.")
 
     return df
 

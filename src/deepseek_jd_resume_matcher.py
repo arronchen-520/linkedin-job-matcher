@@ -171,6 +171,7 @@ class DeepseekMatcher:
             except:
                 self.logger.warning('Missing critical columns. Outputing...')
             df = df.sort_values(by = 'Match Score', ascending = False)
+            df['Missing Skills'] = ', '.join(df['Missing Skills'])
             # File Persistence
             df.to_csv(path, index=False)
             self.logger.info(f"Job processing successful. File exported: {path}")
